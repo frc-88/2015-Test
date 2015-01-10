@@ -11,6 +11,8 @@ public class OI {
     private static final int LEFT_VERT_AXIS = 1;
     private static final int RIGHT_HORIZ_AXIS = 4;
     private static final int RIGHT_VERT_AXIS = 5;
+    private static final int LEFT_Z_AXIS = 2;
+    private static final int RIGHT_Z_AXIS =3;
 
     private Joystick driverController = new Joystick(0);
 
@@ -26,13 +28,16 @@ public class OI {
     }
     
     public double getDriverLeftVerticalAxis() {
-        return driverController.getRawAxis(LEFT_VERT_AXIS);
+        return -driverController.getRawAxis(LEFT_VERT_AXIS);
     }     
     public double getDriverLeftHorizontalAxis() {
         return driverController.getRawAxis(LEFT_HORIZ_AXIS);
     }
-    public double getDriverZAxis() {
-        return driverController.getZ();
+    public double getDriverLeftZAxis() {
+        return driverController.getRawAxis(LEFT_Z_AXIS);
+    }
+    public double getDriverRightZAxis() {
+        return driverController.getRawAxis(RIGHT_Z_AXIS);
     }
    
 }

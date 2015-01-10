@@ -5,7 +5,10 @@ import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.hal.CanTalonSRX;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Gyro ;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  *
@@ -13,6 +16,9 @@ import edu.wpi.first.wpilibj.Gyro ;
 public class Drive extends Subsystem {
     private final CanTalonSRX lTalon, rTalon, mTalon; 
     private final Gyro gyro;
+//    private final Ultrasonic ultrasonic;
+//    private DigitalOutput ping;
+//    private DigitalInput echo;
 
     public Drive() {
     	lTalon = new CanTalonSRX(Wiring.leftMotorController);

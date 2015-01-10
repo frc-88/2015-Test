@@ -22,14 +22,17 @@ public class DriveWithControllerSimple extends Command {
     protected void execute() {
         double left = Robot.oi.getDriverLeftVerticalAxis();
         double right = Robot.oi.getDriverRightVerticalAxis();
-        double middle =Robot.oi.getDriverZAxis();
+        double middle =Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
-        if(left<0.1){
+        if(Math.abs(left)<0.1){
         	left=0;
         }
         
-        if(right<0.1){
+        if(Math.abs(right)<0.1){
         	right=0;
+        }
+        if (Math.abs(middle) < 0.1) {
+        	middle =0;
         }
         
         Robot.drive.driveSimple(left, right, middle);
