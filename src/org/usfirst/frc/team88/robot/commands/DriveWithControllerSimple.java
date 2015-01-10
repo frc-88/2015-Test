@@ -22,8 +22,18 @@ public class DriveWithControllerSimple extends Command {
     protected void execute() {
         double left = Robot.oi.getDriverLeftVerticalAxis();
         double right = Robot.oi.getDriverRightVerticalAxis();
+        double middle =Robot.oi.getDriverZAxis();
 
-        Robot.drive.driveSimple(left, right);
+        if(left<0.1){
+        	left=0;
+        }
+        
+        if(right<0.1){
+        	right=0;
+        }
+        
+        Robot.drive.driveSimple(left, right, middle);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()
