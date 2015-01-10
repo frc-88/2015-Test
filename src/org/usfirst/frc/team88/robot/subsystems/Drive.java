@@ -18,8 +18,8 @@ public class Drive extends Subsystem {
     }
     
     public void driveSimple(double left, double right) {        
-        lTalon.set(left);
-        rTalon.set(right);
+        lTalon.Set(left);
+        rTalon.Set(right);
         System.out.println("Left: " + left);
         System.out.println("Right: " + right);
     }
