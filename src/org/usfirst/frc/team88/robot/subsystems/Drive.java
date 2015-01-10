@@ -14,7 +14,7 @@ public class Drive extends Subsystem {
 
     public Drive() {
     	lTalon = new CanTalonSRX(Wiring.leftMotorController);
-    	rTalon = new CaxTalonSRX(Wiring.rightMotorController);
+    	rTalon = new CanTalonSRX(Wiring.rightMotorController);
     }
     
     public void driveSimple(double left, double right) {        
