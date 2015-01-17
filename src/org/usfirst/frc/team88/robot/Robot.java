@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team88.robot.commands.ExampleCommand;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
@@ -30,10 +31,14 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-		oi = new OI();
 		drive = new Drive();
-        // instantiate the command used for the autonomous period
+
+		// do this last so OI can reference Robot subsystems
+		oi = new OI();
+
+		// instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
+        SmartDashboard.putData(drive);
     }
 	
 	public void disabledPeriodic() {
