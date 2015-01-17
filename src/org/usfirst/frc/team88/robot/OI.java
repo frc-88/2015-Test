@@ -1,6 +1,11 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.LightsOff;
+import org.usfirst.frc.team88.robot.commands.LightsOn;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,9 +20,14 @@ public class OI {
     private static final int RIGHT_Z_AXIS =3;
 
     private Joystick driverController = new Joystick(0);
+    private Button driverButtonA = new JoystickButton(driverController, 1);
+    private Button driverButtonB = new JoystickButton(driverController, 2);
 
     public OI () {
+        driverButtonA.whenPressed(new LightsOn());
+        driverButtonB.whenPressed(new LightsOff());
     }
+    
     
     public double getDriverRightVerticalAxis() {
         return driverController.getRawAxis(RIGHT_VERT_AXIS);
