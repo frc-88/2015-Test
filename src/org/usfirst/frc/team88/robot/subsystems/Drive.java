@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro ;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
-    private Solenoid suspension;
+    private DoubleSolenoid suspension;
     //private final Gyro gyro;
     //private final Ultrasonic ultrasonic;
     //private DigitalOutput ping;
@@ -30,13 +31,15 @@ public class Drive extends Subsystem {
     	rTalonMaster = new CANTalon(Wiring.rightMotorController);
     	rTalonSlave = new CANTalon(Wiring.rightMotorController2);
     	mTalon = new CANTalon(Wiring.middleMotorController);
-    	suspension = new Solenoid(Wiring.suspensionSolenoid);
+    	suspension = new DoubleSolenoid(Wiring.suspensionSolenoidDown, Wiring.suspensionSolenoidUp);
     	
     	//Sets up masters and slaves
     	lTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
     	lTalonSlave.set(lTalonMaster.getDeviceID());
     	rTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
     	rTalonSlave.set(rTalonMaster.getDeviceID());
+    	
+    	suspension.set(Value.kForward);
     	
     	//gyro = new Gyro(Wiring.GYRO);
     	//ping =new DigitalOutput(0);
