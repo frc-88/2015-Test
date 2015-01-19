@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
-    private DoubleSolenoid suspension;
+    //private DoubleSolenoid suspension;
     //private final Gyro gyro;
     //private final Ultrasonic ultrasonic;
     //private DigitalOutput ping;
@@ -31,7 +31,6 @@ public class Drive extends Subsystem {
     	rTalonMaster = new CANTalon(Wiring.rightMotorController);
     	rTalonSlave = new CANTalon(Wiring.rightMotorController2);
     	mTalon = new CANTalon(Wiring.middleMotorController);
-    	suspension = new DoubleSolenoid(Wiring.suspensionSolenoidDown, Wiring.suspensionSolenoidUp);
     	
     	//Sets up masters and slaves
     	lTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
@@ -39,7 +38,6 @@ public class Drive extends Subsystem {
     	rTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
     	rTalonSlave.set(rTalonMaster.getDeviceID());
     	
-    	suspension.set(Value.kForward);
     	
     	//gyro = new Gyro(Wiring.GYRO);
     	//ping =new DigitalOutput(0);
@@ -49,6 +47,7 @@ public class Drive extends Subsystem {
     	//ultrasonic.setAutomaticMode(false);
     }
     
+
     public void driveSimple(double left, double right, double middle) {        
         lTalonMaster.set(left);
         rTalonMaster.set(right);

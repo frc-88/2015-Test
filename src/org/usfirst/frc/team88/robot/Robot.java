@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team88.robot.commands.ExampleCommand;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team88.robot.subsystems.Suspension;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +24,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drive drive;
-
+	public static Suspension suspension;
     Command autonomousCommand;
 
     /**

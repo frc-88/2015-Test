@@ -1,6 +1,10 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.suspensionDown;
+import org.usfirst.frc.team88.robot.commands.suspensionUp;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -15,8 +19,16 @@ public class OI {
     private static final int RIGHT_Z_AXIS =3;
 
     private Joystick driverController = new Joystick(0);
+    private Button driverButtonA = new JoystickButton(driverController, 1);
+    private Button driverButtonB = new JoystickButton(driverController, 2);
+    private Button driverButtonX = new JoystickButton(driverController, 3);
+    private Button driverButtonY = new JoystickButton(driverController, 4);
+    private Button driverButtonLeftBumper = new JoystickButton(driverController, 5);
+    private Button driverButtonRightBumper = new JoystickButton(driverController, 6);
 
     public OI () {
+        driverButtonY.whenPressed(new suspensionUp());
+        driverButtonA.whenPressed(new suspensionDown());
     }
     
     public double getDriverRightVerticalAxis() {
