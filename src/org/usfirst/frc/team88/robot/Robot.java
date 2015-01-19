@@ -33,6 +33,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		drive = new Drive();
+		suspension = new Suspension();
 
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();

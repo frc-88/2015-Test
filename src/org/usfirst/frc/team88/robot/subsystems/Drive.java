@@ -31,7 +31,8 @@ public class Drive extends Subsystem {
     	rTalonMaster = new CANTalon(Wiring.rightMotorController);
     	rTalonSlave = new CANTalon(Wiring.rightMotorController2);
     	mTalon = new CANTalon(Wiring.middleMotorController);
-    	
+    	lTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	rTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	//Sets up masters and slaves
     	lTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
     	lTalonSlave.set(lTalonMaster.getDeviceID());
@@ -51,7 +52,9 @@ public class Drive extends Subsystem {
     public void driveSimple(double left, double right, double middle) {        
         lTalonMaster.set(left);
         rTalonMaster.set(right);
-        mTalon.set(middle);        
+        mTalon.set(middle);
+        SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
+        SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
         //System.out.println(gyro.getAngle()+ " degrees");
         //ultrasonic.ping();
         //SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
