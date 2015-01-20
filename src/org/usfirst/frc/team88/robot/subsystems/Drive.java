@@ -38,6 +38,10 @@ public class Drive extends Subsystem {
         System.out.println(gyro.getAngle()+ " degrees");
     }
     
+    public double getFacing() {
+    	return gyro.getAngle();
+    }
+    
     public void initDefaultCommand() {
         setDefaultCommand(new DriveWithControllerSimple());
     }
