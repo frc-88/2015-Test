@@ -8,57 +8,60 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command will maintain the robot facing while allowing the driver to
  * drive forward or sideways. We store the initial angle returned by the gyro
  * when we start and adjust left and right power to compensate when the gyro
- * reading drifts from that value.
+ * reading drifts from that value. The driver can also adjust the desired 
+ * facing, causing the robot to rotate, using the triggers on the controller.
  */
 public class DriveWithGyroAndRotate extends Command {
 
 	private static final double MAX_FORWARD_POWER = 0.5;
 	private static final double FACING_THRESHOLD = 10.0;
 	private double desiredFacing;
-	
-    public DriveWithGyroAndRotate() {
-        requires(Robot.drive);
-    }
 
-    protected void initialize() {
-    	// store initial facing
-    	desiredFacing = Robot.drive.getFacing();
-    }
+	public DriveWithGyroAndRotate() {
+		requires(Robot.drive);
+	}
 
-    protected void execute() {
-    	double left, right, scale, facingAdjustment;
-        double forward = Robot.oi.getDriverLeftVerticalAxis() * MAX_FORWARD_POWER;
-        double sideways = Robot.oi.getDriverRightHorizontalAxis();
-        double rotation = Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis();
-        
-        desiredFacing += rotation * FACING_THRESHOLD;
-        facingAdjustment = Math.max(Math.min((Robot.drive.getFacing() - desiredFacing) / FACING_THRESHOLD, 1.0), -1.0);
-        
-        left = forward + facingAdjustment;
-        right = forward - facingAdjustment;
+	protected void initialize() {
+		// store initial facing
+		desiredFacing = Robot.drive.getFacing();
+	}
 
-        // scale values of left and right so they are between -1.0 and 1.0
-        if ((Math.abs(left) > 1.0) || (Math.abs(right) > 1.0)) {
-        	if (Math.abs(left)>Math.abs(right)) {
-        		scale = 1.0 / Math.abs(left);
-        	} else {
-        		scale = 1.0 / Math.abs(right);
-        	}
-        	left *= scale;
-        	right *= scale;
-        }
-        
-        Robot.drive.driveSimple(left, right, sideways);
-    }
+	protected void execute() {
+		double left, right, scale, facingAdjustment;
+		double forward = Robot.oi.getDriverLeftVerticalAxis() * MAX_FORWARD_POWER;
+		double sideways = Robot.oi.getDriverRightHorizontalAxis();
+		double rotation = Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis();
 
-    protected boolean isFinished() {
-        return false;
-    }
+		// calculate any adjustment needed in order to rotate to desired facing
+		desiredFacing += rotation * FACING_THRESHOLD;
+		facingAdjustment = Math.max(Math.min((Robot.drive.getFacing() - desiredFacing) / FACING_THRESHOLD, 1.0), -1.0);
 
-    protected void end() {
-    }
+		// apply the rotation adjustment. This may cause values outside of -1 to 1, so we scale next
+		left = forward + facingAdjustment;
+		right = forward - facingAdjustment;
 
-    protected void interrupted() {
-    }
+		// scale values of left and right so they are between -1.0 and 1.0
+		if ((Math.abs(left) > 1.0) || (Math.abs(right) > 1.0)) {
+			if (Math.abs(left)>Math.abs(right)) {
+				scale = 1.0 / Math.abs(left);
+			} else {
+				scale = 1.0 / Math.abs(right);
+			}
+			left *= scale;
+			right *= scale;
+		}
+
+		Robot.drive.driveSimple(left, right, sideways);
+	}
+
+	protected boolean isFinished() {
+		return false;
+	}
+
+	protected void end() {
+	}
+
+	protected void interrupted() {
+	}
 
 }
