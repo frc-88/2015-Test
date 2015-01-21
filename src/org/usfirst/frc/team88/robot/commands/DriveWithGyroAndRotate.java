@@ -15,6 +15,8 @@ public class DriveWithGyroAndRotate extends Command {
 
 	private static final double MAX_FORWARD_POWER = 0.5;
 	private static final double FACING_THRESHOLD = 10.0;
+	private static final double DEADZONE = 0.1;
+
 	private double currentFacing;
 
 	public DriveWithGyroAndRotate() {
@@ -27,13 +29,27 @@ public class DriveWithGyroAndRotate extends Command {
 	}
 
 	protected void execute() {
-		double left, right, scale, desiredFacing, facingAdjustment;
+		double left, right, scale, facingAdjustment;
+		double desiredFacing = currentFacing;
 		double forward = Robot.oi.getDriverLeftVerticalAxis() * MAX_FORWARD_POWER;
 		double sideways = Robot.oi.getDriverRightHorizontalAxis();
 		double rotation = Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis();
 
+		// apply deadzones to forward and sideways inputs
+		if (Math.abs(forward) < DEADZONE) {
+			forward = 0.0;
+		}
+
+		if (Math.abs(sideways) < DEADZONE) {
+			sideways = 0.0;
+		}
+		
+		// if rotation outside of deadzone, adjust desired facing
+		if (Math.abs(rotation) > DEADZONE) {
+			desiredFacing += rotation * FACING_THRESHOLD;
+		}
+
 		// calculate any adjustment needed in order to rotate to desired facing
-		desiredFacing = currentFacing + (rotation * FACING_THRESHOLD);
 		facingAdjustment = Math.max(Math.min((Robot.drive.getFacing() - desiredFacing) / FACING_THRESHOLD, 1.0), -1.0);
 
 		// apply the rotation adjustment. This may cause values outside of -1 to 1, so we scale next
@@ -52,8 +68,11 @@ public class DriveWithGyroAndRotate extends Command {
 		}
 
 		Robot.drive.driveSimple(left, right, sideways);
-		
-		currentFacing = Robot.drive.getFacing();
+
+		// if we adjusted our desired facing in order to rotate, update currentFacing
+		if (Math.abs(rotation) > DEADZONE) {
+			currentFacing = Robot.drive.getFacing();
+		}
 	}
 
 	protected boolean isFinished() {
