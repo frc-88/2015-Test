@@ -9,5 +9,5 @@ public class Wiring {
     
     public static final int suspensionSolenoidDown = 0;
     public static final int suspensionSolenoidUp = 1;
-    //public static final int GYRO=0;
+    public static final int gyro=0;
 }

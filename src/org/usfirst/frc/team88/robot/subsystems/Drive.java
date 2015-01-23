@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
     //private DoubleSolenoid suspension;
-    //private final Gyro gyro;
+    private final Gyro gyro;
     //private final Ultrasonic ultrasonic;
     //private DigitalOutput ping;
     //private DigitalInput echo;
@@ -40,7 +40,7 @@ public class Drive extends Subsystem {
     	rTalonSlave.set(rTalonMaster.getDeviceID());
     	
     	
-    	//gyro = new Gyro(Wiring.GYRO);
+    	gyro = new Gyro(Wiring.gyro);
     	//ping =new DigitalOutput(0);
     	//echo = new DigitalInput(1);
     	//ultrasonic=new Ultrasonic(ping, echo);
@@ -60,7 +60,9 @@ public class Drive extends Subsystem {
         //SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
     }
     
-    
+    public double getFacing() {
+    	return gyro.getAngle();
+    }
     public void initDefaultCommand() {
         setDefaultCommand(new DriveWithControllerSimple());
     }
