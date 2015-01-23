@@ -25,6 +25,7 @@ public class Drive extends Subsystem {
     	rTalon = new CanTalonSRX(Wiring.rightMotorController);
     	mTalon = new CanTalonSRX(Wiring.middleMotorController);
     	gyro = new Gyro(Wiring.GYRO);
+    	gyro.initGyro();
     }
     
     public void driveSimple(double left, double right, double middle) {        

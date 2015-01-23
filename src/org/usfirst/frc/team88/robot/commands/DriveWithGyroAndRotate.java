@@ -25,6 +25,7 @@ public class DriveWithGyroAndRotate extends Command {
 
 	protected void initialize() {
 		// store initial facing
+		// ? should we reset the gypo here ?
 		currentFacing = Robot.drive.getFacing();
 	}
 
@@ -71,6 +72,7 @@ public class DriveWithGyroAndRotate extends Command {
 
 		// if we adjusted our desired facing in order to rotate, update currentFacing
 		if (Math.abs(rotation) > DEADZONE) {
+			// ? should we reset the gypo here ?
 			currentFacing = Robot.drive.getFacing();
 		}
 	}
