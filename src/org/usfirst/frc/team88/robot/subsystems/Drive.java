@@ -55,7 +55,7 @@ public class Drive extends Subsystem {
         mTalon.set(middle);
         SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
         SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
-        //System.out.println(gyro.getAngle()+ " degrees");
+        SmartDashboard.putNumber("Gyro Angle: ", gyro.getAngle());
         //ultrasonic.ping();
         //SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
     }
