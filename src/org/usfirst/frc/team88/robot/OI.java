@@ -15,8 +15,8 @@ public class OI {
     private static final int LEFT_VERT_AXIS = 1;
     private static final int RIGHT_HORIZ_AXIS = 4;
     private static final int RIGHT_VERT_AXIS = 5;
-    private static final int LEFT_Z_AXIS = 2;
-    private static final int RIGHT_Z_AXIS =3;
+    private static final int LEFT_Z_AXIS = 3;
+    private static final int RIGHT_Z_AXIS =2;
 
     private Joystick driverController = new Joystick(0);
     private Button driverButtonA = new JoystickButton(driverController, 1);
@@ -27,8 +27,8 @@ public class OI {
     private Button driverButtonRightBumper = new JoystickButton(driverController, 6);
 
     public OI () {
-        driverButtonY.whenPressed(new suspensionUp());
-        driverButtonA.whenPressed(new suspensionDown());
+        driverButtonY.whenPressed(new suspensionDown());
+        driverButtonA.whenPressed(new suspensionUp());
     }
     
     public double getDriverRightVerticalAxis() {
