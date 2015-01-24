@@ -72,6 +72,8 @@ public class Drive extends Subsystem {
     	mTalon = new CANTalon(Wiring.middleMotorController);
     	    	
     	gyro = new Gyro(Wiring.gyro);
+    	gyro.initGyro();
+
     	//ping =new DigitalOutput(0);
     	//echo = new DigitalInput(1);
     	//ultrasonic=new Ultrasonic(ping, echo);
