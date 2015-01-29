@@ -1,6 +1,8 @@
 package org.usfirst.frc.team88.robot.subsystems;
 
 import org.usfirst.frc.team88.robot.Wiring;
+import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
+import org.usfirst.frc.team88.robot.commands.lift;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -14,7 +16,7 @@ public class Lift extends Subsystem {
     private final CANTalon liftTalon;
     private final DoubleSolenoid liftSolenoid;
     
-    private final static double LIFT_SPEED = 0.5;
+    //private final static double LIFT_SPEED = 0.5;
     
     public Lift() {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
@@ -22,13 +24,10 @@ public class Lift extends Subsystem {
     	// TODO - Add code for limit switches
     }
 
-    public void liftUp() {
-    	liftTalon.set(LIFT_SPEED);
+    public void moveLift(double liftSpeed) {
+    	liftTalon.set(liftSpeed);
     }
     
-    public void liftDown() {
-    	liftTalon.set(-LIFT_SPEED);
-    }
     
     public void liftGrab() {
     	liftSolenoid.set(Value.kForward);
@@ -39,8 +38,7 @@ public class Lift extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+        setDefaultCommand(new lift());
     }
 }
 

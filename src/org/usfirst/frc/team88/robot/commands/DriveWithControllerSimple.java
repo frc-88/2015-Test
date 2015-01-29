@@ -2,8 +2,10 @@ package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -25,18 +27,20 @@ public class DriveWithControllerSimple extends Command {
         double right = Robot.oi.getDriverRightVerticalAxis();
         double middle =Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
-        if(Math.abs(left)<0.2){
+        if(Math.abs(left)<0.4){
         	left=0;
         }
         
-        if(Math.abs(right)<0.2){
+        if(Math.abs(right)<0.4){
         	right=0;
         }
-        if (Math.abs(middle) < 0.2) {
+        if (Math.abs(middle) < 0.4) {
         	middle =0;
         }
         
         Robot.drive.driveSimple(left, right, middle);
+        Robot.drive.ultrasonic.ping();
+        SmartDashboard.putNumber("inches from detected object:", Robot.drive.ultrasonic.getRangeInches());
         
     }
 

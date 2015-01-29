@@ -22,9 +22,9 @@ public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
     //private DoubleSolenoid suspension;
     private final Gyro gyro;
-    //private final Ultrasonic ultrasonic;
-    //private DigitalOutput ping;
-    //private DigitalInput echo;
+    public final Ultrasonic ultrasonic;
+    private DigitalOutput ping;
+    private DigitalInput echo;
     
     private final static double ENC_CYCLES_PER_REV = 360.0;
     private final static double GEAR_RATIO = 28.0 / 22.0;
@@ -74,11 +74,13 @@ public class Drive extends Subsystem {
     	gyro = new Gyro(Wiring.gyro);
     	gyro.initGyro();
 
-    	//ping =new DigitalOutput(0);
-    	//echo = new DigitalInput(1);
-    	//ultrasonic=new Ultrasonic(ping, echo);
-    	//ultrasonic.setEnabled(true);
-    	//ultrasonic.setAutomaticMode(false);
+    	ping =new DigitalOutput(0);
+    	echo = new DigitalInput(1);
+    	ultrasonic=new Ultrasonic(ping, echo);
+    	ultrasonic.setEnabled(true);
+    	ultrasonic.setAutomaticMode(false);
+        ultrasonic.ping();
+        SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
     }
     
 
@@ -106,8 +108,7 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Right Speed: ", -rightSpeed);
 
         
-        //ultrasonic.ping();
-        //SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
+
     }
     
     public double getFacing() {

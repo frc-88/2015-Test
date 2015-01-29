@@ -1,7 +1,10 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.grabberClose;
+import org.usfirst.frc.team88.robot.commands.grabberOpen;
 import org.usfirst.frc.team88.robot.commands.suspensionDown;
 import org.usfirst.frc.team88.robot.commands.suspensionUp;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -18,6 +21,7 @@ public class OI {
     private static final int LEFT_Z_AXIS = 3;
     private static final int RIGHT_Z_AXIS =2;
 
+    //driver controller setup
     private Joystick driverController = new Joystick(0);
     private Button driverButtonA = new JoystickButton(driverController, 1);
     private Button driverButtonB = new JoystickButton(driverController, 2);
@@ -25,10 +29,22 @@ public class OI {
     private Button driverButtonY = new JoystickButton(driverController, 4);
     private Button driverButtonLeftBumper = new JoystickButton(driverController, 5);
     private Button driverButtonRightBumper = new JoystickButton(driverController, 6);
+    
+    //operator controller setup
+    private Joystick operatorController = new Joystick(1);
+    private Button operatorButtonA = new JoystickButton(operatorController, 1);
+    private Button operatorButtonB = new JoystickButton(operatorController, 2);
+    private Button operatorButtonX = new JoystickButton(operatorController, 3);
+    private Button operatorButtonY = new JoystickButton(operatorController, 4);
+    private Button operatorButtonLeftBumper = new JoystickButton(operatorController, 5);
+    private Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
 
     public OI () {
         driverButtonY.whenPressed(new suspensionDown());
         driverButtonA.whenPressed(new suspensionUp());
+        operatorButtonA.whenPressed(new grabberOpen());
+        operatorButtonY.whenPressed(new grabberClose());
+        //driverButtonB.whenPressed(new Ping());
     }
     
     public double getDriverRightVerticalAxis() {
@@ -50,6 +66,12 @@ public class OI {
     }
     public double getDriverRightZAxis() {
         return driverController.getRawAxis(RIGHT_Z_AXIS);
+    }
+    public double getOperatorLeftZAxis() {
+        return operatorController.getRawAxis(LEFT_Z_AXIS);
+    }
+    public double getOperatorRightZAxis() {
+        return operatorController.getRawAxis(RIGHT_Z_AXIS);
     }
    
 }
