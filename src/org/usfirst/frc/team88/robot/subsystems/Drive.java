@@ -43,9 +43,12 @@ public class Drive extends Subsystem {
     private final static int IZONE = 0;
     private final static double RAMPRATE = 6.0;
     private final static int PROFILE = 0;
+    
+    private ITG3200_I2C gyroNew;
        
     
     public Drive() {
+    	gyroNew = new ITG3200_I2C();
     	// set up drive masters
     	lTalonMaster = new CANTalon(Wiring.leftMotorController);
     	lTalonMaster.changeControlMode(ControlMode.Speed);
@@ -106,6 +109,7 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Right Enc RPS: ", rightRPS);
         SmartDashboard.putNumber("Left Speed: ", leftSpeed);
         SmartDashboard.putNumber("Right Speed: ", -rightSpeed);
+        SmartDashboard.putNumber("Gyro Reading New:", gyroNew.getX());
 
         
 

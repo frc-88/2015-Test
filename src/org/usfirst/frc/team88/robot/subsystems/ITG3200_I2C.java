@@ -80,5 +80,6 @@ public class ITG3200_I2C{
 	public double getHeading() {
 		return m_heading;
 	}
+	
 }
 
