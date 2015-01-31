@@ -8,9 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team88.robot.commands.Autonomous;
-import org.usfirst.frc.team88.robot.commands.ExampleCommand;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
-import org.usfirst.frc.team88.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
 import org.usfirst.frc.team88.robot.subsystems.Suspension;
 
@@ -23,7 +21,6 @@ import org.usfirst.frc.team88.robot.subsystems.Suspension;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drive drive;
 	public static Suspension suspension;
