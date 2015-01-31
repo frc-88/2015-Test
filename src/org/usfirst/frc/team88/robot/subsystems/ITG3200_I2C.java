@@ -7,6 +7,8 @@ package org.usfirst.frc.team88.robot.subsystems;
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+import java.nio.ByteBuffer;
+
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.Utility;
@@ -24,11 +26,12 @@ public class ITG3200_I2C{
 	private static final double kLSBpDpS = 14.375, kGyroConstant = 0.12485;
 	private static double lastSystemTime;
 	private static double m_xAxis, m_yAxis, m_zAxis, m_heading;
-
+	private byte[] array = new byte[8];
 	private final I2C m_i2c;
 
 	public ITG3200_I2C() {
-		m_i2c = new I2C(Port.kMXP, kAddress);
+		
+		m_i2c = new I2C(Port.kOnboard, kAddress);
 
 		// Turn on the measurements
 		m_i2c.write(kPowerCtlRegister, kPowerCtl_Measure);
@@ -65,6 +68,10 @@ public class ITG3200_I2C{
 		m_heading += m_zAxis * deltaTime;
 	}
 
+	int fromByteArray() {
+	     return ByteBuffer.wrap(array).getInt();
+	}
+	
 	public double getX() {
 		return m_xAxis;
 	}

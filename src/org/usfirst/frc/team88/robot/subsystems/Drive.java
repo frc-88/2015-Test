@@ -3,6 +3,9 @@ package org.usfirst.frc.team88.robot.subsystems;
 import org.usfirst.frc.team88.robot.Wiring;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
 
+import com.kauailabs.nav6.frc.IMU;
+import com.kauailabs.nav6.frc.IMUAdvanced;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -13,6 +16,7 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro ;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -45,10 +49,18 @@ public class Drive extends Subsystem {
     private final static int PROFILE = 0;
     
     private ITG3200_I2C gyroNew;
-       
+    private IMU imu;
+    private SerialPort serialPort;
     
     public Drive() {
-    	gyroNew = new ITG3200_I2C();
+    	try{
+        	serialPort = new SerialPort(57600,SerialPort.Port.kOnboard);
+    		imu = new IMUAdvanced(serialPort);
+    	}catch(Exception ex) {
+    		System.out.println("Serial port is busy");
+    	}
+    	imu.zeroYaw();
+    	//gyroNew = new ITG3200_I2C();
     	// set up drive masters
     	lTalonMaster = new CANTalon(Wiring.leftMotorController);
     	lTalonMaster.changeControlMode(ControlMode.Speed);
@@ -109,8 +121,16 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Right Enc RPS: ", rightRPS);
         SmartDashboard.putNumber("Left Speed: ", leftSpeed);
         SmartDashboard.putNumber("Right Speed: ", -rightSpeed);
-        SmartDashboard.putNumber("Gyro Reading New:", gyroNew.getX());
-
+//        SmartDashboard.putNumber("Gyro X Reading New:", gyroNew.getX());
+//        SmartDashboard.putNumber("Gyro Y Reading New:", gyroNew.getY());
+//        SmartDashboard.putNumber("Gyro Z Reading New:", gyroNew.getZ());
+        SmartDashboard.putNumber("IMU Pitch", imu.getPitch());
+        SmartDashboard.putNumber("IMU Yaw", imu.getYaw());
+        SmartDashboard.putNumber("IMU Roll", imu.getRoll());
+        SmartDashboard.putBoolean("Connected:", imu.isConnected());
+        SmartDashboard.putBoolean("Calibrating: ", imu.isCalibrating());
+        
+        
         
 
     }
