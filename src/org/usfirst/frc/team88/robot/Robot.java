@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team88.robot.commands.Autonomous;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
 import org.usfirst.frc.team88.robot.subsystems.Suspension;
@@ -37,6 +39,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		// instantiate the command used for the autonomous period
+        autonomousCommand = new Autonomous();
         SmartDashboard.putData(drive);
     }
 	
