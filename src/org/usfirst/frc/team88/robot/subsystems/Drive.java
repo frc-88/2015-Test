@@ -25,19 +25,20 @@ public class Drive extends Subsystem {
     public final Ultrasonic ultrasonic;
     private DigitalOutput ping;
     private DigitalInput echo;
+
+    private double maxSpeed;
     
     public final static double ENC_CYCLES_PER_REV = 360.0;
     public final static double GEAR_RATIO = 28.0 / 22.0;
     public final static double WHEEL_DIAMETER = 6.0;
-
-    private final static double MAX_SPEED = 400.0;
+    
+    private final static double FAST_SPEED = 400.0;
+    private final static double SLOW_SPEED = 100.0;
     
     private final static double LEFT_P = 0.5;
     private final static double LEFT_I = 0.002;
-
     private final static double RIGHT_P = 0.55;
     private final static double RIGHT_I = 0.002;
-
     private final static double D = 1.0;
     private final static double F = 0.5;
     private final static int IZONE = 0;
@@ -70,7 +71,9 @@ public class Drive extends Subsystem {
     	
     	// set up middle wheel
     	mTalon = new CANTalon(Wiring.middleMotorController);
-    	    	
+
+    	maxSpeed = FAST_SPEED;
+    	
     	gyro = new Gyro(Wiring.gyro);
     	gyro.initGyro();
 
@@ -83,12 +86,11 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("inches from detected object:", ultrasonic.getRangeInches());
     }
     
-
     public void driveSimple(double left, double right, double middle) {
     	double leftRPS, rightRPS, leftSpeed, rightSpeed;
     	
-        lTalonMaster.set(left * MAX_SPEED);
-        rTalonMaster.set(right * MAX_SPEED);
+        lTalonMaster.set(left * maxSpeed);
+        rTalonMaster.set(right * maxSpeed);
         mTalon.set(middle);
         SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getEncPosition());
         SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getEncPosition());
@@ -106,17 +108,22 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Right Enc RPS: ", rightRPS);
         SmartDashboard.putNumber("Left Speed: ", leftSpeed);
         SmartDashboard.putNumber("Right Speed: ", -rightSpeed);
-
-        
-
-    }
-    
-    public double getFacing() {
-    	return gyro.getAngle();
     }
     
     public double getLeftEncoderPosition(){
     	return lTalonMaster.getEncPosition();
+    }
+    
+    public void toggleMaxSpeed(){
+    	if (maxSpeed == FAST_SPEED) {
+    		maxSpeed = SLOW_SPEED;
+    	} else {
+    		maxSpeed = FAST_SPEED;
+    	}
+    }
+    
+    public double getFacing() {
+    	return gyro.getAngle();
     }
     
     public void initDefaultCommand() {
