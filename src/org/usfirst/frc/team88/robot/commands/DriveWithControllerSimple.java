@@ -25,23 +25,24 @@ public class DriveWithControllerSimple extends Command {
 	protected void execute() {
 		double left = Robot.oi.getDriverLeftVerticalAxis();
 		double right = Robot.oi.getDriverRightVerticalAxis();
-		double middle =Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
+		double middle = Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
 		if (Math.abs(left) < 0.4) {
-			left = 0;
+			left = 0.0;
 		}
 
 		if (Math.abs(right) < 0.4) {
-			right = 0;
+			right = 0.0;
 		}
+		
 		if (Math.abs(middle) < 0.4) {
-			middle = 0;
+			middle = 0.0;
 		}
 
 		Robot.drive.driveSimple(left, right, middle);
-		Robot.drive.ultrasonic.ping();
-		SmartDashboard.putNumber("inches from detected object:", Robot.drive.ultrasonic.getRangeInches());
-
+		
+		// Robot.drive.ultrasonic.ping();
+		// SmartDashboard.putNumber("inches from detected object:", Robot.drive.ultrasonic.getRangeInches());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
