@@ -27,18 +27,10 @@ public class DriveWithControllerSimple extends Command {
 		double right = Robot.oi.getDriverRightVerticalAxis();
 		double middle = Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
-		if (Math.abs(left) < 0.4) {
-			left = 0.0;
-		}
-
-		if (Math.abs(right) < 0.4) {
-			right = 0.0;
-		}
+		left = Robot.oi.applyDeadZone(left);
+		right = Robot.oi.applyDeadZone(right);
+		middle = Robot.oi.applyDeadZone(middle);
 		
-		if (Math.abs(middle) < 0.4) {
-			middle = 0.0;
-		}
-
 		Robot.drive.driveSimple(left, right, middle);
 		
 		// Robot.drive.ultrasonic.ping();

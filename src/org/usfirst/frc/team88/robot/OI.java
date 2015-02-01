@@ -20,7 +20,9 @@ public class OI {
     private static final int RIGHT_HORIZ_AXIS = 4;
     private static final int RIGHT_VERT_AXIS = 5;
     private static final int LEFT_Z_AXIS = 3;
-    private static final int RIGHT_Z_AXIS =2;
+    private static final int RIGHT_Z_AXIS = 2;
+
+    private static final double DEADZONE = 0.4;
 
     //driver controller setup
     private Joystick driverController = new Joystick(0);
@@ -76,5 +78,12 @@ public class OI {
         return operatorController.getRawAxis(RIGHT_Z_AXIS);
     }
    
+    public double applyDeadZone(double value) {
+    	if (Math.abs(value) < DEADZONE) {
+    		return 0.0;
+    	}
+
+    	return value;
+    }
 }
 
