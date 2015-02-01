@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveWithController extends Command {
+public class DriveWithControllerSSS extends Command {
 
-    public DriveWithController() {
+    public DriveWithControllerSSS() {
     	requires(Robot.drive);
     }
 
@@ -24,6 +24,10 @@ public class DriveWithController extends Command {
         double strafe = Robot.oi.getDriverRightHorizontalAxis();
         double spin = Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
+        speed = Robot.oi.applyDeadZone(speed);
+		strafe = Robot.oi.applyDeadZone(strafe);
+		spin = Robot.oi.applyDeadZone(spin);
+        
         left = speed + spin;
         right = speed - spin;
         
