@@ -4,6 +4,7 @@ import org.usfirst.frc.team88.robot.commands.grabberClose;
 import org.usfirst.frc.team88.robot.commands.grabberOpen;
 import org.usfirst.frc.team88.robot.commands.suspensionDown;
 import org.usfirst.frc.team88.robot.commands.suspensionUp;
+import org.usfirst.frc.team88.robot.commands.toggleMaxSpeed;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,7 +20,9 @@ public class OI {
     private static final int RIGHT_HORIZ_AXIS = 4;
     private static final int RIGHT_VERT_AXIS = 5;
     private static final int LEFT_Z_AXIS = 3;
-    private static final int RIGHT_Z_AXIS =2;
+    private static final int RIGHT_Z_AXIS = 2;
+
+    private static final double DEADZONE = 0.4;
 
     //driver controller setup
     private Joystick driverController = new Joystick(0);
@@ -42,6 +45,7 @@ public class OI {
     public OI () {
         driverButtonY.whenPressed(new suspensionDown());
         driverButtonA.whenPressed(new suspensionUp());
+        driverButtonX.whenPressed(new toggleMaxSpeed());
         operatorButtonA.whenPressed(new grabberOpen());
         operatorButtonY.whenPressed(new grabberClose());
         //driverButtonB.whenPressed(new Ping());
@@ -74,5 +78,12 @@ public class OI {
         return operatorController.getRawAxis(RIGHT_Z_AXIS);
     }
    
+    public double applyDeadZone(double value) {
+    	if (Math.abs(value) < DEADZONE) {
+    		return 0.0;
+    	}
+
+    	return value;
+    }
 }
 
