@@ -41,6 +41,8 @@ public class Robot extends IterativeRobot {
 		// instantiate the command used for the autonomous period
         autonomousCommand = new Autonomous();
         SmartDashboard.putData(drive);
+        SmartDashboard.putData(lift);
+        
     }
 	
 	public void disabledPeriodic() {
