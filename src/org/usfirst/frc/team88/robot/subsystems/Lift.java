@@ -29,22 +29,18 @@ public class Lift extends Subsystem {
     }
 
     public void moveLift(double liftSpeed) {
-    	//logic probably needs to be inverted
-    	if (atLowerLimit()) {
-    		if (liftSpeed <0) {
-    			liftSpeed = 0;
-    		}
-    	}else if (atUpperLimit()) {
-    		if (liftSpeed >0) {
-    			liftSpeed = 0;
-    		}	
+    	if (atLowerLimit() && (liftSpeed < 0.0)) {
+			liftSpeed = 0.0;
+    	} else if (atUpperLimit() && (liftSpeed > 0.0)) {
+			liftSpeed = 0.0;
     	}
+    	
     	SmartDashboard.putBoolean("LimitSwitch Lower" , lowerLimit.get());
     	SmartDashboard.putBoolean("LimitSwitch Upper" , upperLimit.get());
     	
     	liftTalon.set(liftSpeed);
-    	
     }
+    
     public double getEncoderCount() {
     	return liftTalon.getEncPosition();
     }
