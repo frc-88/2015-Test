@@ -36,7 +36,6 @@ public class DriveStraight extends Command {
     	double middle = 0.0;
     	initialLeftEncoder = Robot.drive.getLeftEncoderPosition();
     	Robot.drive.driveSimple(leftSpeed, rightSpeed, middle);
-
     }
 
     // Called repeatedly when this Command is scheduled to run

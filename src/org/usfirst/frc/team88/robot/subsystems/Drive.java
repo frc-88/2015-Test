@@ -87,7 +87,7 @@ public class Drive extends Subsystem {
     public void driveSimple(double left, double right, double middle) {
     	double leftRPS, rightRPS, leftSpeed, rightSpeed;
     	
-        lTalonMaster.set(left * maxSpeed);
+        lTalonMaster.set(-left * maxSpeed);
         rTalonMaster.set(right * maxSpeed);
         mTalon.set(middle);
         SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getEncPosition());
