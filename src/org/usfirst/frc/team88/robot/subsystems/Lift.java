@@ -17,8 +17,10 @@ public class Lift extends Subsystem {
     private final CANTalon liftTalon;
     private final DoubleSolenoid liftSolenoid;
     private final DigitalInput upperLimit, lowerLimit;
-    
+        
     //private final static double LIFT_SPEED = 0.5;
+    
+    private int bottomPosition;
     
     public Lift() {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
@@ -46,7 +48,11 @@ public class Lift extends Subsystem {
     }
     
     public boolean atLowerLimit() {
-    	return !lowerLimit.get();
+    	if (!lowerLimit.get()) {
+    		bottomPosition = liftTalon.getEncPosition();
+    		return true;
+    	}
+    	return false;
     }
     
     public boolean atUpperLimit() {
