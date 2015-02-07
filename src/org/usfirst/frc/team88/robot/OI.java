@@ -51,6 +51,7 @@ public class OI {
         //driverButtonB.whenPressed(new Ping());
     }
     
+    // driver joysticks
     public double getDriverRightVerticalAxis() {
         return driverController.getRawAxis(RIGHT_VERT_AXIS);
     }
@@ -62,22 +63,45 @@ public class OI {
     public double getDriverLeftVerticalAxis() {
         return -driverController.getRawAxis(LEFT_VERT_AXIS);
     }     
+    
     public double getDriverLeftHorizontalAxis() {
         return driverController.getRawAxis(LEFT_HORIZ_AXIS);
     }
+
     public double getDriverLeftZAxis() {
         return driverController.getRawAxis(LEFT_Z_AXIS);
     }
+    
     public double getDriverRightZAxis() {
         return driverController.getRawAxis(RIGHT_Z_AXIS);
     }
+    
+ // operator joysticks
+    public double getOperatorRightVerticalAxis() {
+        return driverController.getRawAxis(RIGHT_VERT_AXIS);
+    }
+    
+    public double getOperatorRightHorizontalAxis() {
+        return driverController.getRawAxis(RIGHT_HORIZ_AXIS);
+    }
+    
+    public double getOperatorLeftVerticalAxis() {
+        return driverController.getRawAxis(LEFT_VERT_AXIS);
+    }     
+    
+    public double getOperatorLeftHorizontalAxis() {
+        return driverController.getRawAxis(LEFT_HORIZ_AXIS);
+    }
+    
     public double getOperatorLeftZAxis() {
         return operatorController.getRawAxis(LEFT_Z_AXIS);
     }
+    
     public double getOperatorRightZAxis() {
         return operatorController.getRawAxis(RIGHT_Z_AXIS);
     }
    
+    // Utilities
     public double applyDeadZone(double value) {
     	if (Math.abs(value) < DEADZONE) {
     		return 0.0;

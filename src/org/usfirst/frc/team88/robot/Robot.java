@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team88.robot.commands.Autonomous;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
+import org.usfirst.frc.team88.robot.subsystems.FishingPole;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
 import org.usfirst.frc.team88.robot.subsystems.Suspension;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static Drive drive;
 	public static Suspension suspension;
 	public static Lift lift;
+	public static FishingPole pole;
     Command autonomousCommand;
 
     /**
@@ -35,6 +37,8 @@ public class Robot extends IterativeRobot {
 		drive = new Drive();
 		suspension = new Suspension();
 		lift = new Lift();
+		pole = new FishingPole();
+		
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();
 
