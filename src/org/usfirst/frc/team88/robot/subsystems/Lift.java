@@ -30,11 +30,11 @@ public class Lift extends Subsystem {
 
     public void moveLift(double liftSpeed) {
     	//logic probably needs to be inverted
-    	if (!getLowerLimit()) {
+    	if (atLowerLimit()) {
     		if (liftSpeed <0) {
     			liftSpeed = 0;
     		}
-    	}else if (!getUpperLimit()) {
+    	}else if (atUpperLimit()) {
     		if (liftSpeed >0) {
     			liftSpeed = 0;
     		}	
@@ -49,12 +49,12 @@ public class Lift extends Subsystem {
     	return liftTalon.getEncPosition();
     }
     
-    public boolean getLowerLimit() {
-    	return lowerLimit.get();
+    public boolean atLowerLimit() {
+    	return !lowerLimit.get();
     }
     
-    public boolean getUpperLimit() {
-    	return upperLimit.get();
+    public boolean atUpperLimit() {
+    	return !upperLimit.get();
     }
     
     
