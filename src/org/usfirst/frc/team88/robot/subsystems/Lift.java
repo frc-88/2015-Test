@@ -57,7 +57,6 @@ public class Lift extends Subsystem {
     	return !upperLimit.get();
     }
     
-    
     public void liftGrab() {
     	liftSolenoid.set(Value.kForward);
     }
