@@ -1,7 +1,6 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
-import org.usfirst.frc.team88.robot.subsystems.Suspension;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,8 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class suspensionDown extends Command {
 
     public suspensionDown() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.suspension);
     }
 

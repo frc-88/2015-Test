@@ -4,15 +4,12 @@ import org.usfirst.frc.team88.robot.Wiring;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.CanTalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Gyro ;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
@@ -20,7 +17,6 @@ import edu.wpi.first.wpilibj.Ultrasonic;
  */
 public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
-    //private DoubleSolenoid suspension;
     private final Gyro gyro;
     public final Ultrasonic ultrasonic;
     private DigitalOutput ping;

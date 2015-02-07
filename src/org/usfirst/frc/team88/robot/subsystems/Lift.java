@@ -1,8 +1,7 @@
 package org.usfirst.frc.team88.robot.subsystems;
 
 import org.usfirst.frc.team88.robot.Wiring;
-import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
-import org.usfirst.frc.team88.robot.commands.lift;
+import org.usfirst.frc.team88.robot.commands.LiftWithController;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -68,7 +67,7 @@ public class Lift extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        setDefaultCommand(new lift());
+        setDefaultCommand(new LiftWithController());
     }
 }
 

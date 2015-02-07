@@ -1,19 +1,16 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class lift extends Command {
+public class LiftWithController extends Command {
 
-    public lift() {
+    public LiftWithController() {
     	super("lift");
     	requires(Robot.lift);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
