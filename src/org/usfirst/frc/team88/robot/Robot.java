@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 		drive = new Drive();
 		suspension = new Suspension();
 		lift = new Lift();
-		pole = new FishingPole();
+//		pole = new FishingPole();
 		
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();

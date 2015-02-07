@@ -49,7 +49,7 @@ public class Lift extends Subsystem {
     
     public boolean atLowerLimit() {
     	if (!lowerLimit.get()) {
-    		bottomPosition = liftTalon.getEncPosition();
+//    		bottomPosition = liftTalon.getEncPosition();
     		return true;
     	}
     	return false;
