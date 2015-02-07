@@ -25,10 +25,8 @@ public class Lift extends Subsystem {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
     	liftTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	liftSolenoid = new DoubleSolenoid(Wiring.liftSolenoidIn, Wiring.liftSolenoidOut);
-    	lowerLimit = new DigitalInput(Wiring.lowerLimit);
-    	upperLimit = new DigitalInput(Wiring.upperLimit);
-    	// TODO - Add code for limit switches
-    	//update David is doing this through DIO
+    	lowerLimit = new DigitalInput(Wiring.liftLowerLimit);
+    	upperLimit = new DigitalInput(Wiring.liftUpperLimit);
     }
 
     public void moveLift(double liftSpeed) {
