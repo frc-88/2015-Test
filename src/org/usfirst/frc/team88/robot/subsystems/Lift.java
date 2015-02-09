@@ -20,7 +20,7 @@ public class Lift extends Subsystem {
         
     //private final static double LIFT_SPEED = 0.5;
     
-    private int bottomPosition;
+    private int bottomPosition = -1;
     
     public Lift() {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
@@ -43,13 +43,17 @@ public class Lift extends Subsystem {
     	liftTalon.set(liftSpeed);
     }
     
-    public double getEncoderCount() {
-    	return liftTalon.getEncPosition();
+    public int getPosition() {
+    	if (bottomPosition == -1) {
+    		return -1;
+    	} else {
+    		return liftTalon.getEncPosition() - bottomPosition;
+		}
     }
     
     public boolean atLowerLimit() {
     	if (!lowerLimit.get()) {
-//    		bottomPosition = liftTalon.getEncPosition();
+    		bottomPosition = liftTalon.getEncPosition();
     		return true;
     	}
     	return false;
