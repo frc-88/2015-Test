@@ -17,6 +17,10 @@ public class Wiring {
     public static final int liftMotorController = 8;
     public static final int liftSolenoidIn = 2;
     public static final int liftSolenoidOut = 3;
+    public static final int liftLowerLimit = 5;
+    public static final int liftUpperLimit = 4;
     
+    // Fishing Pole
+    public static final int poleMotor = 0;
     // Grabber
 }

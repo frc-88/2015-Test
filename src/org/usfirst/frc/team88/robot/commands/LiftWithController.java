@@ -1,32 +1,32 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class grabberOpen extends Command {
+public class LiftWithController extends Command {
 
-    public grabberOpen() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    public LiftWithController() {
+    	super("lift");
     	requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lift.liftRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        double liftSpeed = Robot.oi.getOperatorRightZAxis() - Robot.oi.getOperatorLeftZAxis();
+        Robot.lift.moveLift(liftSpeed);
+        System.out.print("Lifter Speed= " + liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

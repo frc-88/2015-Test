@@ -7,26 +7,26 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class grabberOpen extends Command {
+public class MovePole extends Command {
 
-    public grabberOpen() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.lift);
+    public MovePole() {
+    	requires(Robot.pole);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lift.liftRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+		double speed = Robot.oi.applyDeadZone(Robot.oi.getOperatorLeftVerticalAxis());
+		
+		Robot.pole.movePole(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
