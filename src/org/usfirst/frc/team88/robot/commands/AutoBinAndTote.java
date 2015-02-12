@@ -21,7 +21,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LifterToPosition(2));
     	
     	// drive forward to tote
-    	addSequential(new DriveStraight(0.5, 60.0));
+    	addSequential(new DriveDistance(100, 100));
     	
     	// lower lift to bottom limit
     	addSequential(new LifterDown());
@@ -33,7 +33,7 @@ public class AutoBinAndTote extends CommandGroup {
     	// TODO: Write turning command
     	
     	// drive forward to autozone
-    	addSequential(new DriveStraight(0.5, 120.0));
+    	addSequential(new DriveDistance(100, 100));
     	
     	// lower lift to bottom limit
     	addSequential(new LifterDown());

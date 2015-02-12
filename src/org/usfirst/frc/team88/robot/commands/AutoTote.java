@@ -24,7 +24,7 @@ public class AutoTote extends CommandGroup {
     	// TODO: Write turning command
     	
     	// drive forward to autozone
-    	addSequential(new DriveStraight(0.5, 120.0));
+    	addSequential(new DriveDistance(100, 100));
     	
     	// lower lift to bottom limit
     	addSequential(new LifterDown());

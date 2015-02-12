@@ -1,5 +1,6 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.DriveDistance;
 import org.usfirst.frc.team88.robot.commands.grabberClose;
 import org.usfirst.frc.team88.robot.commands.grabberOpen;
 import org.usfirst.frc.team88.robot.commands.toggleMaxSpeed;
@@ -41,10 +42,13 @@ public class OI {
     private Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
 
     public OI () {
-        driverButtonX.whenPressed(new toggleMaxSpeed());
+        driverButtonA.whenPressed(new DriveDistance(500,500));
+        driverButtonB.whenPressed(new DriveDistance(1000,1000));
+        driverButtonX.whenPressed(new DriveDistance(1500,1500));
+        driverButtonY.whenPressed(new DriveDistance(2000,2000));
+
         operatorButtonA.whenPressed(new grabberOpen());
         operatorButtonY.whenPressed(new grabberClose());
-        //driverButtonB.whenPressed(new Ping());
     }
     
     // driver joysticks

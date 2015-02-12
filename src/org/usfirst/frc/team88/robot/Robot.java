@@ -51,10 +51,7 @@ public class Robot extends IterativeRobot {
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Tote Only", new AutoTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
-		
-        SmartDashboard.putData(drive);
-        SmartDashboard.putData(lift);
-    }
+}
 	
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -62,8 +59,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command
-    	//autoCommand = (Command) autoSelector.getSelected();
-    	autoCommand = new AutoTest();
+    	autoCommand = (Command) autoSelector.getSelected();
         if (autoCommand != null) autoCommand.start();
     }
 
