@@ -33,6 +33,8 @@ public class DriveTurn extends Command {
     	wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
     	gearRotation = wheelRotation / Drive.GEAR_RATIO;
     	targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV;
+
+    	targetCount = 250;
     	
     	requires(Robot.drive);
     }
