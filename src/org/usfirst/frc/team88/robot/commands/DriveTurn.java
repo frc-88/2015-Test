@@ -8,24 +8,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveStraight extends Command {
+public class DriveTurn extends Command {
 
 	private double leftSpeed;
 	private double rightSpeed;
 	private double desiredDistance;
 	private double initialLeftEncoder;
-	private double currentLeftEncoder;
 	private double targetCount;
 	
-    public DriveStraight(double speed,  double distance) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	leftSpeed = speed;
-    	rightSpeed = speed;
+    public DriveTurn(double speed,  double distance) {
+    	double wheelRotation;
+    	double gearRotation;
+    	
     	desiredDistance = distance;
     	
-    	double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
-    	double gearRotation = wheelRotation / Drive.GEAR_RATIO;
+    	if (distance > 1) {
+        	leftSpeed = speed;
+        	rightSpeed = -speed;
+    	} else {
+        	leftSpeed = -speed;
+        	rightSpeed = speed;
+    	}
+    	
+    	wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
+    	gearRotation = wheelRotation / Drive.GEAR_RATIO;
     	targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV;
     	
     	requires(Robot.drive);
@@ -34,6 +40,7 @@ public class DriveStraight extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	double middle = 0.0;
+    	
     	initialLeftEncoder = Robot.drive.getLeftEncoderPosition();
     	Robot.drive.driveSimple(leftSpeed, rightSpeed, middle);
     }
@@ -45,11 +52,10 @@ public class DriveStraight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double encoderCount;
-    	
-    	currentLeftEncoder = Robot.drive.getLeftEncoderPosition();
-    	encoderCount = currentLeftEncoder - initialLeftEncoder;
-        return (encoderCount >= targetCount);
+    	double currentLeftEncoder = Robot.drive.getLeftEncoderPosition();
+    	double encoderCount = currentLeftEncoder - initialLeftEncoder;
+        
+    	return (Math.abs(encoderCount) >= Math.abs(targetCount));
     }
 
     // Called once after isFinished returns true

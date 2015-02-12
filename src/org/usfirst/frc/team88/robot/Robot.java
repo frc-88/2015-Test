@@ -5,9 +5,13 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team88.robot.commands.Autonomous;
+import org.usfirst.frc.team88.robot.commands.AutoBin;
+import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
+import org.usfirst.frc.team88.robot.commands.AutoTest;
+import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.FishingPole;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
@@ -25,7 +29,8 @@ public class Robot extends IterativeRobot {
 	public static Drive drive;
 	public static Lift lift;
 	public static FishingPole pole;
-    Command autonomousCommand;
+    private static SendableChooser autoSelector;
+	private static Command autoCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -39,11 +44,15 @@ public class Robot extends IterativeRobot {
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();
 
-		// instantiate the command used for the autonomous period
-        autonomousCommand = new Autonomous();
+		// set up SendableChooser to select autonomous mode
+		autoSelector = new SendableChooser();
+		autoSelector.addDefault("test", new AutoTest());
+		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
+		autoSelector.addObject("Bin Only", new AutoBin());
+		autoSelector.addObject("Tote Only", new AutoTote());
+		
         SmartDashboard.putData(drive);
         SmartDashboard.putData(lift);
-        
     }
 	
 	public void disabledPeriodic() {
@@ -51,8 +60,9 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        // schedule the autonomous command
+    	autoCommand = (Command) autoSelector.getSelected();
+        if (autoCommand != null) autoCommand.start();
     }
 
     /**
@@ -67,7 +77,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        if (autoCommand != null) autoCommand.cancel();
     }
 
     /**
