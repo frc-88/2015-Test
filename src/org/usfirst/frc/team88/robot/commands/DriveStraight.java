@@ -17,16 +17,18 @@ public class DriveStraight extends Command {
 	private double currentLeftEncoder;
 	private double targetCount;
 	
-    public DriveStraight(double speed,  double distance) {
+    public DriveStraight(double speed,  double counts) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	leftSpeed = speed;
     	rightSpeed = speed;
-    	desiredDistance = distance;
+    	//desiredDistance = distance;
     	
-    	double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
-    	double gearRotation = wheelRotation / Drive.GEAR_RATIO;
-    	targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV;
+    	//double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
+    	//double gearRotation = wheelRotation / Drive.GEAR_RATIO;
+    	//targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV * 2.0;
+    	
+    	targetCount = counts;
     	
     	requires(Robot.drive);
     }

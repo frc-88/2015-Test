@@ -26,6 +26,7 @@ public class AutoTest extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new DriveStraight(0.5, 120.0));// DriveAutonomous(left, distance "In")
+    	//addSequential(new DriveStraight(-0.5, 120.0));// DriveAutonomous(left, distance "In")
+    	addSequential(new DriveTurn(0.5, 20.0));// DriveAutonomous(left, distance "In")
     }
 }

@@ -61,7 +61,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command
-    	autoCommand = (Command) autoSelector.getSelected();
+    	//autoCommand = (Command) autoSelector.getSelected();
+    	autoCommand = new AutoTest();
         if (autoCommand != null) autoCommand.start();
     }
 

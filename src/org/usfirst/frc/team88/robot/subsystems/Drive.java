@@ -41,7 +41,7 @@ public class Drive extends Subsystem {
     private final static double D = 1.0;
     private final static double F = 0.5;
     private final static int IZONE = 0;
-    private final static double RAMPRATE = 6.0;
+    private final static double RAMPRATE = 96.0;
     private final static int PROFILE = 0;
     
     private ITG3200_I2C gyroNew;
@@ -51,13 +51,13 @@ public class Drive extends Subsystem {
     	gyroNew = new ITG3200_I2C();
     	// set up drive masters
     	lTalonMaster = new CANTalon(Wiring.leftMotorController);
-    	lTalonMaster.changeControlMode(ControlMode.Speed);
+    	lTalonMaster.changeControlMode(ControlMode.Disabled);
     	lTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	lTalonMaster.reverseSensor(false);
     	lTalonMaster.setPID(LEFT_P, LEFT_I, D, F, IZONE, RAMPRATE, PROFILE);
     	
     	rTalonMaster = new CANTalon(Wiring.rightMotorController);
-    	rTalonMaster.changeControlMode(ControlMode.Speed);
+    	rTalonMaster.changeControlMode(ControlMode.Disabled);
     	rTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	rTalonMaster.reverseSensor(false);
     	rTalonMaster.setPID(RIGHT_P, RIGHT_I, D, F, IZONE, RAMPRATE, PROFILE);
