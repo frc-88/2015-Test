@@ -12,6 +12,14 @@ public class DriveDistance extends Command {
 	
     public DriveDistance(double left, double right) {
     	requires(Robot.drive);
+
+    	// Possible math to calculate encoder count target based on desired distance
+    	//desiredDistance = distance;
+        //double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
+        //double gearRotation = wheelRotation / Drive.GEAR_RATIO;
+        //targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV * 2.0;
+
+    	// for now, just pass in encoder counts
     	targetLeft = left;
     	targetRight = right;
     }
@@ -20,13 +28,11 @@ public class DriveDistance extends Command {
     protected void initialize() {
     	Robot.drive.setClosedLoopPosition();
     	Robot.drive.resetEncoders();
-    	
     	Robot.drive.driveSimple(targetLeft, targetRight, 0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
