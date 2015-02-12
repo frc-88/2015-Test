@@ -21,7 +21,6 @@ public class LiftWithController extends Command {
     protected void execute() {
         double liftSpeed = Robot.oi.getOperatorRightZAxis() - Robot.oi.getOperatorLeftZAxis();
         Robot.lift.moveLift(liftSpeed);
-        System.out.print("Lifter Speed= " + liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LifterToPosition extends Command {
 	private static final double SPEED = .5;
-	private static final int [] POSITIONS = new int[] {0, 200, 400, 99999};
+	private static final int [] POSITIONS = new int[] {0, 200, 400, 600, 99999};
 	
 	private int target;
 	private boolean moveDown;
@@ -40,9 +40,7 @@ public class LifterToPosition extends Command {
     protected void initialize() {
     	int position = Robot.lift.getPosition();
     	
-    	if(position == -1) {
-    		done = true;
-    	} else if (position > target) {
+    	if (position > target) {
     		moveDown = true;
         	Robot.lift.moveLift(-SPEED);
     	} else if (position < target) {

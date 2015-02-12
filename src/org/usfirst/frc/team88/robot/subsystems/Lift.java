@@ -20,8 +20,6 @@ public class Lift extends Subsystem {
         
     //private final static double LIFT_SPEED = 0.5;
     
-    private int bottomPosition = -1;
-    
     public Lift() {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
     	liftTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
@@ -37,23 +35,21 @@ public class Lift extends Subsystem {
 			liftSpeed = 0.0;
     	}
     	
+    	liftTalon.set(liftSpeed);
+
     	SmartDashboard.putBoolean("LimitSwitch Lower" , lowerLimit.get());
     	SmartDashboard.putBoolean("LimitSwitch Upper" , upperLimit.get());
-    	
-    	liftTalon.set(liftSpeed);
+        SmartDashboard.putNumber("Lift Encoder: ", liftTalon.getEncPosition());
+        SmartDashboard.putNumber("Lift Position: ", liftTalon.getPosition());
     }
     
     public int getPosition() {
-    	if (bottomPosition == -1) {
-    		return -1;
-    	} else {
-    		return liftTalon.getEncPosition() - bottomPosition;
-		}
+    	return liftTalon.getEncPosition();
     }
     
     public boolean atLowerLimit() {
     	if (!lowerLimit.get()) {
-    		bottomPosition = liftTalon.getEncPosition();
+    		liftTalon.setPosition(0);
     		return true;
     	}
     	return false;
