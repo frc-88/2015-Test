@@ -1,7 +1,5 @@
 package org.usfirst.frc.team88.robot;
 
-import org.usfirst.frc.team88.robot.commands.DriveStraight;
-import org.usfirst.frc.team88.robot.commands.DriveTurn;
 import org.usfirst.frc.team88.robot.commands.grabberClose;
 import org.usfirst.frc.team88.robot.commands.grabberOpen;
 import org.usfirst.frc.team88.robot.commands.toggleMaxSpeed;
@@ -47,11 +45,6 @@ public class OI {
         operatorButtonA.whenPressed(new grabberOpen());
         operatorButtonY.whenPressed(new grabberClose());
         //driverButtonB.whenPressed(new Ping());
-        //operatorButtonB.whenPressed(new DriveTurn(0.5, 20.0));
-        //operatorButtonA.whenPressed(new DriveStraight(-0.1, 500));
-        //operatorButtonB.whenPressed(new DriveStraight(-0.1, 1000));
-        //operatorButtonX.whenPressed(new DriveStraight(-0.1, 1500));
-        //operatorButtonY.whenPressed(new DriveStraight(-0.1, 2000));
     }
     
     // driver joysticks
