@@ -22,5 +22,8 @@ public class Wiring {
     
     // Fishing Pole
     public static final int poleMotor = 0;
-    // Grabber
+
+    // Schtick
+	public static final int schtickSolenoidIn = 4;
+	public static final int schtickSolenoidOut = 5;
 }
