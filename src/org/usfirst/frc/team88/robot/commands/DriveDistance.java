@@ -1,7 +1,6 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
-import org.usfirst.frc.team88.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -32,8 +31,8 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
-        return true;
+    	return Math.abs(Robot.drive.getLeftPosition()) >= Math.abs(targetLeft) &&
+    			Math.abs(Robot.drive.getRightPosition()) >= Math.abs(targetRight);
     }
 
     // Called once after isFinished returns true

@@ -134,6 +134,14 @@ public class Drive extends Subsystem {
     	rTalonMaster.setPosition(0);
     }
     
+    public double getLeftPosition() {
+    	return lTalonMaster.getPosition();
+    }
+
+    public double getRightPosition() {
+    	return rTalonMaster.getPosition();
+    }
+    
     public void initDefaultCommand() {
         setDefaultCommand(new DriveWithControllerSimple());
     }
