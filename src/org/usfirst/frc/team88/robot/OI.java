@@ -2,8 +2,6 @@ package org.usfirst.frc.team88.robot;
 
 import org.usfirst.frc.team88.robot.commands.grabberClose;
 import org.usfirst.frc.team88.robot.commands.grabberOpen;
-import org.usfirst.frc.team88.robot.commands.suspensionDown;
-import org.usfirst.frc.team88.robot.commands.suspensionUp;
 import org.usfirst.frc.team88.robot.commands.toggleMaxSpeed;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -43,8 +41,6 @@ public class OI {
     private Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
 
     public OI () {
-        driverButtonY.whenPressed(new suspensionDown());
-        driverButtonA.whenPressed(new suspensionUp());
         driverButtonX.whenPressed(new toggleMaxSpeed());
         operatorButtonA.whenPressed(new grabberOpen());
         operatorButtonY.whenPressed(new grabberClose());
