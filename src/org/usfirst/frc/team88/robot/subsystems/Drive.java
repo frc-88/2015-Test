@@ -29,7 +29,7 @@ public class Drive extends Subsystem {
     public final static double WHEEL_DIAMETER = 6.0;
     
     private final static double FAST_SPEED = 400.0;
-    private final static double SLOW_SPEED = 100.0;
+    private final static double SLOW_SPEED = 200.0;
     
     private final static double LEFT_P = 0.5;
     private final static double LEFT_I = 0.002;
