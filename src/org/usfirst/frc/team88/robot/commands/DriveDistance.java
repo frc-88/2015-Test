@@ -18,7 +18,7 @@ public class DriveDistance extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drive.setPositionMode();
+    	Robot.drive.setClosedLoopPosition();
     	Robot.drive.resetEncoders();
     	
     	Robot.drive.driveSimple(targetLeft, targetRight, 0.0);

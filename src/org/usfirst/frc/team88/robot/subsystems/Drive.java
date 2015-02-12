@@ -43,7 +43,7 @@ public class Drive extends Subsystem {
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
     private DoubleSolenoid suspension;
     private double maxSpeed;
-    private boolean positionMode;
+    private CANTalon.ControlMode controlMode;
     
     public Drive() {
     	lTalonMaster = new CANTalon(Wiring.leftMotorController);
@@ -75,7 +75,7 @@ public class Drive extends Subsystem {
 
     	maxSpeed = FAST_SPEED;
     	
-    	setSpeedMode();
+    	setClosedLoopSpeed();
     }
     
     public void driveSimple(double left, double right, double middle) {
@@ -85,14 +85,21 @@ public class Drive extends Subsystem {
     		suspensionDown();
     	}
 
-    	if (positionMode) {
+    	switch (controlMode) {
+    	case Disabled:
+    	case Position:
     		lTalonMaster.set(left);
     		rTalonMaster.set(right);
-    	} else {
-	    	lTalonMaster.set(-left * maxSpeed);
+    		break;
+    		
+    	case Speed:
+    		lTalonMaster.set(-left * maxSpeed);
 	        rTalonMaster.set(right * maxSpeed);
+	        break;
+		default:
+			break;
     	}
-
+    	
     	mTalon.set(middle);
 
         SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getEncPosition());
@@ -109,26 +116,33 @@ public class Drive extends Subsystem {
     	}
     }
     
-    public void setSpeedMode() {
-    	lTalonMaster.setProfile(SPEED_PROFILE);
-    	lTalonMaster.changeControlMode(ControlMode.Speed);
+    public void setClosedLoopSpeed() {
+    	controlMode = ControlMode.Speed;
 
+    	lTalonMaster.setProfile(SPEED_PROFILE);
     	rTalonMaster.setProfile(SPEED_PROFILE);
-    	rTalonMaster.changeControlMode(ControlMode.Speed);
-    	
-    	positionMode = false;
+
+    	lTalonMaster.changeControlMode(controlMode);
+       	rTalonMaster.changeControlMode(controlMode);
     }
     
-    public void setPositionMode() {
+    public void setClosedLoopPosition() {
+    	controlMode = ControlMode.Position;
+
     	lTalonMaster.setProfile(POSITION_PROFILE);
-    	lTalonMaster.changeControlMode(ControlMode.Position);
-    	
     	rTalonMaster.setProfile(POSITION_PROFILE);
-    	rTalonMaster.changeControlMode(ControlMode.Position);
-    	
-    	positionMode = true;
+
+    	lTalonMaster.changeControlMode(controlMode);
+       	rTalonMaster.changeControlMode(controlMode);
     }
-    
+
+    public void setOpenLoop() {
+    	controlMode = ControlMode.Disabled;
+
+    	lTalonMaster.changeControlMode(controlMode);
+       	rTalonMaster.changeControlMode(controlMode);
+    }
+
     public void resetEncoders() {
     	lTalonMaster.setPosition(0);
     	rTalonMaster.setPosition(0);
