@@ -3,9 +3,9 @@ package org.usfirst.frc.team88.robot;
 import org.usfirst.frc.team88.robot.commands.DriveDistance;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
-import org.usfirst.frc.team88.robot.commands.grabberClose;
-import org.usfirst.frc.team88.robot.commands.grabberOpen;
-import org.usfirst.frc.team88.robot.commands.toggleMaxSpeed;
+import org.usfirst.frc.team88.robot.commands.GrabberClose;
+import org.usfirst.frc.team88.robot.commands.GrabberOpen;
+import org.usfirst.frc.team88.robot.commands.ToggleMaxSpeed;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -49,10 +49,10 @@ public class OI {
         driverButtonB.whenPressed(new DriveDistance(1000,1000));
         driverButtonX.whenPressed(new DriveDistance(1500,1500));
         driverButtonY.whenPressed(new DriveDistance(2000,2000));
-        //driverButtonX.whenPressed(new toggleMaxSpeed());
+        //driverButtonX.whenPressed(new ToggleMaxSpeed());
         
-        operatorButtonA.whenPressed(new grabberOpen());
-        operatorButtonB.whenPressed(new grabberClose());
+        operatorButtonA.whenPressed(new GrabberOpen());
+        operatorButtonB.whenPressed(new GrabberClose());
         operatorButtonX.whenPressed(new SchtickIn());
         operatorButtonY.whenPressed(new SchtickOut());
     }
@@ -82,7 +82,7 @@ public class OI {
         return driverController.getRawAxis(RIGHT_Z_AXIS);
     }
     
- // operator joysticks
+    // operator joysticks
     public double getOperatorRightVerticalAxis() {
         return driverController.getRawAxis(RIGHT_VERT_AXIS);
     }

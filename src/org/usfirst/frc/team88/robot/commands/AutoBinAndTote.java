@@ -9,13 +9,13 @@ public class AutoBinAndTote extends CommandGroup {
     
     public  AutoBinAndTote() {
     	// open grabber
-    	addSequential(new grabberOpen());
+    	addSequential(new GrabberOpen());
 
-    	// lower lift to bottom limit
+    	// lower lift to bottom limit, zeroes lifter encoder
     	addSequential(new LifterDown());
     	
     	// close grabber
-    	addSequential(new grabberClose());
+    	addSequential(new GrabberClose());
     	
     	// raise lift to position 2
     	addSequential(new LifterToPosition(2));
@@ -30,7 +30,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LifterToPosition(1));
     	
     	// turn left 90 degrees
-    	// TODO: Write turning command
+    	addSequential(new DriveDistance(-100, 100));
     	
     	// drive forward to autozone
     	addSequential(new DriveDistance(100, 100));
@@ -39,6 +39,6 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LifterDown());
     	
     	// open grabber
-    	addSequential(new grabberOpen());
+    	addSequential(new GrabberOpen());
     }
 }

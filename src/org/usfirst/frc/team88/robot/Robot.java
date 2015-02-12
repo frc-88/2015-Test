@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
 
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("test", new AutoTest());
+		autoSelector.addDefault("Testing", new AutoTest());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Tote Only", new AutoTote());

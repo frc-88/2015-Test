@@ -7,9 +7,6 @@ public class Wiring {
     public static final int rightMotorController = 3;
     public static final int rightMotorController2 = 4;
     public static final int middleMotorController = 5;
-    public static final int gyro=0;
-    
-    // Suspension
     public static final int suspensionSolenoidDown = 0;
     public static final int suspensionSolenoidUp = 1;
     
