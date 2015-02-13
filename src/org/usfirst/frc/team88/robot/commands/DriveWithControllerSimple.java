@@ -26,22 +26,11 @@ public class DriveWithControllerSimple extends Command {
 		double right = Robot.oi.getDriverRightVerticalAxis();
 		double middle = Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
-        SmartDashboard.putNumber("Left before: ", left);
-        SmartDashboard.putNumber("Right before: ", right);
-        SmartDashboard.putNumber("Middle before: ", middle);
-        
         left = Robot.oi.applyDeadZone(left);
 		right = Robot.oi.applyDeadZone(right);
 		middle = Robot.oi.applyDeadZone(middle);
-		
-        SmartDashboard.putNumber("Left after: ", left);
-        SmartDashboard.putNumber("Right after: ", right);
-        SmartDashboard.putNumber("Middle after: ", middle);
-        
+
 		Robot.drive.driveSimple(left, right, middle);
-		
-		// Robot.drive.ultrasonic.ping();
-		// SmartDashboard.putNumber("inches from detected object:", Robot.drive.ultrasonic.getRangeInches());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -50,20 +50,6 @@ public class OI {
     private Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
 
     public OI () {
-    	SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
-    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
-    	SmartDashboard.putData("Forward 1000 cycles", new DriveEncoder(1000,-1000));
-    	SmartDashboard.putData("Forward 2000 cycles",new DriveEncoder(2000,-2000));
-    	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
-    	SmartDashboard.putData("Right 90",new DriveTurnRight90());
-
-    	SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
-    	SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
-    	SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
-    	SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
-    	SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
-    	SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
-
         driverButtonA.whenPressed(new SchtickIn());
         driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new DriveToggleMaxSpeed());

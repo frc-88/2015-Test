@@ -12,6 +12,11 @@ import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
+import org.usfirst.frc.team88.robot.commands.DriveEncoder;
+import org.usfirst.frc.team88.robot.commands.DriveStraight;
+import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
+import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
+import org.usfirst.frc.team88.robot.commands.LiftToPosition;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.Arminator;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
@@ -47,6 +52,7 @@ public class Robot extends IterativeRobot {
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();
 
+		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
 		autoSelector.addDefault("Testing", new AutoTest());
@@ -54,6 +60,28 @@ public class Robot extends IterativeRobot {
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Tote Only", new AutoTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
+		
+    	// Testing commands for auto drive
+		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
+    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
+    	SmartDashboard.putData("Forward 1000 cycles", new DriveEncoder(1000,-1000));
+    	SmartDashboard.putData("Forward 2000 cycles",new DriveEncoder(2000,-2000));
+    	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
+    	SmartDashboard.putData("Right 90",new DriveTurnRight90());
+
+    	// Testing commands for auto lift
+    	SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
+    	SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
+    	SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
+    	SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
+    	SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
+    	SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
+
+    	// Testing auto command groups
+    	SmartDashboard.putData("Auto Test", new AutoTest());
+    	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
+    	SmartDashboard.putData("Auto Bin Only", new AutoBin());
+    	SmartDashboard.putData("Auto Tote Only", new AutoTote());
     }
 	
 	public void disabledPeriodic() {
