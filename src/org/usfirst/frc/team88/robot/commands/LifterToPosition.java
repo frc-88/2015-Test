@@ -22,8 +22,15 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  */
 public class LifterToPosition extends Command {
-	private static final double SPEED = .5;
-	private static final int [] POSITIONS = new int[] {0, 200, 400, 600, 99999};
+	public static final double SPEED = .5;
+	public static final int BOTTOM = 0;
+	public static final int TRAVEL = 1;
+	public static final int ONETOTE = 2;
+	public static final int TWOTOTES = 3;
+	public static final int THREETOTES = 4;
+	public static final int TOP = 5;
+	
+	private static final int [] POSITIONS = new int[] {0, 200, 400, 600, 800, 99999};
 	
 	private int target;
 	private boolean moveDown;

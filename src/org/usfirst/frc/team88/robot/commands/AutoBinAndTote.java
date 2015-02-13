@@ -17,17 +17,20 @@ public class AutoBinAndTote extends CommandGroup {
     	// close grabber
     	addSequential(new GrabberClose());
     	
-    	// raise lift to position 2
-    	addSequential(new LifterToPosition(2));
+    	// raise lift to one tote position
+    	addSequential(new LifterToPosition(LifterToPosition.ONETOTE));
     	
     	// drive forward to tote
     	addSequential(new DriveDistance(100, 100));
     	
+    	// drop the bin
+    	addSequential(new GrabberOpen());
+    	
     	// lower lift to bottom limit
     	addSequential(new LifterDown());
     	
-    	// raise lift to position 1
-    	addSequential(new LifterToPosition(1));
+    	// raise lift to travel position
+    	addSequential(new LifterToPosition(LifterToPosition.TRAVEL));
     	
     	// turn left 90 degrees
     	addSequential(new DriveDistance(-100, 100));
