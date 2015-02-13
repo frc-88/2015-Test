@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * life hits the lower limit. Run the "LifterDown" command to initialize.
  * 
  */
-public class LifterToPosition extends Command {
+public class LiftToPosition extends Command {
 	public static final double SPEED = .5;
 	public static final int BOTTOM = 0;
 	public static final int TRAVEL = 1;
@@ -36,7 +36,7 @@ public class LifterToPosition extends Command {
 	private boolean moveDown;
 	private boolean done = false;
 	
-    public LifterToPosition(int position) {
+    public LiftToPosition(int position) {
     	super("LifterToPosition");
     	requires(Robot.lift);
     	

@@ -9,16 +9,16 @@ public class AutoBin extends CommandGroup {
     
     public  AutoBin() {
     	// open grabber
-    	addSequential(new GrabberOpen());
+    	addSequential(new LiftGrabberOpen());
 
     	// lower lift to bottom limit, zeroes lifter encoder
-    	addSequential(new LifterDown());
+    	addSequential(new LiftDown());
     	
     	// close grabber
-    	addSequential(new GrabberClose());
+    	addSequential(new LiftGrabberClose());
     	
     	// raise lift to position 1
-    	addSequential(new LifterToPosition(1));
+    	addSequential(new LiftToPosition(1));
     	
     	// turn left 90 degrees
     	addSequential(new DriveDistance(-100, 100));
@@ -27,9 +27,9 @@ public class AutoBin extends CommandGroup {
     	addSequential(new DriveDistance(100, 100));
     	
     	// lower lift to bottom limit
-    	addSequential(new LifterDown());
+    	addSequential(new LiftDown());
     	
     	// open grabber
-    	addSequential(new GrabberOpen());
+    	addSequential(new LiftGrabberOpen());
     }
 }

@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MovePole extends Command {
+public class ArminatorWithController extends Command {
 
-    public MovePole() {
-    	requires(Robot.pole);
+    public ArminatorWithController() {
+    	requires(Robot.arminator);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +21,7 @@ public class MovePole extends Command {
     protected void execute() {
 		double speed = Robot.oi.applyDeadZone(Robot.oi.getOperatorLeftVerticalAxis());
 		
-		Robot.pole.movePole(speed);
+		Robot.arminator.move(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

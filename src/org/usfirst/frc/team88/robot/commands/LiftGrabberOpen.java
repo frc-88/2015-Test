@@ -7,34 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LifterDown extends Command {
+public class LiftGrabberOpen extends Command {
 
-	private final static double speedDown = -0.5;
-	
-    public LifterDown() {
-    	super("Lifter Down");
-    	requires(Robot.lift);
+    public LiftGrabberOpen() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.lift.liftRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.moveLift(speedDown);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.lift.atLowerLimit();
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lift.moveLift(0);
     }
 
     // Called when another command which requires one or more of the same

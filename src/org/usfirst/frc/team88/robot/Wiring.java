@@ -17,8 +17,8 @@ public class Wiring {
     public static final int liftLowerLimit = 5;
     public static final int liftUpperLimit = 4;
     
-    // Fishing Pole
-    public static final int poleMotor = 0;
+    // Arminator
+    public static final int arminatorMotor = 0;
 
     // Schtick
 	public static final int schtickSolenoidIn = 4;

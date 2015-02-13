@@ -13,7 +13,7 @@ import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
-import org.usfirst.frc.team88.robot.subsystems.FishingPole;
+import org.usfirst.frc.team88.robot.subsystems.Arminator;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
 import org.usfirst.frc.team88.robot.subsystems.Schtick;
 
@@ -29,7 +29,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static Drive drive;
 	public static Lift lift;
-	public static FishingPole pole;
+	public static Arminator arminator;
 	public static Schtick schtick;
     private static SendableChooser autoSelector;
 	private static Command autoCommand;
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		drive = new Drive();
 		lift = new Lift();
-		pole = new FishingPole();
+		arminator = new Arminator();
 		schtick = new Schtick();
 		
 		// do this last so OI can reference Robot subsystems

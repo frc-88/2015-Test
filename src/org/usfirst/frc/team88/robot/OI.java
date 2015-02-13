@@ -3,8 +3,8 @@ package org.usfirst.frc.team88.robot;
 import org.usfirst.frc.team88.robot.commands.DriveDistance;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
-import org.usfirst.frc.team88.robot.commands.GrabberClose;
-import org.usfirst.frc.team88.robot.commands.GrabberOpen;
+import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
+import org.usfirst.frc.team88.robot.commands.LiftGrabberOpen;
 import org.usfirst.frc.team88.robot.commands.ToggleMaxSpeed;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -52,8 +52,8 @@ public class OI {
         driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new ToggleMaxSpeed());
         
-        operatorButtonA.whenPressed(new GrabberOpen());
-        operatorButtonB.whenPressed(new GrabberClose());
+        operatorButtonA.whenPressed(new LiftGrabberOpen());
+        operatorButtonB.whenPressed(new LiftGrabberClose());
     }
     
     // driver joysticks
