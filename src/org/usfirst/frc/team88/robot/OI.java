@@ -45,8 +45,9 @@ public class OI {
 
     public OI () {
     	// test driver button configuration
-    	driverButtonA.whenPressed(new DriveDistance(500,500));
-        driverButtonB.whenPressed(new DriveDistance(1000,1000));
+    	driverButtonA.whenPressed(new DriveDistance(0,0));
+    	// 90 degree spin to the right
+        driverButtonB.whenPressed(new DriveDistance(1050,1050));
         //driverButtonA.whenPressed(new SchtickIn());
         //driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new ToggleMaxSpeed());
