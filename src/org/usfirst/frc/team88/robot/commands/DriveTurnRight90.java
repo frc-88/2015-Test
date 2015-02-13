@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTurnRight90 extends Command {
-	public DriveTurnRight90(double distance) {
+	public DriveTurnRight90() {
     	requires(Robot.drive);
     }
 
