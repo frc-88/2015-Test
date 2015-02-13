@@ -1,27 +1,19 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
+import org.usfirst.frc.team88.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveDistance extends Command {
-	private static final double BUFFER = 10.0;
+public class DriveEncoder extends Command {
 	private double targetLeft, targetRight;
 	
-    public DriveDistance(double left, double right) {
+    public DriveEncoder(double left, double right) {
     	requires(Robot.drive);
 
-    	// Possible math to calculate encoder count target based on desired distance
-    	//desiredDistance = distance;
-        //double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
-        //double gearRotation = wheelRotation / Drive.GEAR_RATIO;
-        //targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV * 2.0;
-    	// 1000 count ~= 68cm
-    	
-    	// for now, just pass in encoder counts
     	targetLeft = left;
     	targetRight = right;
     }
@@ -39,8 +31,8 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.drive.getLeftPosition()) >= (Math.abs(targetLeft) - BUFFER) &&
-    			Math.abs(Robot.drive.getRightPosition()) >= (Math.abs(targetRight) - BUFFER);
+    	return Math.abs(Robot.drive.getLeftPosition()) >= (Math.abs(targetLeft) - Drive.BUFFER) &&
+    			Math.abs(Robot.drive.getRightPosition()) >= (Math.abs(targetRight) - Drive.BUFFER);
     }
 
     // Called once after isFinished returns true

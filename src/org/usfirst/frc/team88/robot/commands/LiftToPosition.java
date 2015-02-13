@@ -1,6 +1,7 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
+import org.usfirst.frc.team88.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,16 +23,6 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  */
 public class LiftToPosition extends Command {
-	public static final double SPEED = .5;
-	public static final int BOTTOM = 0;
-	public static final int TRAVEL = 1;
-	public static final int ONETOTE = 2;
-	public static final int TWOTOTES = 3;
-	public static final int THREETOTES = 4;
-	public static final int TOP = 5;
-	
-	private static final int [] POSITIONS = new int[] {0, 200, 400, 600, 800, 99999};
-	
 	private int target;
 	private boolean moveDown;
 	private boolean done = false;
@@ -40,7 +31,7 @@ public class LiftToPosition extends Command {
     	super("LifterToPosition");
     	requires(Robot.lift);
     	
-    	target = POSITIONS[position];
+    	target = position;
     }
 
     // Called just before this Command runs the first time
@@ -49,10 +40,10 @@ public class LiftToPosition extends Command {
     	
     	if (position > target) {
     		moveDown = true;
-        	Robot.lift.moveLift(-SPEED);
+        	Robot.lift.moveLift(-Lift.AUTO_SPEED);
     	} else if (position < target) {
     		moveDown = false;
-        	Robot.lift.moveLift(SPEED);
+        	Robot.lift.moveLift(Lift.AUTO_SPEED);
     	} else {
     		done = true;
     	}

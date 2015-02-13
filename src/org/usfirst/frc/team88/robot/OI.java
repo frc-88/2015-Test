@@ -1,15 +1,21 @@
 package org.usfirst.frc.team88.robot;
 
-import org.usfirst.frc.team88.robot.commands.DriveDistance;
+import org.usfirst.frc.team88.robot.commands.DriveEncoder;
+import org.usfirst.frc.team88.robot.commands.DriveStraight;
+import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
+import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
+import org.usfirst.frc.team88.robot.commands.LiftToPosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberOpen;
 import org.usfirst.frc.team88.robot.commands.DriveToggleMaxSpeed;
+import org.usfirst.frc.team88.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,10 +50,20 @@ public class OI {
     private Button operatorButtonRightBumper = new JoystickButton(operatorController, 6);
 
     public OI () {
-    	// test driver button configuration
-    	//driverButtonA.whenPressed(new DriveDistance(0,0));
-    	// 90 degree spin to the right
-        //driverButtonB.whenPressed(new DriveDistance(1050,1050));
+    	SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
+    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
+    	SmartDashboard.putData("Forward 1000 cycles", new DriveEncoder(1000,-1000));
+    	SmartDashboard.putData("Forward 2000 cycles",new DriveEncoder(2000,-2000));
+    	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
+    	SmartDashboard.putData("Right 90",new DriveTurnRight90());
+
+    	SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
+    	SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
+    	SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
+    	SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
+    	SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
+    	SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
+
         driverButtonA.whenPressed(new SchtickIn());
         driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new DriveToggleMaxSpeed());

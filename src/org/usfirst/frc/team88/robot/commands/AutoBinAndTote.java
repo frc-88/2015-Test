@@ -1,5 +1,7 @@
 package org.usfirst.frc.team88.robot.commands;
 
+import org.usfirst.frc.team88.robot.subsystems.Lift;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -18,10 +20,10 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LiftGrabberClose());
     	
     	// raise lift to one tote position
-    	addSequential(new LiftToPosition(LiftToPosition.ONETOTE));
+    	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     	
     	// drive forward to tote
-    	addSequential(new DriveDistance(100, 100));
+    	addSequential(new DriveEncoder(100, 100));
     	
     	// drop the bin
     	addSequential(new LiftGrabberOpen());
@@ -30,13 +32,13 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LiftDown());
     	
     	// raise lift to travel position
-    	addSequential(new LiftToPosition(LiftToPosition.TRAVEL));
+    	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
     	// turn left 90 degrees
-    	addSequential(new DriveDistance(-100, 100));
+    	addSequential(new DriveEncoder(-100, 100));
     	
     	// drive forward to autozone
-    	addSequential(new DriveDistance(100, 100));
+    	addSequential(new DriveEncoder(100, 100));
     	
     	// lower lift to bottom limit
     	addSequential(new LiftDown());
