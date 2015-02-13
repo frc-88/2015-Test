@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ *    Lifting totes and bins
+ *    Pick things up and put them down
+ *                 Oooo, a yellow one!
  */
 public class Lift extends Subsystem {
 	public static final double AUTO_SPEED = .5;

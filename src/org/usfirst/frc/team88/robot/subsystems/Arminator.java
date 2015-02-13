@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *           The Arminator
+ *    It might give you a wedgie!
+ *        Can it pick up bins?
  */
 public class Arminator extends Subsystem {
 	private Talon arminatorMotor;

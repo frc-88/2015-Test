@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *    Schtick! Schtick! Schtick! Schtick! Schtick!
+ *    The TJ fans chant and then
+ *                              Dream of St. Louis
  */
 public class Schtick extends Subsystem {
     private DoubleSolenoid schtick;

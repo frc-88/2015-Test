@@ -7,19 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * This command will move the lifter to specific positions based on encoder
- * counts from the bottom limit. An array of encoded counts is used to 
- * specify five positions:
- * 
- * 	Position	Meaning
- * 		0		Bottom limit
- * 		1		Just off the ground...driving position
- * 		2		Above one tote...position to stack on one tote
- * 		3		Above two totes...position to stack on two totes
- * 		4		Top limit
+ * counts from the bottom limit. 
  * 
  * NOTE: This command does rely on the position of the bottom limit being
- * captured by the Lift subsystem, which should happen the first time the
- * life hits the lower limit. Run the "LifterDown" command to initialize.
+ * zeroed by the Lift subsystem, which should happen the first time the
+ * lift hits the lower limit. Run the "LiftDown" command to initialize.
  * 
  */
 public class LiftToPosition extends Command {

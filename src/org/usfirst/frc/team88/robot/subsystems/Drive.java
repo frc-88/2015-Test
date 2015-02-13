@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
- *
+ *               This is the Drive code
+ *    Forwards, backwards, and sideways
+ *    Point A to Point B
  */
 public class Drive extends Subsystem {
 	

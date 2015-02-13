@@ -31,11 +31,11 @@ import org.usfirst.frc.team88.robot.subsystems.Schtick;
  */
 public class Robot extends IterativeRobot {
 
-	public static OI oi;
 	public static Drive drive;
 	public static Lift lift;
 	public static Arminator arminator;
 	public static Schtick schtick;
+	public static OI oi;
     private static SendableChooser autoSelector;
 	private static Command autoCommand;
 
