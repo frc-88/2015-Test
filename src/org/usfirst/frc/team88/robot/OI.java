@@ -45,11 +45,11 @@ public class OI {
 
     public OI () {
     	// test driver button configuration
-    	driverButtonA.whenPressed(new DriveDistance(500,500));
-        driverButtonB.whenPressed(new DriveDistance(1000,1000));
-        driverButtonX.whenPressed(new DriveDistance(1500,1500));
-        driverButtonY.whenPressed(new DriveDistance(2000,2000));
-        //driverButtonX.whenPressed(new ToggleMaxSpeed());
+    	//driverButtonA.whenPressed(new DriveDistance(500,-500));
+        //driverButtonB.whenPressed(new DriveDistance(1000,-1000));
+        //driverButtonX.whenPressed(new DriveDistance(1500,1500));
+        //driverButtonY.whenPressed(new DriveDistance(2000,2000));
+        driverButtonX.whenPressed(new ToggleMaxSpeed());
         
         operatorButtonA.whenPressed(new GrabberOpen());
         operatorButtonB.whenPressed(new GrabberClose());
@@ -84,19 +84,19 @@ public class OI {
     
     // operator joysticks
     public double getOperatorRightVerticalAxis() {
-        return driverController.getRawAxis(RIGHT_VERT_AXIS);
+        return operatorController.getRawAxis(RIGHT_VERT_AXIS);
     }
     
     public double getOperatorRightHorizontalAxis() {
-        return driverController.getRawAxis(RIGHT_HORIZ_AXIS);
+        return operatorController.getRawAxis(RIGHT_HORIZ_AXIS);
     }
     
     public double getOperatorLeftVerticalAxis() {
-        return driverController.getRawAxis(LEFT_VERT_AXIS);
+        return operatorController.getRawAxis(LEFT_VERT_AXIS);
     }     
     
     public double getOperatorLeftHorizontalAxis() {
-        return driverController.getRawAxis(LEFT_HORIZ_AXIS);
+        return operatorController.getRawAxis(LEFT_HORIZ_AXIS);
     }
     
     public double getOperatorLeftZAxis() {
