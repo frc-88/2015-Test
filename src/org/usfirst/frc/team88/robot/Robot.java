@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		drive = new Drive();
 		lift = new Lift();
-//		pole = new FishingPole();
+		pole = new FishingPole();
 		schtick = new Schtick();
 		
 		// do this last so OI can reference Robot subsystems
