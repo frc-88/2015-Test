@@ -17,7 +17,7 @@ public class DriveTurnLeft90 extends Command {
     protected void initialize() {
     	Robot.drive.setClosedLoopPosition();
     	Robot.drive.resetEncoders();
-    	// 90 degree spin to the right
+    	// 90 degree spin to the left
     	Robot.drive.driveSimple(-Drive.CYCLES_PER_90DEGREES, -Drive.CYCLES_PER_90DEGREES, 0.0);
     }
 
