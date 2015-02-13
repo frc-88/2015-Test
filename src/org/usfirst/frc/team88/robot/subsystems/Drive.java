@@ -32,10 +32,10 @@ public class Drive extends Subsystem {
     private final static double SPEED_RAMPRATE = 6.0;
     
     // Position PID constants 
-    private final static double POSITION_P = 0.15;
-    private final static double POSITION_I = 0.002;
-    private final static double POSITION_D = 1.0;
-    private final static double POSITION_F = 0.5;
+    private final static double POSITION_P = 0.9;
+    private final static double POSITION_I = 0.0;
+    private final static double POSITION_D = 0.0;
+    private final static double POSITION_F = 0.0;
     private final static int POSITION_PROFILE = 1;
     private final static int POSITION_IZONE = 0;
     private final static double POSITION_RAMPRATE = 6.0;

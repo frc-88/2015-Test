@@ -45,16 +45,14 @@ public class OI {
 
     public OI () {
     	// test driver button configuration
-    	//driverButtonA.whenPressed(new DriveDistance(500,-500));
-        //driverButtonB.whenPressed(new DriveDistance(1000,-1000));
-        //driverButtonX.whenPressed(new DriveDistance(1500,1500));
-        //driverButtonY.whenPressed(new DriveDistance(2000,2000));
+    	driverButtonA.whenPressed(new DriveDistance(500,500));
+        driverButtonB.whenPressed(new DriveDistance(1000,1000));
+        //driverButtonA.whenPressed(new SchtickIn());
+        //driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new ToggleMaxSpeed());
         
         operatorButtonA.whenPressed(new GrabberOpen());
         operatorButtonB.whenPressed(new GrabberClose());
-        operatorButtonX.whenPressed(new SchtickIn());
-        operatorButtonY.whenPressed(new SchtickOut());
     }
     
     // driver joysticks

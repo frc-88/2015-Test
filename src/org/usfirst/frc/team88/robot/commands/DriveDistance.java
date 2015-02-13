@@ -18,7 +18,8 @@ public class DriveDistance extends Command {
         //double wheelRotation = desiredDistance / (Drive.WHEEL_DIAMETER * Math.PI);
         //double gearRotation = wheelRotation / Drive.GEAR_RATIO;
         //targetCount = gearRotation * Drive.ENC_CYCLES_PER_REV * 2.0;
-
+    	// 1000 count ~= 68cm
+    	
     	// for now, just pass in encoder counts
     	targetLeft = left;
     	targetRight = right;
