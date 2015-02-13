@@ -15,9 +15,10 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  *
  */
 public class Drive extends Subsystem {
-    public final static double ENC_CYCLES_PER_REV = 360.0;
-    public final static double GEAR_RATIO = 28.0 / 22.0;
-    public final static double WHEEL_DIAMETER = 6.0;
+	
+	public static final double BUFFER = 10.0;
+	public static final double CYCLES_PER_METER = 1400.0;
+	public static final double CYCLES_PER_90DEGREES = 1050.0;
     
     private final static double FAST_SPEED = 400.0;
     private final static double SLOW_SPEED = 200.0;

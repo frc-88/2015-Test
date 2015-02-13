@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveDistance extends Command {
+	private static final double BUFFER = 10.0;
 	private double targetLeft, targetRight;
 	
     public DriveDistance(double left, double right) {
@@ -38,8 +39,8 @@ public class DriveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.drive.getLeftPosition()) >= Math.abs(targetLeft) &&
-    			Math.abs(Robot.drive.getRightPosition()) >= Math.abs(targetRight);
+    	return Math.abs(Robot.drive.getLeftPosition()) >= (Math.abs(targetLeft) - BUFFER) &&
+    			Math.abs(Robot.drive.getRightPosition()) >= (Math.abs(targetRight) - BUFFER);
     }
 
     // Called once after isFinished returns true
