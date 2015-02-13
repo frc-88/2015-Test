@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleMaxSpeed extends Command {
+public class DriveToggleMaxSpeed extends Command {
 
-    public ToggleMaxSpeed() {
+    public DriveToggleMaxSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);

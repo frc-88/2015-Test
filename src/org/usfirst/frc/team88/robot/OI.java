@@ -5,7 +5,7 @@ import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberOpen;
-import org.usfirst.frc.team88.robot.commands.ToggleMaxSpeed;
+import org.usfirst.frc.team88.robot.commands.DriveToggleMaxSpeed;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -50,7 +50,7 @@ public class OI {
         //driverButtonB.whenPressed(new DriveDistance(1050,1050));
         driverButtonA.whenPressed(new SchtickIn());
         driverButtonB.whenPressed(new SchtickOut());
-        driverButtonX.whenPressed(new ToggleMaxSpeed());
+        driverButtonX.whenPressed(new DriveToggleMaxSpeed());
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());
