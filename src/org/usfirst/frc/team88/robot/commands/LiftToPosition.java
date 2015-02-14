@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  */
 public class LiftToPosition extends Command {
-	private int target;
+	private double target;
 	private boolean moveDown;
 	private boolean done = false;
 	
-    public LiftToPosition(int position) {
+    public LiftToPosition(double position) {
     	super("LifterToPosition");
     	requires(Robot.lift);
     	
@@ -28,7 +28,7 @@ public class LiftToPosition extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	int position = Robot.lift.getPosition();
+    	double position = Robot.lift.getPosition();
     	
     	if (position > target) {
     		moveDown = true;
@@ -47,18 +47,18 @@ public class LiftToPosition extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	int position = Robot.lift.getPosition();
+    	double position = Robot.lift.getPosition();
 
-    	if (!done && moveDown && (position <= target)) {
+    	if (!done && moveDown && ((position <= target) || Robot.lift.atLowerLimit())) {
     		done = true;
     	}
     	
-    	if (!done && !moveDown && (position >= target)) {
+    	if (!done && !moveDown && ((position >= target) || Robot.lift.atUpperLimit())) {
     		done = true;
     	}
     	
     	// if we hit a limit stop no matter what
-    	return done || Robot.lift.atLowerLimit() || Robot.lift.atUpperLimit();
+    	return done;
     }
 
     // Called once after isFinished returns true

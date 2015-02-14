@@ -1,5 +1,7 @@
 package org.usfirst.frc.team88.robot.commands;
 
+import org.usfirst.frc.team88.robot.subsystems.Lift;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -18,13 +20,13 @@ public class AutoTote extends CommandGroup {
     	addSequential(new LiftGrabberClose());
     	
     	// raise lift to position 1
-    	addSequential(new LiftToPosition(1));
+    	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
     	// turn right 90 degrees
-    	addSequential(new DriveEncoder(100, -100));
+    	addSequential(new DriveTurnRight90());
     	
     	// drive forward to autozone
-    	addSequential(new DriveEncoder(100, 100));
+    	addSequential(new DriveStraight(3.0));
     	
     	// lower lift to bottom limit
     	addSequential(new LiftDown());

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
+import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.commands.DriveEncoder;
@@ -55,9 +56,10 @@ public class Robot extends IterativeRobot {
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("Testing", new AutoTest());
-		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
-		autoSelector.addObject("Bin Only", new AutoBin());
+		//autoSelector.addDefault("Testing", new AutoTest());
+		autoSelector.addDefault("Drive", new AutoDrive());
+		//autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
+		//autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Tote Only", new AutoTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 		
@@ -79,6 +81,7 @@ public class Robot extends IterativeRobot {
 
     	// Testing auto command groups
     	SmartDashboard.putData("Auto Test", new AutoTest());
+    	SmartDashboard.putData("Auto Drive", new AutoDrive());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
     	SmartDashboard.putData("Auto Tote Only", new AutoTote());
