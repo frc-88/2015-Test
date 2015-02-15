@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveWithControllerSimple extends Command {
+public class DriveWithControllerClosed extends Command {
 
-	public DriveWithControllerSimple() {
+	public DriveWithControllerClosed() {
 		super("DriveWithControllerSimple");
 		requires(Robot.drive);
 	}

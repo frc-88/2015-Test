@@ -9,6 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTurnRight90 extends Command {
+	private static final double TIMEOUT = 10;
+
+	private double prevLeftPosition = 0.0;
+	private double prevRightPosition = 0.0;
+	private int leftStillCount = 0;
+	private int rightStillCount = 0;
+
 	public DriveTurnRight90() {
     	requires(Robot.drive);
     }
@@ -16,7 +23,7 @@ public class DriveTurnRight90 extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.drive.resetEncoders();
-    	Robot.drive.setClosedLoopPositionTurn();
+    	Robot.drive.setClosedLoopPosition();
     	// 90 degree spin to the right
     	Robot.drive.driveSimple(Drive.CYCLES_PER_90DEGREES, Drive.CYCLES_PER_90DEGREES, 0.0);
     }
@@ -27,8 +34,29 @@ public class DriveTurnRight90 extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(Robot.drive.getLeftPosition()) >= (Drive.CYCLES_PER_90DEGREES - Drive.BUFFER) &&
-    			Math.abs(Robot.drive.getRightPosition()) >= (Drive.CYCLES_PER_90DEGREES - Drive.BUFFER);
+		double leftPosition = Robot.drive.getLeftPosition();
+		double rightPosition = Robot.drive.getRightPosition();
+		boolean done = false;
+
+		// if we are not in speed mode, start counting cycles 
+		// where the encoder position doesn't change.
+		// If we aren't moving for long enough, we are done.
+		if (leftPosition == prevLeftPosition) {
+			leftStillCount++;
+		} else {
+			leftStillCount = 0;
+		}
+		if (rightPosition == prevRightPosition) {
+			rightStillCount++;
+		} else {
+			rightStillCount = 0;
+		}
+
+		if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {
+			done = true;
+		}
+
+		return done;
     }
 
     // Called once after isFinished returns true
