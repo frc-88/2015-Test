@@ -19,6 +19,9 @@ public class AutoBinAndTote extends CommandGroup {
     	// close grabber
     	addSequential(new LiftGrabberClose());
     	
+    	// wait for the grabber to completely close before moving the lift
+    	addSequential(new Delay(0.3));
+    	
     	// raise lift to one tote position
     	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     	
@@ -33,6 +36,9 @@ public class AutoBinAndTote extends CommandGroup {
     	
     	// close grabber
     	addSequential(new LiftGrabberClose());
+    	
+    	// wait for the grabber to completely close before moving the lift
+    	addSequential(new Delay(0.3));
     	
     	// raise lift to travel position
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));

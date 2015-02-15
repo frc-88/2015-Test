@@ -19,6 +19,9 @@ public class AutoTote extends CommandGroup {
     	// close grabber
     	addSequential(new LiftGrabberClose());
     	
+    	// wait for the grabber to completely close before moving the lift
+    	addSequential(new Delay(0.3));
+    	
     	// raise lift to position 1
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
