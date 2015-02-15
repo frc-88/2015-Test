@@ -35,9 +35,8 @@ public class Drive extends Subsystem {
     private final static double SPEED_RAMPRATE = 6.0;
     
     // Position PID constants 
-    //good auto drive p constant
-    //private final static double POSITION_P = 0.9;
-    private final static double POSITION_P = 0.8;
+    private final static double POSITION_STRAIGHT_P = 0.3;
+    private final static double POSITION_TURN_P = 0.9;
     private final static double POSITION_I = 0.0;
     private final static double POSITION_D = 0.0;
     private final static double POSITION_F = 0.0;
@@ -60,13 +59,11 @@ public class Drive extends Subsystem {
 
     	// set up drive masters
     	lTalonMaster.setPID(SPEED_P, SPEED_I, SPEED_D, SPEED_F, SPEED_IZONE, SPEED_RAMPRATE, SPEED_PROFILE);
-    	lTalonMaster.setPID(POSITION_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
     	lTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	lTalonMaster.reverseSensor(false);
     	lTalonMaster.reverseOutput(false);
     	
     	rTalonMaster.setPID(SPEED_P, SPEED_I, SPEED_D, SPEED_F, SPEED_IZONE, SPEED_RAMPRATE, SPEED_PROFILE);
-    	rTalonMaster.setPID(POSITION_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
     	rTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	rTalonMaster.reverseSensor(false);
     	rTalonMaster.reverseOutput(false);
@@ -132,11 +129,21 @@ public class Drive extends Subsystem {
        	rTalonMaster.changeControlMode(controlMode);
     }
     
-    public void setClosedLoopPosition() {
+    public void setClosedLoopPositionStraight() {
     	controlMode = ControlMode.Position;
 
-    	lTalonMaster.setProfile(POSITION_PROFILE);
-    	rTalonMaster.setProfile(POSITION_PROFILE);
+    	lTalonMaster.setPID(POSITION_STRAIGHT_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
+    	rTalonMaster.setPID(POSITION_STRAIGHT_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
+
+    	lTalonMaster.changeControlMode(controlMode);
+       	rTalonMaster.changeControlMode(controlMode);
+    }
+
+    public void setClosedLoopPositionTurn() {
+    	controlMode = ControlMode.Position;
+
+    	lTalonMaster.setPID(POSITION_TURN_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
+    	rTalonMaster.setPID(POSITION_TURN_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
 
     	lTalonMaster.changeControlMode(controlMode);
        	rTalonMaster.changeControlMode(controlMode);
