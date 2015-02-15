@@ -13,7 +13,6 @@ import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
-import org.usfirst.frc.team88.robot.commands.DriveEncoder;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
 import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
@@ -56,18 +55,16 @@ public class Robot extends IterativeRobot {
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		//autoSelector.addDefault("Testing", new AutoTest());
-		autoSelector.addDefault("Drive", new AutoDrive());
-		//autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
-		//autoSelector.addObject("Bin Only", new AutoBin());
+		autoSelector.addDefault("Testing", new AutoTest());
+		autoSelector.addDefault("Drive Only", new AutoDrive());
 		autoSelector.addObject("Tote Only", new AutoTote());
+		autoSelector.addObject("Bin Only", new AutoBin());
+		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 		
     	// Testing commands for auto drive
 		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
     	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
-    	SmartDashboard.putData("Forward 1000 cycles", new DriveEncoder(1000,-1000));
-    	SmartDashboard.putData("Forward 2000 cycles",new DriveEncoder(2000,-2000));
     	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
     	SmartDashboard.putData("Right 90",new DriveTurnRight90());
 

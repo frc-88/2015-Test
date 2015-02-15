@@ -38,7 +38,7 @@ public class DriveStraight extends Command {
     	Robot.drive.resetEncoders();
     	Robot.drive.setClosedLoopSpeed();
     	inSpeedMode = true;
-    	Robot.drive.driveSimple(SPEED, SPEED, 0.0);
+    	Robot.drive.driveMove(SPEED, SPEED, 0.0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -50,7 +50,7 @@ public class DriveStraight extends Command {
     		if ( (leftPosition > speedTarget) || (rightPosition > speedTarget) ) {
     			inSpeedMode = false;
     			Robot.drive.setClosedLoopPosition();
-    			Robot.drive.driveSimple(finalTarget, finalTarget, 0.0);
+    			Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
     		}
     	}
     }

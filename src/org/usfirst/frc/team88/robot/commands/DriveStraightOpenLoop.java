@@ -29,7 +29,7 @@ public class DriveStraightOpenLoop extends Command {
             Robot.drive.setOpenLoop();
         	Robot.drive.resetEncoders();
             initialLeftEncoder = Robot.drive.getLeftPosition();
-            Robot.drive.driveSimple(leftSpeed, rightSpeed, middle);
+            Robot.drive.driveMove(leftSpeed, rightSpeed, middle);
         }
 
         // Called repeatedly when this Command is scheduled to run
@@ -43,7 +43,7 @@ public class DriveStraightOpenLoop extends Command {
 
         // Called once after isFinished returns true
         protected void end() {
-            Robot.drive.driveSimple(0.0, 0.0, 0.0);
+            Robot.drive.driveMove(0.0, 0.0, 0.0);
         }
 
         // Called when another command which requires one or more of the same

@@ -7,16 +7,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveWithControllerClosed extends Command {
+public class DriveWithControllerOpen extends Command {
 
-	public DriveWithControllerClosed() {
-		super("DriveWithControllerSimple");
+	public DriveWithControllerOpen() {
 		requires(Robot.drive);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.drive.setClosedLoopSpeed();
+		Robot.drive.setOpenLoop();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

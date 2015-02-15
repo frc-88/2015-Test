@@ -3,6 +3,7 @@ package org.usfirst.frc.team88.robot.subsystems;
 import org.usfirst.frc.team88.robot.Wiring;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerClosed;
+import org.usfirst.frc.team88.robot.commands.DriveWithControllerOpen;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,11 +19,19 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class Drive extends Subsystem {
 	
+	// DRIVE_MODE sets the default command
+	// 	0 = Drive, open loop
+	//  1 = Drive, closed loop, tank controls
+	//  2 = Dirve, closed loop, SSS controls
+	public static final int DRIVE_MODE = 1;
+	
 	public static final double CYCLES_PER_METER = 1400.0;
 	public static final double CYCLES_PER_90DEGREES = 1050.0;
     
     private final static double FAST_SPEED = 400.0;
     private final static double SLOW_SPEED = 200.0;
+    
+    private final static int SUSPENSION_TIMEOUT = 50;
     
     // Speed PID constants
     private final static double SPEED_P = 0.5;
@@ -43,9 +52,11 @@ public class Drive extends Subsystem {
     private final static double POSITION_RAMPRATE = 0.1;
     
     private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
-    private DoubleSolenoid suspension;
-    private double maxSpeed;
     private CANTalon.ControlMode controlMode;
+    private double maxSpeed;
+    private DoubleSolenoid suspension;
+    private boolean isSuspensionDown = false;
+    private int middleStillCount = 0;
     
     public Drive() {
     	lTalonMaster = new CANTalon(Wiring.leftMotorController);
@@ -80,10 +91,12 @@ public class Drive extends Subsystem {
     	setClosedLoopSpeed();
     }
     
-    public void driveSimple(double left, double right, double middle) {
-    	if (middle == 0.0) {
-    		suspensionUp();
-    	} else {
+    public void driveMove(double left, double right, double middle) {
+    	if (middle == 0.0 && isSuspensionDown) {
+    		if (middleStillCount++ > SUSPENSION_TIMEOUT) {
+        		suspensionUp();
+			}
+    	} else if(!isSuspensionDown) {
     		suspensionDown();
     	}
 
@@ -159,16 +172,26 @@ public class Drive extends Subsystem {
     	return rTalonMaster.getPosition();
     }
     
-    public void initDefaultCommand() {
-        setDefaultCommand(new DriveWithControllerClosed());
-    }
-    
-    // private functions
-    private void suspensionUp() {
+    public void suspensionUp() {
     	suspension.set(Value.kReverse);
+    	isSuspensionDown = false;
     }
     
-    private void suspensionDown() {
+    public void suspensionDown() {
     	suspension.set(Value.kForward);
+    	isSuspensionDown = true;
+    }
+    public void initDefaultCommand() {
+        switch (DRIVE_MODE) {
+        case 0:
+            setDefaultCommand(new DriveWithControllerOpen());
+        	break;
+        case 1:
+        	setDefaultCommand(new DriveWithControllerClosed());
+        	break;
+        case 2:
+            setDefaultCommand(new DriveWithControllerSSS());
+            break;
+        }
     }
 }

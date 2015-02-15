@@ -43,7 +43,7 @@ public class DriveWithControllerSSS extends Command {
             right *= scale;
         }
         
-        Robot.drive.driveSimple(left, right, strafe);
+        Robot.drive.driveMove(left, right, strafe);
     }
 
     // Make this return true when this Command no longer needs to run execute()

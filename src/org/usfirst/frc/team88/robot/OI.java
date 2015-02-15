@@ -1,21 +1,14 @@
 package org.usfirst.frc.team88.robot;
 
-import org.usfirst.frc.team88.robot.commands.DriveEncoder;
-import org.usfirst.frc.team88.robot.commands.DriveStraight;
-import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
-import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
-import org.usfirst.frc.team88.robot.commands.LiftToPosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberOpen;
 import org.usfirst.frc.team88.robot.commands.DriveToggleMaxSpeed;
-import org.usfirst.frc.team88.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
