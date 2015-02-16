@@ -76,7 +76,7 @@ public class Drive extends Subsystem {
     	rTalonMaster.setPID(SPEED_P, SPEED_I, SPEED_D, SPEED_F, SPEED_IZONE, SPEED_RAMPRATE, SPEED_PROFILE);
     	rTalonMaster.setPID(POSITION_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
     	rTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
-    	rTalonMaster.reverseSensor(false);
+    	rTalonMaster.reverseSensor(true);
     	rTalonMaster.reverseOutput(false);
     	
     	// set up drive slaves
@@ -118,10 +118,10 @@ public class Drive extends Subsystem {
     	
     	mTalon.set(middle);
 
-        SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getEncPosition());
-        SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getEncPosition());
-        SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getEncVelocity());
-        SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getEncVelocity());
+        SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
+        SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
+        SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
+        SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
     }
     
     public void toggleMaxSpeed(){
