@@ -65,6 +65,7 @@ public class Robot extends IterativeRobot {
     	// Testing commands for auto drive
 		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
     	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
+    	SmartDashboard.putData("Forward 3m",new DriveStraight(3.0));
     	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
     	SmartDashboard.putData("Right 90",new DriveTurnRight90());
 
