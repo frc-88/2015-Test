@@ -3,6 +3,7 @@ package org.usfirst.frc.team88.robot.commands;
 import org.usfirst.frc.team88.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -25,12 +26,15 @@ public class DriveWithControllerClosed extends Command {
 		double right = Robot.oi.getDriverRightVerticalAxis();
 		double middle = Robot.oi.getDriverRightZAxis() - Robot.oi.getDriverLeftZAxis();
 
+		SmartDashboard.putNumber("Left stick: ", left);
+		SmartDashboard.putNumber("Right stick: ", right);
+		
         left = Robot.oi.applyDeadZone(left);
 		right = Robot.oi.applyDeadZone(right);
 		middle = Robot.oi.applyDeadZone(middle);
 
-		Robot.drive.driveMove(left, right, middle);
-		//Robot.drive.driveMoveSteadyStrafe(left, right, middle);
+		//Robot.drive.driveMove(left, right, middle);
+		Robot.drive.driveMoveSteadyStrafe(left, right, middle);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

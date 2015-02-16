@@ -34,13 +34,14 @@ public class Drive extends Subsystem {
 	private final static int SUSPENSION_TIMEOUT = 25;
 
 	// Speed PID constants
-	private final static double SPEED_P = 0.5;
+	private final static double SPEED_P = 1.0;
 	private final static double SPEED_I = 0.002;
-	private final static double SPEED_D = 1.0;
-	private final static double SPEED_F = 0.5;
+	private final static double SPEED_D = 0.0;
+	private final static double SPEED_F = 0.0;
+
 	private final static int SPEED_PROFILE = 0;
 	private final static int SPEED_IZONE = 0;
-	private final static double SPEED_RAMPRATE = 6.0;
+	private final static double SPEED_RAMPRATE = 36.0;
 
 	// Position PID constants 
 	private final static double POSITION_P = 0.9;
@@ -77,7 +78,7 @@ public class Drive extends Subsystem {
 		rTalonMaster.setPID(POSITION_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
 		rTalonMaster.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
 		rTalonMaster.reverseSensor(true);
-		rTalonMaster.reverseOutput(false);
+		rTalonMaster.reverseOutput(true);
 
 		// set up drive slaves
 		lTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
@@ -88,6 +89,7 @@ public class Drive extends Subsystem {
 
 		maxSpeed = FAST_SPEED;
 
+		resetEncoders();
 		setClosedLoopSpeed();
 	}
 
@@ -116,7 +118,7 @@ public class Drive extends Subsystem {
 			break;
 
 		case Speed:
-			lTalonMaster.set(-left * maxSpeed);
+			lTalonMaster.set(left * maxSpeed);
 			rTalonMaster.set(right * maxSpeed);
 			break;
 
@@ -161,7 +163,7 @@ public class Drive extends Subsystem {
 				break;
 
 			case Speed:
-				lTalonMaster.set(-left * maxSpeed);
+				lTalonMaster.set(left * maxSpeed);
 				rTalonMaster.set(right * maxSpeed);
 				break;
 
