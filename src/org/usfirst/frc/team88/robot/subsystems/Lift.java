@@ -30,6 +30,7 @@ public class Lift extends Subsystem {
     
     public Lift() {
     	liftTalon = new CANTalon(Wiring.liftMotorController);
+    	liftTalon.enableBrakeMode(true);
     	liftTalon.reverseSensor(true);
     	liftTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	liftSolenoid = new DoubleSolenoid(Wiring.liftSolenoidIn, Wiring.liftSolenoidOut);

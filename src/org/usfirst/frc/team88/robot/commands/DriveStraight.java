@@ -38,8 +38,8 @@ public class DriveStraight extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		inSpeedMode = true;
-		Robot.drive.resetEncoders();
 		Robot.drive.setClosedLoopSpeed();
+		Robot.drive.resetEncoders();
 		Robot.drive.driveMove(speed, speed, 0.0);
 	}
 
