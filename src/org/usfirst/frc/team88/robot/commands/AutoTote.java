@@ -26,7 +26,12 @@ public class AutoTote extends CommandGroup {
     	addSequential(new DriveTurnRight90());
     	
     	// drive forward to autozone
-    	addSequential(new DriveStraight(3.0));
+    	addSequential(new DriveStraight(1.25,3));
+    	addSequential(new DriveStraight(1,3));
+    	addSequential(new DriveStraight(1,3));
+
+    	// drive forward to autozone
+    	addSequential(new DriveTurnLeft90());
     	
     	// lower lift to bottom limit
     	addSequential(new LiftDown());

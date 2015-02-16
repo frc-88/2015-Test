@@ -64,8 +64,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 		
     	// Testing commands for auto drive
-		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
-    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
+		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0,1.0));
+    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0,2.0));
     	SmartDashboard.putData("Forward 1000 cycles", new DriveEncoder(1000,-1000));
     	SmartDashboard.putData("Forward 2000 cycles",new DriveEncoder(2000,-2000));
     	SmartDashboard.putData("Left 90",new DriveTurnLeft90());

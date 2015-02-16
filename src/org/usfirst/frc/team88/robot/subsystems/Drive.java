@@ -1,6 +1,7 @@
 package org.usfirst.frc.team88.robot.subsystems;
 
 import org.usfirst.frc.team88.robot.Wiring;
+import org.usfirst.frc.team88.robot.commands.DriveWithControllerOpen;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSimple;
 
@@ -18,7 +19,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  */
 public class Drive extends Subsystem {
 	
-	public static final double BUFFER = 120.0;
+	public static final double BUFFER = 150.0;
 	public static final double CYCLES_PER_METER = 1400.0;
 	public static final double CYCLES_PER_90DEGREES = 1050.0;
     
@@ -37,6 +38,8 @@ public class Drive extends Subsystem {
     // Position PID constants 
     //good auto drive p constant
     //private final static double POSITION_P = 0.9;
+    public final static double POSITION_P_STRAIGHT = 0.4;
+    public final static double POSITION_P_TURN = 1.0;
     private final static double POSITION_P = 0.8;
     private final static double POSITION_I = 0.0;
     private final static double POSITION_D = 0.0;
@@ -79,8 +82,8 @@ public class Drive extends Subsystem {
     	rTalonSlave.set(rTalonMaster.getDeviceID());
 
     	maxSpeed = FAST_SPEED;
-    	
-    	setClosedLoopSpeed();
+    	setOpenLoop();
+//    	setClosedLoopSpeed();
     }
     
     public void driveSimple(double left, double right, double middle) {
@@ -141,6 +144,11 @@ public class Drive extends Subsystem {
     	lTalonMaster.changeControlMode(controlMode);
        	rTalonMaster.changeControlMode(controlMode);
     }
+    
+    public void setP(double p) {
+    	lTalonMaster.setP(p);
+    	rTalonMaster.setP(p);
+    }
 
     public void setOpenLoop() {
     	controlMode = ControlMode.Disabled;
@@ -163,7 +171,8 @@ public class Drive extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        setDefaultCommand(new DriveWithControllerSimple());
+        //setDefaultCommand(new DriveWithControllerSimple());
+        setDefaultCommand(new DriveWithControllerOpen());
     }
     
     // private functions
