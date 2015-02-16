@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTurnRight90 extends Command {
-	private static final double TIMEOUT = 10;
+	private static final double TIMEOUT = 5;
 
 	private double prevLeftPosition = 0.0;
 	private double prevRightPosition = 0.0;

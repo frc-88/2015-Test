@@ -16,12 +16,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *                 Oooo, a yellow one!
  */
 public class Lift extends Subsystem {
-	public static final double AUTO_SPEED = .5;
+	public static final double AUTO_SPEED = 1.0;
 	public static final double POS_TOP = 9999;
-	public static final double POS_THREETOTES = 400;
-	public static final double POS_TWOTOTES = 300;
-	public static final double POS_ONETOTE = 1000;
-	public static final double POS_TRAVEL = 9000;
+	public static final double POS_THREETOTES = 5000;
+	public static final double POS_TWOTOTES = 4000;
+	public static final double POS_ONETOTE = 3000;
+	public static final double POS_TRAVEL = 1000;
 	public static final double POS_BOTTOM = 0;
         
     private final CANTalon liftTalon;
