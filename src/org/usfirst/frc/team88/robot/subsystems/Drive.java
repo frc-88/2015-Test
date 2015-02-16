@@ -31,7 +31,7 @@ public class Drive extends Subsystem {
     private final static double FAST_SPEED = 400.0;
     private final static double SLOW_SPEED = 200.0;
     
-    private final static int SUSPENSION_TIMEOUT = 50;
+    private final static int SUSPENSION_TIMEOUT = 25;
     
     // Speed PID constants
     private final static double SPEED_P = 0.5;
@@ -92,13 +92,21 @@ public class Drive extends Subsystem {
     }
     
     public void driveMove(double left, double right, double middle) {
-    	if (middle == 0.0 && isSuspensionDown) {
-    		if (middleStillCount++ > SUSPENSION_TIMEOUT) {
-        		suspensionUp();
-			}
-    	} else if(!isSuspensionDown) {
-    		suspensionDown();
+    	if (middle == 0.0) {
+    		if (isSuspensionDown) {
+	    		if (middleStillCount++ > SUSPENSION_TIMEOUT) {
+	    	    	suspension.set(Value.kReverse);
+	    	    	isSuspensionDown = false;
+				}
+    		}
+    	} else {
+    		if(!isSuspensionDown) {
+	        	suspension.set(Value.kForward);
+	        	isSuspensionDown = true;
+    		} 
+    		middleStillCount = 0;
     	}
+    	mTalon.set(middle);
 
     	switch (controlMode) {
     	case PercentVbus:
@@ -115,8 +123,52 @@ public class Drive extends Subsystem {
 		default:
 			break;
     	}
-    	
+
+        SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
+        SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
+        SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
+        SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+    }
+    
+    public void driveMoveSteadyStrafe(double left, double right, double middle) {
+    	if (middle == 0.0) {
+    		if (isSuspensionDown) {
+	    		if (middleStillCount++ > SUSPENSION_TIMEOUT) {
+	    	    	suspension.set(Value.kReverse);
+	    	    	isSuspensionDown = false;
+	    	    	setClosedLoopSpeed();
+				}
+    		}
+    	} else {
+    		if(!isSuspensionDown) {
+	        	suspension.set(Value.kForward);
+	        	isSuspensionDown = true;
+	        	resetEncoders();
+	        	setClosedLoopPosition();
+	    		lTalonMaster.set(0.0);
+	    		rTalonMaster.set(0.0);
+    		} 
+    		middleStillCount = 0;
+    	}
     	mTalon.set(middle);
+    	
+    	if (!isSuspensionDown) {
+	    	switch (controlMode) {
+	    	case PercentVbus:
+	    	case Position:
+	    		lTalonMaster.set(left);
+	    		rTalonMaster.set(right);
+	    		break;
+	    		
+	    	case Speed:
+	    		lTalonMaster.set(-left * maxSpeed);
+		        rTalonMaster.set(right * maxSpeed);
+		        break;
+		        
+			default:
+				break;
+	    	}
+    	}
 
         SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
         SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
@@ -172,15 +224,6 @@ public class Drive extends Subsystem {
     	return rTalonMaster.getPosition();
     }
     
-    public void suspensionUp() {
-    	suspension.set(Value.kReverse);
-    	isSuspensionDown = false;
-    }
-    
-    public void suspensionDown() {
-    	suspension.set(Value.kForward);
-    	isSuspensionDown = true;
-    }
     public void initDefaultCommand() {
         switch (DRIVE_MODE) {
         case 0:
