@@ -26,7 +26,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     	
     	// drive forward to tote
-    	addSequential(new DriveStraight(0.4));
+    	addSequential(new DriveStraight(0.3));
     	
     	// drop the bin
     	addSequential(new LiftGrabberOpen());
@@ -47,7 +47,10 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new DriveTurnLeft90());
     	
     	// drive forward to autozone
-    	addSequential(new DriveStraight(3.1));
+    	addSequential(new DriveStraight(3.4));
+    	
+    	// turn right 90 degrees
+    	addSequential(new DriveTurnRight90());
     	
     	// lower lift to bottom limit
     	addSequential(new LiftDown());
