@@ -38,18 +38,19 @@ public class DriveTurnLeft90 extends Command {
 		double rightPosition = Robot.drive.getRightPosition();
 		boolean done = false;
 
-		// if we are not in speed mode, start counting cycles 
-		// where the encoder position doesn't change.
+		// start counting cycles as long as the encoder position doesn't change.
 		// If we aren't moving for long enough, we are done.
 		if (leftPosition == prevLeftPosition) {
 			leftStillCount++;
 		} else {
 			leftStillCount = 0;
+			prevLeftPosition = leftPosition;
 		}
 		if (rightPosition == prevRightPosition) {
 			rightStillCount++;
 		} else {
 			rightStillCount = 0;
+			prevRightPosition = rightPosition;
 		}
 
 		if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {

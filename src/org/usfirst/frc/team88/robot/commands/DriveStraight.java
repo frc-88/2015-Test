@@ -13,83 +13,87 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  */
 public class DriveStraight extends Command {
-	
+
 	private static final double SPEED = 0.5;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 10;
-	
+
+	private double speed;
+	private double firstTarget;
 	private double finalTarget;
-	private double speedTarget;
 	private boolean inSpeedMode;
 	private double prevLeftPosition = 0.0;
 	private double prevRightPosition = 0.0;
 	private int leftStillCount = 0;
 	private int rightStillCount = 0;
 
-    public DriveStraight(double distance) {
-    	requires(Robot.drive);
-    	
-    	finalTarget = Drive.CYCLES_PER_METER * distance;
-    	speedTarget = finalTarget - RANGE;
-    }
+	public DriveStraight(double distance) {
+		requires(Robot.drive);
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	Robot.drive.resetEncoders();
-    	Robot.drive.setClosedLoopSpeed();
-    	inSpeedMode = true;
-    	Robot.drive.driveMove(SPEED, SPEED, 0.0);
-    }
+		speed = (distance > 0.0) ? SPEED : -SPEED;
+		finalTarget = Drive.CYCLES_PER_METER * distance;
+		firstTarget = Math.abs(finalTarget) - RANGE;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	double leftPosition = Robot.drive.getLeftPosition();
-    	double rightPosition = Robot.drive.getRightPosition();
-    	
-    	if (inSpeedMode) {
-    		if ( (leftPosition > speedTarget) || (rightPosition > speedTarget) ) {
-    			inSpeedMode = false;
-    			Robot.drive.setClosedLoopPosition();
-    			Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
-    		}
-    	}
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		inSpeedMode = true;
+		Robot.drive.resetEncoders();
+		Robot.drive.setClosedLoopSpeed();
+		Robot.drive.driveMove(speed, speed, 0.0);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	double leftPosition = Robot.drive.getLeftPosition();
-    	double rightPosition = Robot.drive.getRightPosition();
-    	boolean done = false;
-    	
-    	// if we are not in speed mode, start counting cycles 
-    	// where the encoder position doesn't change.
-    	// If we aren't moving for long enough, we are done.
-    	if (!inSpeedMode) {
-    		if (leftPosition == prevLeftPosition) {
-    			leftStillCount++;
-	    	} else {
-	    		leftStillCount = 0;
-	    	}
-	    	if (rightPosition == prevRightPosition) {
-	    		rightStillCount++;
-	    	} else {
-	    		rightStillCount = 0;
-	    	}
-    	
-	    	if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {
-	    		done = true;
-	    	}
-    	}
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		double leftPosition = Robot.drive.getLeftPosition();
+		double rightPosition = Robot.drive.getRightPosition();
 
-    	return done;
-    }
+		if (inSpeedMode) {
+			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
+				inSpeedMode = false;
+				Robot.drive.setClosedLoopPosition();
+				Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
+			}
+		}
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		double leftPosition = Robot.drive.getLeftPosition();
+		double rightPosition = Robot.drive.getRightPosition();
+		boolean done = false;
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+		// if we are not in speed mode, start counting cycles 
+		// as long as the encoder position doesn't change.
+		// If we aren't moving for long enough, we are done.
+		if (!inSpeedMode) {
+			if (leftPosition == prevLeftPosition) {
+				leftStillCount++;
+			} else {
+				leftStillCount = 0;
+				prevLeftPosition = leftPosition;
+			}
+			if (rightPosition == prevRightPosition) {
+				rightStillCount++;
+			} else {
+				rightStillCount = 0;
+				prevRightPosition = rightPosition;
+			}
+
+			if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {
+				done = true;
+			}
+		}
+
+		return done;
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }
