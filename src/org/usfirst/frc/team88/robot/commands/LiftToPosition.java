@@ -20,7 +20,6 @@ public class LiftToPosition extends Command {
 	private boolean done = false;
 	
     public LiftToPosition(double position) {
-    	super("LifterToPosition");
     	requires(Robot.lift);
     	
     	target = position;
@@ -29,6 +28,8 @@ public class LiftToPosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	double position = Robot.lift.getPosition();
+
+    	done = false;
     	
     	if (position > target) {
     		moveDown = true;

@@ -15,6 +15,7 @@ public class AutoBin extends CommandGroup {
 
     	// lower lift to bottom limit, zeroes lifter encoder
     	addSequential(new LiftDown());
+    	addSequential(new LiftToPosition(Lift.POS_PICKUPBIN));
     	
     	// close grabber
     	addSequential(new LiftGrabberClose());
@@ -23,16 +24,13 @@ public class AutoBin extends CommandGroup {
     	addSequential(new Delay(0.3));
     	
     	// raise lift to position 1
-    	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
+    	addSequential(new LiftToPosition(Lift.POS_BINONTOTE));
     	
     	// turn left 90 degrees
     	addSequential(new DriveTurnLeft90());
     	
     	// drive forward to autozone
-    	addSequential(new DriveStraight(3.4));
-    	
-    	// turn right 90 degrees
-    	addSequential(new DriveTurnRight90());
+    	addSequential(new DriveStraight(3.5));
     	
     	// lower lift to bottom limit
     	addSequential(new LiftDown());

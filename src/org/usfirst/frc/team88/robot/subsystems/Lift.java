@@ -17,11 +17,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Lift extends Subsystem {
 	public static final double AUTO_SPEED = 1.0;
-	public static final double POS_TOP = 9999;
-	public static final double POS_THREETOTES = 5000;
-	public static final double POS_TWOTOTES = 4000;
-	public static final double POS_ONETOTE = 3000;
-	public static final double POS_TRAVEL = 1000;
+	public static final double POS_TOP = 100000;
+	public static final double POS_THREETOTES = 75000;
+	public static final double POS_BINONTOTE = 53500;
+	public static final double POS_TWOTOTES = 50000;
+	public static final double POS_ONETOTE = 28000;
+	public static final double POS_PICKUPBIN = 21000;
+	public static final double POS_TRAVEL = 9000;
 	public static final double POS_BOTTOM = 0;
         
     private final CANTalon liftTalon;
@@ -29,13 +31,13 @@ public class Lift extends Subsystem {
     private final DigitalInput upperLimit, lowerLimit;
     
     public Lift() {
-    	liftTalon = new CANTalon(Wiring.liftMotorController);
-    	liftTalon.enableBrakeMode(true);
-    	liftTalon.reverseSensor(true);
-    	liftTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
     	liftSolenoid = new DoubleSolenoid(Wiring.liftSolenoidIn, Wiring.liftSolenoidOut);
     	lowerLimit = new DigitalInput(Wiring.liftLowerLimit);
     	upperLimit = new DigitalInput(Wiring.liftUpperLimit);
+    	liftTalon = new CANTalon(Wiring.liftMotorController);
+    	liftTalon.enableBrakeMode(true);
+    	liftTalon.setFeedbackDevice(CANTalon.FeedbackDevice.QuadEncoder);
+    	liftTalon.reverseSensor(true);
     }
 
     public void moveLift(double liftSpeed) {
