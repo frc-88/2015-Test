@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftDown extends Command {
 
-	private final static double speedDown = -0.5;
+	private final static double speedDown = -1;
 	
     public LiftDown() {
     	super("Lifter Down");

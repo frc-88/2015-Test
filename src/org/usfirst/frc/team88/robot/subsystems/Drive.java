@@ -26,12 +26,12 @@ public class Drive extends Subsystem {
 	public static final int DRIVE_MODE = 1;
 
 	public static final double CYCLES_PER_METER = 1400.0;
-	public static final double CYCLES_PER_90DEGREES = 1300.0;
+	public static final double CYCLES_PER_90DEGREES = 1400.0;
 
 	private final static double FAST_SPEED = 300.0;
 	private final static double SLOW_SPEED = 150.0;
 
-	private final static int SUSPENSION_TIMEOUT = 25;
+	private final static int SUSPENSION_TIMEOUT = 15;
 
 	// Speed PID constants
 	private final static double SPEED_P = 1.0;
@@ -44,13 +44,13 @@ public class Drive extends Subsystem {
 	private final static double SPEED_RAMPRATE = 36.0;
 
 	// Position PID constants 
-	private final static double POSITION_P = 0.4;
+	private final static double POSITION_P = 0.2;
 	private final static double POSITION_I = 0.0;
 	private final static double POSITION_D = 0.0;
 	private final static double POSITION_F = 0.0;
 	private final static int POSITION_PROFILE = 1;
 	private final static int POSITION_IZONE = 0;
-	private final static double POSITION_RAMPRATE = 0.1;
+	private final static double POSITION_RAMPRATE = 0.05;
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
 	private CANTalon.ControlMode controlMode;

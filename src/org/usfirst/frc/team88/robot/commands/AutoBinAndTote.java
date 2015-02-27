@@ -15,7 +15,7 @@ public class AutoBinAndTote extends CommandGroup {
 
     	// lower lift to bottom limit, zeroes lifter encoder
     	addSequential(new LiftDown());
-    	addSequential(new LiftToPosition(Lift.POS_PICKUPBIN));
+    	//addSequential(new LiftToPosition(Lift.POS_PICKUPBIN));
     	
     	// close grabber
     	addSequential(new LiftGrabberClose());
@@ -27,7 +27,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LiftToPosition(Lift.POS_BINONTOTE));
     	
     	// drive forward to tote
-    	addSequential(new DriveStraight(0.6));
+    	addSequential(new DriveStraight(0.85));
 
     	// drop the bin
     	addSequential(new LiftGrabberOpen());
