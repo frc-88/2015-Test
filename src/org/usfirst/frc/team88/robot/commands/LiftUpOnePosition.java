@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftUpOnePosition extends Command {
 	private double target;
-	private boolean done = false;
+	private boolean done;
 	
     public LiftUpOnePosition() {
     	requires(Robot.lift);
@@ -25,6 +25,8 @@ public class LiftUpOnePosition extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	double position = Robot.lift.getPosition();
+    	
+    	done = false;
     	
     	if (position < Lift.POS_TRAVEL) {
     		target = Lift.POS_TRAVEL;
