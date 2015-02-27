@@ -1,5 +1,7 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
+import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
@@ -49,6 +51,8 @@ public class OI {
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());
+        operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
+        operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
     }
     
     // driver joysticks
