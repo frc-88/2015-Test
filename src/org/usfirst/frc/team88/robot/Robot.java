@@ -11,12 +11,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
+import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
 import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
+import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
 import org.usfirst.frc.team88.robot.commands.LiftToPosition;
+import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.Arminator;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
@@ -57,6 +60,7 @@ public class Robot extends IterativeRobot {
 		autoSelector = new SendableChooser();
 		autoSelector.addDefault("Testing", new AutoTest());
 		autoSelector.addDefault("Drive Only", new AutoDrive());
+		autoSelector.addDefault("Landfill Grab", new AutoGrabFromLandfill());
 		autoSelector.addObject("Tote Only", new AutoTote());
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
@@ -70,16 +74,19 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Right 90",new DriveTurnRight90());
 
     	// Testing commands for auto lift
+    	SmartDashboard.putData("Lift Down One",new LiftDownOnePosition());
     	SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
     	SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
     	SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
     	SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
     	SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
     	SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
+    	SmartDashboard.putData("Lift Up One",new LiftUpOnePosition());
 
     	// Testing auto command groups
     	SmartDashboard.putData("Auto Test", new AutoTest());
     	SmartDashboard.putData("Auto Drive", new AutoDrive());
+    	SmartDashboard.putData("Auto Landfill Grab", new AutoGrabFromLandfill());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
     	SmartDashboard.putData("Auto Tote Only", new AutoTote());
