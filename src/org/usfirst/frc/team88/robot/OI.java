@@ -54,7 +54,12 @@ public class OI {
         operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
         operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
     }
-    
+    public boolean getOperatorXButton(){
+    	return operatorButtonX.get();
+    }
+    public boolean getOperatorYButton(){
+    	return operatorButtonY.get();
+    }
     // driver joysticks
     public double getDriverRightVerticalAxis() {
         return -driverController.getRawAxis(RIGHT_VERT_AXIS);

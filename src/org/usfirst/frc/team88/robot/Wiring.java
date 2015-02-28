@@ -23,4 +23,10 @@ public class Wiring {
     // Schtick
 	public static final int schtickSolenoidIn = 4;
 	public static final int schtickSolenoidOut = 5;
+	// Light
+	public static final int lightDigitalOutPin1 = 0;
+	public static final int lightDigitalOutPin2 = 2;
+	public static final int lightDigitalOutPin3 = 3;
+	public static final int lightPWMOutput = 1;
+
 }

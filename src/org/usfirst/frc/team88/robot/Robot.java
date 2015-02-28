@@ -12,6 +12,7 @@ import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
+import org.usfirst.frc.team88.robot.commands.AutoNothing;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
@@ -23,6 +24,7 @@ import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 import org.usfirst.frc.team88.robot.subsystems.Arminator;
 import org.usfirst.frc.team88.robot.subsystems.Lift;
+import org.usfirst.frc.team88.robot.subsystems.Lights;
 import org.usfirst.frc.team88.robot.subsystems.Schtick;
 
 /**
@@ -39,6 +41,7 @@ public class Robot extends IterativeRobot {
 	public static Arminator arminator;
 	public static Schtick schtick;
 	public static OI oi;
+	public static Lights lights;
     private static SendableChooser autoSelector;
 	private static Command autoCommand;
 
@@ -51,6 +54,7 @@ public class Robot extends IterativeRobot {
 		lift = new Lift();
 		arminator = new Arminator();
 		schtick = new Schtick();
+		lights = new Lights();
 		
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();
@@ -58,14 +62,15 @@ public class Robot extends IterativeRobot {
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("Testing", new AutoTest());
-		autoSelector.addDefault("Drive Only", new AutoDrive());
-		autoSelector.addDefault("Landfill Grab", new AutoGrabFromLandfill());
-		autoSelector.addObject("Tote Only", new AutoTote());
+		autoSelector.addDefault("Tote Only", new AutoTote());
+		autoSelector.addObject("Do Nothing", new AutoNothing());
+		autoSelector.addObject("Drive Only", new AutoDrive());
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
-		
+
+		SmartDashboard.putData(lights);
+		//SmartDashboard.
     	// Testing commands for auto drive
 		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
     	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
@@ -99,7 +104,12 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command
     	autoCommand = (Command) autoSelector.getSelected();
-        if (autoCommand != null) autoCommand.start();
+        if (autoCommand != null) {
+        	autoCommand.start();
+        } else {
+        	autoCommand = new AutoTote();
+        	autoCommand.start();
+        }
     }
 
     /**
