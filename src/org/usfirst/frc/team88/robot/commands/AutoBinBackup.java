@@ -10,20 +10,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoBinBackup extends CommandGroup {
     
     public  AutoBinBackup() {
-    	addSequential(new Delay(3));
+    	addSequential(new LiftToPosition(Lift.POS_BOTTOM));
+    	addSequential(new LiftGrabberOpen());
+    	
+    	addSequential(new Delay(5));
 
     	addSequential(new DriveStraight(1.0));
-
-    	// close grabber
     	addSequential(new LiftGrabberClose());
-    	
-    	// wait for the grabber to completely close before moving the lift
     	addSequential(new Delay(0.3));
-    	
-    	// raise lift to position 1
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
-    	addSequential(new DriveStraight(-2.0));
+    	addSequential(new DriveStraight(-3.0));
     	
     }
 }

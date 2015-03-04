@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
+import org.usfirst.frc.team88.robot.commands.AutoBinBackup;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoNothing;
@@ -66,6 +67,7 @@ public class Robot extends IterativeRobot {
 		autoSelector.addObject("Do Nothing", new AutoNothing());
 		autoSelector.addObject("Drive Only", new AutoDrive());
 		autoSelector.addObject("Bin Only", new AutoBin());
+		autoSelector.addObject("Bin Backup", new AutoBinBackup());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 
