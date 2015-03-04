@@ -19,13 +19,16 @@ public class Lift extends Subsystem {
 	public static final double AUTO_SPEED = 1.0;
 	public static final double POS_TOP = 100000;
 	public static final double POS_THREETOTES = 75000;
-	public static final double POS_BINONTOTE = 35000;
 	public static final double POS_TWOTOTES = 50000;
 	public static final double POS_ONETOTE = 28000;
-	public static final double POS_PICKUPBIN = 21000;
 	public static final double POS_TRAVEL = 9000;
 	public static final double POS_BOTTOM = 0;
-        
+	public static final double POS_BINONTOTE = 35000;
+	public static final double POS_PICKUPBIN = 21000;
+	public static final double POS_HOOKBIN = 75000;
+	public static final double POS_TOTEONTOTE = 20000;
+
+	
     private final CANTalon liftTalon;
     private final DoubleSolenoid liftSolenoid;
     private final DigitalInput upperLimit, lowerLimit;
