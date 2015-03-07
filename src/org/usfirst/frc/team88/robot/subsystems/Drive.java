@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Gyro;
 
 /**
  *               This is the Drive code
@@ -54,6 +55,7 @@ public class Drive extends Subsystem {
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
 	private CANTalon.ControlMode controlMode;
+	private Gyro gyro;
 	private double maxSpeed;
 	private DoubleSolenoid suspension;
 	private boolean isSuspensionDown = false;
@@ -66,7 +68,8 @@ public class Drive extends Subsystem {
 		rTalonSlave = new CANTalon(Wiring.rightMotorController2);
 		mTalon = new CANTalon(Wiring.middleMotorController);
 		suspension = new DoubleSolenoid(Wiring.suspensionSolenoidDown, Wiring.suspensionSolenoidUp);
-
+		gyro = new Gyro(0);
+		
 		// set up drive masters
 		lTalonMaster.setPID(SPEED_P, SPEED_I, SPEED_D, SPEED_F, SPEED_IZONE, SPEED_RAMPRATE, SPEED_PROFILE);
 		lTalonMaster.setPID(POSITION_P, POSITION_I, POSITION_D, POSITION_F, POSITION_IZONE, POSITION_RAMPRATE, POSITION_PROFILE);
@@ -87,8 +90,12 @@ public class Drive extends Subsystem {
 		rTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
 		rTalonSlave.set(rTalonMaster.getDeviceID());
 
+		// set up gryo
+		gyro.reset();
+		gyro.initGyro();
+		gyro.setSensitivity(0.250);
+		
 		maxSpeed = FAST_SPEED;
-
 		resetEncoders();
 		setClosedLoopSpeed();
 	}
@@ -130,6 +137,10 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+
+		SmartDashboard.putNumber("Gyro angle (rad?): ", gyro.getAngle());
+		SmartDashboard.putNumber("Gyro angle (deg?): ", gyro.getAngle() * 180 / Math.PI);
+		SmartDashboard.putNumber("Gyro rate: ", gyro.getRate());
 	}
 
 	public void driveMoveSteadyStrafe(double left, double right, double middle) {
@@ -176,6 +187,10 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+
+		SmartDashboard.putNumber("Gyro angle (rad?): ", gyro.getAngle());
+		SmartDashboard.putNumber("Gyro angle (deg?): ", gyro.getAngle() * 180 / Math.PI);
+		SmartDashboard.putNumber("Gyro rate: ", gyro.getRate());
 	}
 
 	public void toggleMaxSpeed(){
@@ -216,6 +231,14 @@ public class Drive extends Subsystem {
 	public void resetEncoders() {
 		lTalonMaster.setPosition(0);
 		rTalonMaster.setPosition(0);
+	}
+
+	public void resetGyro() {
+		gyro.reset();
+	}
+
+	public double getGyroAngle() {
+		return gyro.getAngle();
 	}
 
 	public double getLeftPosition() {

@@ -17,6 +17,7 @@ public class AutoThreeToteOhYeah extends CommandGroup {
     	
     	addSequential(new LiftToPosition(Lift.POS_HOOKBIN));
     	addSequential(new DriveStraight(1.5));
+    	
     	addSequential(new LiftToPosition(Lift.POS_TOTEONTOTE));
     	
     	addSequential(new LiftGrabberOpen());

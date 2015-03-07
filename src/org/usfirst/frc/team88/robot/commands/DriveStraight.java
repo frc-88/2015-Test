@@ -40,19 +40,22 @@ public class DriveStraight extends Command {
 		inSpeedMode = true;
 		Robot.drive.setClosedLoopSpeed();
 		Robot.drive.resetEncoders();
-		Robot.drive.driveMove(speed, speed, 0.0);
+		Robot.drive.resetGyro();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
+		double angle = 2 * Robot.drive.getGyroAngle();
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
 				inSpeedMode = false;
 				Robot.drive.setClosedLoopPosition();
 				Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
+			} else {
+				Robot.drive.driveMove(speed - angle, speed + angle, 0.0);
 			}
 		}
 	}
