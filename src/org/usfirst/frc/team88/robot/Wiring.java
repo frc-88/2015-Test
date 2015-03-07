@@ -2,6 +2,8 @@ package org.usfirst.frc.team88.robot;
 
 public class Wiring {
 	// Practice bot flag for practice bot overrides
+	// true = practice bot
+	// false = competition bot
 	public static boolean practiceRobot = true;
 	
 	// Drive
