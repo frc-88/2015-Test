@@ -1,5 +1,7 @@
 package org.usfirst.frc.team88.robot;
 
+import org.usfirst.frc.team88.robot.commands.DecreaseMode;
+import org.usfirst.frc.team88.robot.commands.IncreaseMode;
 import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
 import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
@@ -53,6 +55,9 @@ public class OI {
         operatorButtonB.whenPressed(new LiftGrabberClose());
         operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
         operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
+        operatorButtonX.whenPressed(new DecreaseMode());
+        operatorButtonY.whenPressed(new IncreaseMode());
+        
     }
     public boolean getOperatorXButton(){
     	return operatorButtonX.get();

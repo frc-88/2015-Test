@@ -15,6 +15,7 @@ import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoNothing;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
+import org.usfirst.frc.team88.robot.commands.AutoThreeToteOhYeah;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
@@ -91,12 +92,12 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Lift Up One",new LiftUpOnePosition());
 
     	// Testing auto command groups
-    	SmartDashboard.putData("Auto Test", new AutoTest());
     	SmartDashboard.putData("Auto Drive", new AutoDrive());
     	SmartDashboard.putData("Auto Landfill Grab", new AutoGrabFromLandfill());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
     	SmartDashboard.putData("Auto Tote Only", new AutoTote());
+    	SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
     }
 	
 	public void disabledPeriodic() {

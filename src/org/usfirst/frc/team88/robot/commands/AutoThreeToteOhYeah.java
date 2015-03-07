@@ -13,10 +13,10 @@ public class AutoThreeToteOhYeah extends CommandGroup {
     	addSequential(new LiftGrabberOpen());
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
-    	addSequential(new Delay(0.3));
-    	
-    	addSequential(new LiftToPosition(Lift.POS_HOOKBIN));
+    	addSequential(new Delay(0.2));
+    	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     	addSequential(new DriveStraight(1.5));
+    	/*
     	
     	addSequential(new LiftToPosition(Lift.POS_TOTEONTOTE));
     	
@@ -41,5 +41,6 @@ public class AutoThreeToteOhYeah extends CommandGroup {
 
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberOpen());
+*/    	
     }
 }

@@ -48,7 +48,16 @@ public class Lights extends Subsystem {
     }
     
     public void initDefaultCommand() {
-        setDefaultCommand(new LightsDefault());
+    //    setDefaultCommand(new LightsDefault());
+    }
+    
+    public void increaseMode(){
+    	activeMode+=1;
+    	updateOutput();
+    }
+    public void decreaseMode(){
+    	activeMode-=1;
+    	updateOutput();
     }
     
     private void updateOutput() {
