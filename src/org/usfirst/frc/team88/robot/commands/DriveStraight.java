@@ -17,6 +17,7 @@ public class DriveStraight extends Command {
 	private static final double SPEED = 0.75;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 5;
+	private static final double ANGLE_MULTIPLIER = 5;
 
 	private double speed;
 	private double firstTarget;
@@ -45,9 +46,10 @@ public class DriveStraight extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		double left, right, scale;
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
-		double angle = 2 * Robot.drive.getGyroAngle();
+		double angle = ANGLE_MULTIPLIER * Robot.drive.getGyroAngle();
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
@@ -55,7 +57,21 @@ public class DriveStraight extends Command {
 				Robot.drive.setClosedLoopPosition();
 				Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
 			} else {
-				Robot.drive.driveMove(speed - angle, speed + angle, 0.0);
+				left = speed - angle;
+				right = speed + angle;
+				
+		        // scale values of left and right so they are between -1.0 and 1.0
+		        if ((Math.abs(left) > 1.0) || (Math.abs(right) > 1.0)) {
+		            if (Math.abs(left) > Math.abs(right)) {
+		                scale = 1.0 / Math.abs(left);
+		            } else {
+		                scale = 1.0 / Math.abs(right);
+		            }
+		            left *= scale;
+		            right *= scale;
+		        }
+
+				Robot.drive.driveMove(left, right, 0.0);
 			}
 		}
 	}
