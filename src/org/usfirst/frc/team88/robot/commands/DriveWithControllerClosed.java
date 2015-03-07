@@ -1,6 +1,7 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
+import org.usfirst.frc.team88.robot.Wiring;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,7 +25,7 @@ public class DriveWithControllerClosed extends Command {
 	protected void execute() {
 		double left = Robot.oi.getDriverLeftVerticalAxis();
 		double right = Robot.oi.getDriverRightVerticalAxis();
-		double middle = - Robot.oi.getDriverRightZAxis() + Robot.oi.getDriverLeftZAxis();
+		double middle = Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis() * (Wiring.practiceRobot ? -1 : 1);
 
 		SmartDashboard.putNumber("Left stick: ", left);
 		SmartDashboard.putNumber("Right stick: ", right);

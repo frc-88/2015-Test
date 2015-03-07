@@ -1,6 +1,9 @@
 package org.usfirst.frc.team88.robot;
 
 public class Wiring {
+	// Practice bot flag for practice bot overrides
+	public static boolean practiceRobot = true;
+	
 	// Drive
 	public static final int leftMotorController = 7;
     public static final int leftMotorController2 = 2;
