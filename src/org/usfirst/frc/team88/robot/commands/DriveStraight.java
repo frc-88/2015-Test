@@ -17,7 +17,7 @@ public class DriveStraight extends Command {
 	private static final double SPEED = 0.75;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 5;
-	private static final double ANGLE_MULTIPLIER = 5;
+	private static final double ANGLE_MULTIPLIER = 10;
 
 	private double speed;
 	private double firstTarget;

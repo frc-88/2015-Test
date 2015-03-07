@@ -18,6 +18,7 @@ import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoThreeToteOhYeah;
 import org.usfirst.frc.team88.robot.commands.AutoTote;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
+import org.usfirst.frc.team88.robot.commands.DriveTurnLeft10;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
 import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
 import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
@@ -79,6 +80,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
     	SmartDashboard.putData("Forward 3m",new DriveStraight(3.0));
     	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
+    	SmartDashboard.putData("Left 10",new DriveTurnLeft10());
     	SmartDashboard.putData("Right 90",new DriveTurnRight90());
 
     	// Testing commands for auto lift
@@ -92,6 +94,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Lift Up One",new LiftUpOnePosition());
 
     	// Testing auto command groups
+    	SmartDashboard.putData("Auto Test", new AutoTest());
     	SmartDashboard.putData("Auto Drive", new AutoDrive());
     	SmartDashboard.putData("Auto Landfill Grab", new AutoGrabFromLandfill());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());

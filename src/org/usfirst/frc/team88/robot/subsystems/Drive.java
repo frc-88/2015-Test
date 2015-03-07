@@ -27,6 +27,7 @@ public class Drive extends Subsystem {
 	public static final int DRIVE_MODE = 1;
 
 	public static final double CYCLES_PER_METER = 1400.0;
+	public static final double CYCLES_PER_10DEGREES = 250.0;
 	public static final double CYCLES_PER_90DEGREES = 1400.0;
 
 	private final static double FAST_SPEED = 300.0;
