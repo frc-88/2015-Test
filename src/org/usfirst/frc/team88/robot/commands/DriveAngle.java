@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
  * encode values don't change. If we don't move for long enough, we're done.
  * 
  */
-public class DriveStraight extends Command {
+public class DriveAngle extends Command {
 
 	private static final double SPEED = 0.75;
 	private static final double RANGE = 500;
-	private static final double TIMEOUT = 3;
+	private static final double TIMEOUT = 5;
 	private static final double ANGLE_MULTIPLIER = 10;
 
 	private double speed;
@@ -28,7 +28,7 @@ public class DriveStraight extends Command {
 	private int leftStillCount = 0;
 	private int rightStillCount = 0;
 
-	public DriveStraight(double distance) {
+	public DriveAngle(double distance) {
 		requires(Robot.drive);
 
 		speed = (distance > 0.0) ? SPEED : -SPEED;
@@ -71,7 +71,7 @@ public class DriveStraight extends Command {
 		            right *= scale;
 		        }
 
-				Robot.drive.driveMove(left, right, 0.0);
+				Robot.drive.driveMove(left, right, 1.0);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ public class DriveWithControllerClosed extends Command {
 	protected void execute() {
 		double left = Robot.oi.getDriverLeftVerticalAxis();
 		double right = Robot.oi.getDriverRightVerticalAxis();
-		double middle = Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis() * (Wiring.practiceRobot ? -1 : 1);
+		double middle = (Robot.oi.getDriverLeftZAxis() - Robot.oi.getDriverRightZAxis()) * (Wiring.practiceRobot ? -1 : 1);
 
 		SmartDashboard.putNumber("Left stick: ", left);
 		SmartDashboard.putNumber("Right stick: ", right);

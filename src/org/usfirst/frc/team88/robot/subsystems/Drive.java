@@ -46,7 +46,7 @@ public class Drive extends Subsystem {
 	private final static double SPEED_RAMPRATE = 36.0;
 
 	// Position PID constants 
-	private final static double POSITION_P = 0.2 * (Wiring.practiceRobot ? 3 : 1);
+	private final static double POSITION_P = Wiring.practiceRobot ? 0.3 : 0.2;
 	private final static double POSITION_I = 0.0;
 	private final static double POSITION_D = 0.0;
 	private final static double POSITION_F = 0.0;
