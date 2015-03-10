@@ -11,12 +11,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoBinBackup;
+import org.usfirst.frc.team88.robot.commands.AutoBinForward;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoNothing;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoThreeToteOhYeah;
-import org.usfirst.frc.team88.robot.commands.AutoTote;
+import org.usfirst.frc.team88.robot.commands.AutoToteLeftSide;
+import org.usfirst.frc.team88.robot.commands.AutoToteRightSide;
 import org.usfirst.frc.team88.robot.commands.DriveStraight;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft10;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
@@ -65,10 +67,12 @@ public class Robot extends IterativeRobot {
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("Tote Only", new AutoTote());
+		autoSelector.addDefault("Tote Left Side", new AutoToteLeftSide());
+		autoSelector.addObject("Tote Right Side", new AutoToteRightSide());
 		autoSelector.addObject("Do Nothing", new AutoNothing());
 		autoSelector.addObject("Drive Only", new AutoDrive());
 		autoSelector.addObject("Bin Only", new AutoBin());
+		autoSelector.addObject("Bin Forward", new AutoBinForward());
 		autoSelector.addObject("Bin Backup", new AutoBinBackup());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
@@ -99,7 +103,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Auto Landfill Grab", new AutoGrabFromLandfill());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
-    	SmartDashboard.putData("Auto Tote Only", new AutoTote());
+    	SmartDashboard.putData("Auto Tote Only", new AutoToteLeftSide());
     	SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
     }
 	
@@ -113,7 +117,7 @@ public class Robot extends IterativeRobot {
         if (autoCommand != null) {
         	autoCommand.start();
         } else {
-        	autoCommand = new AutoTote();
+        	autoCommand = new AutoToteLeftSide();
         	autoCommand.start();
         }
     }

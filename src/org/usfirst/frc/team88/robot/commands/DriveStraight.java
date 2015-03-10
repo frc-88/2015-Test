@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraight extends Command {
 
-	private static final double SPEED = 0.75;
+	private static final double SPEED = 0.85;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 3;
 	private static final double ANGLE_MULTIPLIER = 10;

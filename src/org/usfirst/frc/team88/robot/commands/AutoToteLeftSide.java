@@ -7,17 +7,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoBin extends CommandGroup {
+public class AutoToteLeftSide extends CommandGroup {
     
-    public  AutoBin() {
+    public  AutoToteLeftSide() {
     	addSequential(new LiftGrabberOpen());
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
     	addSequential(new Delay(0.2));
-    	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
-    	addSequential(new DriveTurnLeft90());
+    	addSequential(new DriveTurnRight90());
+    	
     	addSequential(new DriveStraight(3.4));
+    	
+    	addSequential(new DriveTurnRight90());
+    	
+    	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     }
 }
