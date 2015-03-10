@@ -100,10 +100,9 @@ public class Robot extends IterativeRobot {
     	// Testing auto command groups
     	SmartDashboard.putData("Auto Test", new AutoTest());
     	SmartDashboard.putData("Auto Drive", new AutoDrive());
-    	SmartDashboard.putData("Auto Landfill Grab", new AutoGrabFromLandfill());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
-    	SmartDashboard.putData("Auto Tote Only", new AutoToteLeftSide());
+    	SmartDashboard.putData("Auto Tote Left Side", new AutoToteLeftSide());
     	SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
     }
 	
