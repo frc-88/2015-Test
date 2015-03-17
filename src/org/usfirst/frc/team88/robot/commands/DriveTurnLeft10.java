@@ -4,6 +4,7 @@ import org.usfirst.frc.team88.robot.Robot;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -11,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveTurnLeft10 extends Command {
 	private static final double TIMEOUT = 5;
 
-	private double prevLeftPosition = 0.0;
-	private double prevRightPosition = 0.0;
+	private double prevLeftPosition = 20.0;
+	private double prevRightPosition = 20.0;
 	private int leftStillCount = 0;
 	private int rightStillCount = 0;
 
@@ -24,6 +25,7 @@ public class DriveTurnLeft10 extends Command {
 	protected void initialize() {
 		Robot.drive.resetEncoders();
 		Robot.drive.setClosedLoopPosition();
+		Robot.drive.setP(8.0);
 		// 90 degree spin to the left
 		Robot.drive.driveMove(-Drive.CYCLES_PER_10DEGREES, Drive.CYCLES_PER_10DEGREES, 0.0);
 	}
@@ -52,7 +54,7 @@ public class DriveTurnLeft10 extends Command {
 			rightStillCount = 0;
 			prevRightPosition = rightPosition;
 		}
-
+		
 		if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {
 			done = true;
 		}
@@ -62,6 +64,7 @@ public class DriveTurnLeft10 extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.drive.setP(Robot.drive.POSITION_P);
 	}
 
 	// Called when another command which requires one or more of the same

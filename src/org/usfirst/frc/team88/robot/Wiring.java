@@ -4,7 +4,7 @@ public class Wiring {
 	// Practice bot flag for practice bot overrides
 	// true = practice bot
 	// false = competition bot
-	public static boolean practiceRobot = true;
+	public static boolean practiceRobot = false;
 	
 	// Drive
 	public static final int leftMotorController = 7;
@@ -25,7 +25,7 @@ public class Wiring {
     // Arminator
     public static final int arminatorMotor = 0;
 
-    // Schtick
+    // Bin Arms
 	public static final int schtickSolenoidIn = 4;
 	public static final int schtickSolenoidOut = 5;
 	// Light

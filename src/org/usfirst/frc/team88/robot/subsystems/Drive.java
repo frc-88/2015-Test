@@ -36,7 +36,7 @@ public class Drive extends Subsystem {
 	private final static int SUSPENSION_TIMEOUT = 15;
 
 	// Speed PID constants
-	private final static double SPEED_P = 1.0;
+	public final static double SPEED_P = 1.0;
 	private final static double SPEED_I = 0.002;
 	private final static double SPEED_D = 0.0;
 	private final static double SPEED_F = 0.0;
@@ -46,7 +46,7 @@ public class Drive extends Subsystem {
 	private final static double SPEED_RAMPRATE = 36.0;
 
 	// Position PID constants 
-	private final static double POSITION_P = Wiring.practiceRobot ? 0.3 : 0.2;
+	public final static double POSITION_P = Wiring.practiceRobot ? 0.3 : 0.2;
 	private final static double POSITION_I = 0.0;
 	private final static double POSITION_D = 0.0;
 	private final static double POSITION_F = 0.0;
@@ -222,6 +222,11 @@ public class Drive extends Subsystem {
 		rTalonMaster.changeControlMode(controlMode);
 	}
 
+	public void setP(double p) {
+		lTalonMaster.setP(p);
+		rTalonMaster.setP(p);
+	}
+	
 	public void setOpenLoop() {
 		controlMode = ControlMode.PercentVbus;
 
@@ -239,7 +244,8 @@ public class Drive extends Subsystem {
 	}
 
 	public double getGyroAngle() {
-		return gyro.getAngle();
+		//return gyro.getAngle();
+		return 0.0;
 	}
 
 	public double getLeftPosition() {

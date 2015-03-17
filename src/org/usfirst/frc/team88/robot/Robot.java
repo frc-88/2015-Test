@@ -13,8 +13,11 @@ import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
 import org.usfirst.frc.team88.robot.commands.AutoBinBackup;
 import org.usfirst.frc.team88.robot.commands.AutoBinForward;
 import org.usfirst.frc.team88.robot.commands.AutoDrive;
+import org.usfirst.frc.team88.robot.commands.AutoDriveTurnLeft90;
+import org.usfirst.frc.team88.robot.commands.AutoDriveTurnRight90;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoNothing;
+import org.usfirst.frc.team88.robot.commands.AutoOneBinandTwoTote;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
 import org.usfirst.frc.team88.robot.commands.AutoThreeToteOhYeah;
 import org.usfirst.frc.team88.robot.commands.AutoToteLeftSide;
@@ -71,10 +74,14 @@ public class Robot extends IterativeRobot {
 		autoSelector.addObject("Tote Right Side", new AutoToteRightSide());
 		autoSelector.addObject("Do Nothing", new AutoNothing());
 		autoSelector.addObject("Drive Only", new AutoDrive());
+		autoSelector.addObject("Drive straight Turn left 90", new AutoDriveTurnLeft90());
+		autoSelector.addObject("Drive straight Turn right 90", new AutoDriveTurnRight90());
 		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Bin Forward", new AutoBinForward());
 		autoSelector.addObject("Bin Backup", new AutoBinBackup());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
+		autoSelector.addObject("Bin and Two Totes Maybe", new AutoOneBinandTwoTote());
+		autoSelector.addObject("Three Tote", new AutoThreeToteOhYeah());
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 
 		SmartDashboard.putData(lights);
@@ -104,6 +111,9 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
     	SmartDashboard.putData("Auto Tote Left Side", new AutoToteLeftSide());
     	SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
+    	SmartDashboard.putData("Auto Straight turn 90 left",new AutoDriveTurnLeft90());
+    	SmartDashboard.putData("Auto Straight turn 90 right",new AutoDriveTurnRight90());
+    	SmartDashboard.putData("Bin and Two Totes Maybe",new AutoOneBinandTwoTote());
     }
 	
 	public void disabledPeriodic() {

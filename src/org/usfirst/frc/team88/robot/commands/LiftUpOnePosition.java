@@ -17,58 +17,60 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LiftUpOnePosition extends Command {
 	private double target;
 	private boolean done;
-	
-    public LiftUpOnePosition() {
-    	requires(Robot.lift);
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	double position = Robot.lift.getPosition();
-    	
-    	done = false;
-    	
-    	if (position < Lift.POS_TRAVEL) {
-    		target = Lift.POS_TRAVEL;
-    	} else if (position < Lift.POS_ONETOTE) {
-    		target = Lift.POS_ONETOTE;
-    	} else if (position < Lift.POS_TWOTOTES) {
-    		target = Lift.POS_TWOTOTES;
-    	} else if (position < Lift.POS_THREETOTES) {
-    		target = Lift.POS_THREETOTES;
-    	} else if (position < Lift.POS_TOP) {
-    		target = Lift.POS_TOP;
-    	} else {
-    		done = true;
-    	}
-    	
-    	if (!done) {
-    		Robot.lift.moveLift(Lift.AUTO_SPEED);
-    	}
-    }
+	public LiftUpOnePosition() {
+		requires(Robot.lift);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		double position = Robot.lift.getPosition();
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	double position = Robot.lift.getPosition();
+		done = false;
 
-    	if (!done && ((position >= target) || Robot.lift.atUpperLimit())) {
-    		done = true;
-    	}
-    	
-    	return done;
-    }
+		if (position < Lift.POS_TRAVEL) {
+			target = Lift.POS_TRAVEL;
+		} else if (position < Lift.POS_ONETOTE) {
+			target = Lift.POS_ONETOTE;
+		} else if (position < Lift.POS_TWOTOTES) {
+			target = Lift.POS_TWOTOTES;
+		} else if (position < Lift.POS_THREETOTES) {
+			target = Lift.POS_THREETOTES;
+		} else if (position < Lift.POS_FOURTOTES) {
+				target = Lift.POS_FOURTOTES;
+		} else if (position < Lift.POS_TOP) {
+			target = Lift.POS_TOP;
+		} else {
+			done = true;
+		}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Robot.lift.moveLift(0);
-    }
+		if (!done) {
+			Robot.lift.moveLift(Lift.AUTO_SPEED);
+		}
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		double position = Robot.lift.getPosition();
+
+		if (!done && ((position >= target) || Robot.lift.atUpperLimit())) {
+			done = true;
+		}
+
+		return done;
+	}
+
+	// Called once after isFinished returns true
+	protected void end() {
+		Robot.lift.moveLift(0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

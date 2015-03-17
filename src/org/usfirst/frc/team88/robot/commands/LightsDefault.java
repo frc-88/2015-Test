@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LightsDefault extends Command {
-	private boolean busy = false;
 	private boolean blinking = false;
 
 	public LightsDefault() {
@@ -38,7 +37,7 @@ public class LightsDefault extends Command {
 		} else if (DriverStation.getInstance().isOperatorControl()) {
 			// We're in teleop
 			if (DriverStation.getInstance().getMatchTime() > 30) {
-				if (Math.abs(Robot.oi.getOperatorLeftZAxis()) > 0.0  || Robot.oi.getOperatorRightZAxis() > 0.0 && !busy) {
+				if (Math.abs(Robot.oi.getOperatorLeftZAxis()) > 0.0  || Math.abs(Robot.oi.getOperatorRightZAxis()) > 0.0) {
 					Robot.lights.setMode(Robot.lights.MODE_LIFT_FILL);
 					Robot.lights.setAnalog(Robot.lift.getPosition()/Robot.lift.POS_TOP);
 				}
@@ -51,6 +50,7 @@ public class LightsDefault extends Command {
 				}
 				
 			} else {
+				//I have a very strong feeling this will not active properly most of the time.
 				Robot.lights.setMode(Robot.lights.MODE_ENDGAME);
 			}
 		} else if (DriverStation.getInstance().isDisabled()) {

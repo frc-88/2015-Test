@@ -28,8 +28,10 @@ public class LiftDownOnePosition extends Command {
     	
     	done = false;
     	
-    	if (position > Lift.POS_THREETOTES) {
-    		target = Lift.POS_THREETOTES;
+    	if (position > Lift.POS_FOURTOTES) {
+    		target = Lift.POS_FOURTOTES;
+    	} else if (position > Lift.POS_THREETOTES) {
+        		target = Lift.POS_THREETOTES;
     	} else if (position > Lift.POS_TWOTOTES) {
     		target = Lift.POS_TWOTOTES;
     	} else if (position > Lift.POS_ONETOTE) {
