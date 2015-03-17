@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LiftToPosition extends Command {
 	private double target;
 	private boolean moveDown;
+	private double stillCount;
+	private double lastPosition;
 	private boolean done = false;
 	
     public LiftToPosition(double position) {
@@ -29,6 +31,7 @@ public class LiftToPosition extends Command {
     protected void initialize() {
     	double position = Robot.lift.getPosition();
 
+    	stillCount=0;
     	done = false;
     	
     	if (position > target) {
@@ -57,6 +60,14 @@ public class LiftToPosition extends Command {
     	if (!done && !moveDown && ((position >= target) || Robot.lift.atUpperLimit())) {
     		done = true;
     	}
+    	
+		if (position == lastPosition) {
+			if (++stillCount > 5) {
+				done = true;
+			}
+		} else {
+			lastPosition = position;
+		}
     	
     	// if we hit a limit stop no matter what
     	return done;

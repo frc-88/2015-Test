@@ -17,7 +17,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class LiftUpOnePosition extends Command {
 	private double target;
 	private boolean done;
-
+	private double lastPosition;
+	private double stillCount;
+	
 	public LiftUpOnePosition() {
 		requires(Robot.lift);
 	}
@@ -26,6 +28,7 @@ public class LiftUpOnePosition extends Command {
 	protected void initialize() {
 		double position = Robot.lift.getPosition();
 
+		stillCount = 0;
 		done = false;
 
 		if (position < Lift.POS_TRAVEL) {
@@ -61,6 +64,14 @@ public class LiftUpOnePosition extends Command {
 			done = true;
 		}
 
+		if (position == lastPosition) {
+			if (++stillCount > 5) {
+				done = true;
+			}
+		} else {
+			lastPosition = position;
+		}
+		
 		return done;
 	}
 
