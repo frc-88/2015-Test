@@ -30,6 +30,8 @@ public class Lift extends Subsystem {
 	public static final double POS_PICKUPBIN = 21000;
 	public static final double POS_HOOKBIN = 75000;
 	public static final double POS_TOTEONTOTE = Wiring.practiceRobot ? 29000 : 6000;
+	public static final double POS_TOTEONTWOTOTES = Wiring.practiceRobot ? 70000 : 19000;
+	public static final double POS_ABOVETHECHUTE = Wiring.practiceRobot ? 120000 : 32000;
 
 	
     private final CANTalon liftTalon;

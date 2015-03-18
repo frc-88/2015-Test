@@ -33,6 +33,7 @@ public class AutoOneBinandTwoTote extends CommandGroup {
     	addSequential(new LiftGrabberOpen());
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
+    	addSequential(new Delay(0.3));
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	addSequential(new DriveTurnRight90());
     	addSequential(new DriveStraight(3.4));
