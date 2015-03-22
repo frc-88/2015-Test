@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Ultrasonic;
 
 /**
  *               This is the Drive code
@@ -59,6 +60,7 @@ public class Drive extends Subsystem {
 	private final static double POSITION_RAMPRATE = 0.05;
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
+	private final Ultrasonic lUltrasonic, rUltrasonic;
 	private AHRS imu; 
 	private SerialPort serial_port;
 	private CANTalon.ControlMode controlMode;
@@ -95,8 +97,13 @@ public class Drive extends Subsystem {
 		rTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
 		rTalonSlave.set(rTalonMaster.getDeviceID());
 
+		// set up ultrasonics
+		lUltrasonic = new Ultrasonic(Wiring.leftUltrasonicPing, Wiring.leftUltrasonicEcho);
+		rUltrasonic = new Ultrasonic(Wiring.rightUltrasonicPing, Wiring.rightUltrasonicEcho);
+		lUltrasonic.setAutomaticMode(true);
+		rUltrasonic.setAutomaticMode(true);
+		
 		// set up NavX
-    	// initial NavX
 		try {
 	    	// Use SerialPort.Port.kMXP if connecting navX MXP to the RoboRio MXP port
 	    	serial_port = new SerialPort(57600,SerialPort.Port.kMXP);
@@ -298,6 +305,8 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
 
+		SmartDashboard.putNumber("Left Echo: ", lUltrasonic.getRangeInches());
+		SmartDashboard.putNumber("Right Echo: ", rUltrasonic.getRangeInches());
 
 		SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
         SmartDashboard.putBoolean(  "IMU_IsCalibrating",    imu.isCalibrating());

@@ -14,6 +14,10 @@ public class Wiring {
     public static final int middleMotorController = 5;
     public static final int suspensionSolenoidDown = 0;
     public static final int suspensionSolenoidUp = 1;
+    public static final int leftUltrasonicPing = 0;
+    public static final int leftUltrasonicEcho = 1;
+    public static final int rightUltrasonicPing = 2;
+    public static final int rightUltrasonicEcho = 3;
     
     // Lift
     public static final int liftMotorController = 8;
