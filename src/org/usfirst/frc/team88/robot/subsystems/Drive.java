@@ -5,6 +5,8 @@ import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerClosed;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerOpen;
 
+import com.kauailabs.navx_mxp.AHRS;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon;
@@ -56,7 +58,7 @@ public class Drive extends Subsystem {
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
 	private CANTalon.ControlMode controlMode;
-	private Gyro gyro;
+	private AHRS imu; 
 	private double maxSpeed;
 	private DoubleSolenoid suspension;
 	private boolean isSuspensionDown = false;
@@ -69,7 +71,6 @@ public class Drive extends Subsystem {
 		rTalonSlave = new CANTalon(Wiring.rightMotorController2);
 		mTalon = new CANTalon(Wiring.middleMotorController);
 		suspension = new DoubleSolenoid(Wiring.suspensionSolenoidDown, Wiring.suspensionSolenoidUp);
-		gyro = new Gyro(0);
 		
 		// set up drive masters
 		lTalonMaster.setPID(SPEED_P, SPEED_I, SPEED_D, SPEED_F, SPEED_IZONE, SPEED_RAMPRATE, SPEED_PROFILE);
@@ -91,10 +92,8 @@ public class Drive extends Subsystem {
 		rTalonSlave.changeControlMode(CANTalon.ControlMode.Follower);
 		rTalonSlave.set(rTalonMaster.getDeviceID());
 
-		// set up gryo
-		gyro.reset();
-		gyro.initGyro();
-		gyro.setSensitivity(0.250);
+		// set up NavX
+
 		
 		maxSpeed = FAST_SPEED;
 		resetEncoders();
@@ -138,10 +137,6 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
-
-		SmartDashboard.putNumber("Gyro angle (rad?): ", gyro.getAngle());
-		SmartDashboard.putNumber("Gyro angle (deg?): ", gyro.getAngle() * 180 / Math.PI);
-		SmartDashboard.putNumber("Gyro rate: ", gyro.getRate());
 	}
 
 	public void driveMoveSteadyStrafe(double left, double right, double middle) {
@@ -188,10 +183,6 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
-
-		SmartDashboard.putNumber("Gyro angle (rad?): ", gyro.getAngle());
-		SmartDashboard.putNumber("Gyro angle (deg?): ", gyro.getAngle() * 180 / Math.PI);
-		SmartDashboard.putNumber("Gyro rate: ", gyro.getRate());
 	}
 
 	public void toggleMaxSpeed(){
@@ -237,15 +228,6 @@ public class Drive extends Subsystem {
 	public void resetEncoders() {
 		lTalonMaster.setPosition(0);
 		rTalonMaster.setPosition(0);
-	}
-
-	public void resetGyro() {
-		gyro.reset();
-	}
-
-	public double getGyroAngle() {
-		//return gyro.getAngle();
-		return 0.0;
 	}
 
 	public double getLeftPosition() {
