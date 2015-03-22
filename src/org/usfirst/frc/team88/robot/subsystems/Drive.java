@@ -5,9 +5,14 @@ import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerClosed;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerOpen;
 
+import com.kauailabs.navx_mxp.AHRS;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -54,6 +59,8 @@ public class Drive extends Subsystem {
 	private final static double POSITION_RAMPRATE = 0.05;
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
+	private AHRS imu; 
+	private SerialPort serial_port;
 	private CANTalon.ControlMode controlMode;
 	private double maxSpeed;
 	private DoubleSolenoid suspension;
@@ -89,7 +96,50 @@ public class Drive extends Subsystem {
 		rTalonSlave.set(rTalonMaster.getDeviceID());
 
 		// set up NavX
+    	// initial NavX
+		try {
+	    	// Use SerialPort.Port.kMXP if connecting navX MXP to the RoboRio MXP port
+	    	serial_port = new SerialPort(57600,SerialPort.Port.kMXP);
+			
+			// You can add a second parameter to modify the 
+			// update rate (in hz) from.  The minimum is 4.  
+	    	// The maximum (and the default) is 100 on a nav6, 60 on a navX MXP.
+			// If you need to minimize CPU load, you can set it to a
+			// lower value, as shown here, depending upon your needs.
+	    	// The recommended maximum update rate is 50Hz
+			
+			// You can also use the IMUAdvanced class for advanced
+			// features on a nav6 or a navX MXP.
+	    	
+	    	// You can also use the AHRS class for advanced features on 
+	    	// a navX MXP.  This offers superior performance to the
+	    	// IMU Advanced class, and also access to 9-axis headings
+	    	// and magnetic disturbance detection.  This class also offers
+	    	// access to altitude/barometric pressure data from a
+	    	// navX MXP Aero.
+			
+			byte update_rate_hz = 50;
+			//imu = new IMU(serial_port,update_rate_hz);
+			//imu = new IMUAdvanced(serial_port,update_rate_hz);
+			imu = new AHRS(serial_port,update_rate_hz);
+    	} catch( Exception ex ) {
+    		
+    	}
+        if ( imu != null ) {
+            LiveWindow.addSensor("IMU", "Gyro", imu);
+        }
 
+        // When calibration has completed, zero the yaw
+        // Calibration is complete approaximately 20 seconds
+        // after the robot is powered on.  During calibration,
+        // the robot should be still
+        
+		double timeout = 0;
+        while (imu.isCalibrating() && timeout++ < 200) {
+            Timer.delay( 0.3 );
+        }
+        
+        imu.zeroYaw();
 		
 		maxSpeed = FAST_SPEED;
 		resetEncoders();
@@ -248,7 +298,25 @@ public class Drive extends Subsystem {
 		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
 		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
 
-		
+
+		SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
+        SmartDashboard.putBoolean(  "IMU_IsCalibrating",    imu.isCalibrating());
+        SmartDashboard.putNumber(   "IMU_Yaw",              imu.getYaw());
+        SmartDashboard.putNumber(   "IMU_Pitch",            imu.getPitch());
+        SmartDashboard.putNumber(   "IMU_Roll",             imu.getRoll());
+        SmartDashboard.putNumber(   "IMU_CompassHeading",   imu.getCompassHeading());
+        SmartDashboard.putNumber(   "IMU_Update_Count",     imu.getUpdateCount());
+        SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());
+        
+        SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
+        SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
+        SmartDashboard.putBoolean(  "IMU_IsMoving",         imu.isMoving());
+        SmartDashboard.putNumber(   "IMU_Temp_C",           imu.getTempC());
+        
+        SmartDashboard.putNumber(   "Velocity_X",       	imu.getVelocityX() );
+        SmartDashboard.putNumber(   "Velocity_Y",       	imu.getVelocityY() );
+        SmartDashboard.putNumber(   "Displacement_X",       imu.getDisplacementX() );
+        SmartDashboard.putNumber(   "Displacement_Y",       imu.getDisplacementY() );
 	}
 	
 }

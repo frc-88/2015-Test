@@ -50,7 +50,8 @@ public class Robot extends IterativeRobot {
 	public static Schtick schtick;
 	public static OI oi;
 	public static Lights lights;
-    private static SendableChooser autoSelector;
+
+	private static SendableChooser autoSelector;
 	private static Command autoCommand;
 
     /**
@@ -64,7 +65,7 @@ public class Robot extends IterativeRobot {
 		schtick = new Schtick();
 		lights = new Lights();
 		
-		// do this last so OI can reference Robot subsystems
+        // do this last so OI can reference Robot subsystems
 		oi = new OI();
 
 		// set up the SmartDashboard
