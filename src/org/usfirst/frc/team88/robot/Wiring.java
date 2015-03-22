@@ -4,7 +4,7 @@ public class Wiring {
 	// Practice bot flag for practice bot overrides
 	// true = practice bot
 	// false = competition bot
-	public static boolean practiceRobot = false;
+	public static boolean practiceRobot = true;
 	
 	// Drive
 	public static final int leftMotorController = 7;
@@ -14,10 +14,10 @@ public class Wiring {
     public static final int middleMotorController = 5;
     public static final int suspensionSolenoidDown = 0;
     public static final int suspensionSolenoidUp = 1;
-    public static final int leftUltrasonicPing = 0;
-    public static final int leftUltrasonicEcho = 1;
-    public static final int rightUltrasonicPing = 2;
-    public static final int rightUltrasonicEcho = 3;
+    public static final int leftUltrasonicPing = 7;
+    public static final int leftUltrasonicEcho = 6;
+    public static final int rightUltrasonicPing = 9;
+    public static final int rightUltrasonicEcho = 8;
     
     // Lift
     public static final int liftMotorController = 8;

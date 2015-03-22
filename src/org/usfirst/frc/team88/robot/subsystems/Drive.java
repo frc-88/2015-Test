@@ -102,6 +102,8 @@ public class Drive extends Subsystem {
 		rUltrasonic = new Ultrasonic(Wiring.rightUltrasonicPing, Wiring.rightUltrasonicEcho);
 		lUltrasonic.setAutomaticMode(true);
 		rUltrasonic.setAutomaticMode(true);
+		lUltrasonic.setEnabled(true);
+		rUltrasonic.setEnabled(true);
 		
 		// set up NavX
 		try {
@@ -285,6 +287,10 @@ public class Drive extends Subsystem {
 		return rTalonMaster.getPosition();
 	}
 
+	public double getYaw() {
+		return imu.getYaw();
+	}
+	
 	public void initDefaultCommand() {
 		switch (DRIVE_MODE) {
 		case 0:
@@ -307,15 +313,13 @@ public class Drive extends Subsystem {
 
 		SmartDashboard.putNumber("Left Echo: ", lUltrasonic.getRangeInches());
 		SmartDashboard.putNumber("Right Echo: ", rUltrasonic.getRangeInches());
-
+		
 		SmartDashboard.putBoolean(  "IMU_Connected",        imu.isConnected());
         SmartDashboard.putBoolean(  "IMU_IsCalibrating",    imu.isCalibrating());
         SmartDashboard.putNumber(   "IMU_Yaw",              imu.getYaw());
         SmartDashboard.putNumber(   "IMU_Pitch",            imu.getPitch());
         SmartDashboard.putNumber(   "IMU_Roll",             imu.getRoll());
         SmartDashboard.putNumber(   "IMU_CompassHeading",   imu.getCompassHeading());
-        SmartDashboard.putNumber(   "IMU_Update_Count",     imu.getUpdateCount());
-        SmartDashboard.putNumber(   "IMU_Byte_Count",       imu.getByteCount());
         
         SmartDashboard.putNumber(   "IMU_Accel_X",          imu.getWorldLinearAccelX());
         SmartDashboard.putNumber(   "IMU_Accel_Y",          imu.getWorldLinearAccelY());
