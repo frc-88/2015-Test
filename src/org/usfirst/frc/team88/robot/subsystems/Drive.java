@@ -5,15 +5,12 @@ import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerClosed;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerOpen;
 
-import com.kauailabs.navx_mxp.AHRS;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.ControlMode;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Gyro;
 
 /**
  *               This is the Drive code
@@ -58,7 +55,6 @@ public class Drive extends Subsystem {
 
 	private final CANTalon lTalonMaster, lTalonSlave, rTalonMaster, rTalonSlave, mTalon;
 	private CANTalon.ControlMode controlMode;
-	private AHRS imu; 
 	private double maxSpeed;
 	private DoubleSolenoid suspension;
 	private boolean isSuspensionDown = false;
@@ -133,10 +129,7 @@ public class Drive extends Subsystem {
 			break;
 		}
 
-		SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
-		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
-		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+		updateSmartDashboard();
 	}
 
 	public void driveMoveSteadyStrafe(double left, double right, double middle) {
@@ -179,10 +172,7 @@ public class Drive extends Subsystem {
 			}
 		}
 
-		SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
-		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
-		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
-		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+		updateSmartDashboard();
 	}
 
 	public void toggleMaxSpeed(){
@@ -251,4 +241,14 @@ public class Drive extends Subsystem {
 			break;
 		}
 	}
+	
+	private void updateSmartDashboard() {
+		SmartDashboard.putNumber("Left Encoder: ", lTalonMaster.getPosition());
+		SmartDashboard.putNumber("Right Encoder: ", rTalonMaster.getPosition());
+		SmartDashboard.putNumber("Left Encoder Velocity: ", lTalonMaster.getSpeed());
+		SmartDashboard.putNumber("Right Encoder Velocity: ", rTalonMaster.getSpeed());
+
+		
+	}
+	
 }
