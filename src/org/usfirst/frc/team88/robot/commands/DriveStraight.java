@@ -17,7 +17,7 @@ public class DriveStraight extends Command {
 	private static final double SPEED = 0.85;
 	private static final double RANGE = 500;
 	private static final double TIMEOUT = 3;
-	private static final double ANGLE_MULTIPLIER = 10;
+	private static final double ANGLE_MULTIPLIER = 0.2;
 
 	private double speed;
 	private double initialYaw;
@@ -50,7 +50,7 @@ public class DriveStraight extends Command {
 		double left, right, scale;
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
-		double angle = ANGLE_MULTIPLIER * (initialYaw - Robot.drive.getYaw());
+		double angle = ANGLE_MULTIPLIER * (Robot.drive.getYaw() - initialYaw);
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {

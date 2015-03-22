@@ -20,6 +20,7 @@ public class DriveAngle extends Command {
 	private static final double ANGLE_MULTIPLIER = 10;
 
 	private double speed;
+	private double initialYaw;
 	private double firstTarget;
 	private double finalTarget;
 	private boolean inSpeedMode;
@@ -41,7 +42,7 @@ public class DriveAngle extends Command {
 		inSpeedMode = true;
 		Robot.drive.setClosedLoopSpeed();
 		Robot.drive.resetEncoders();
-//		Robot.drive.resetGyro();
+		initialYaw = Robot.drive.getYaw();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -49,8 +50,7 @@ public class DriveAngle extends Command {
 		double left, right, scale;
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
-//		double angle = ANGLE_MULTIPLIER * Robot.drive.getGyroAngle();
-		double angle = 0.0;
+		double angle = ANGLE_MULTIPLIER * (Robot.drive.getYaw() - initialYaw);
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
