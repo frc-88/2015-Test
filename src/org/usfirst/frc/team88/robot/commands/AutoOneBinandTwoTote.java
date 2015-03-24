@@ -26,8 +26,8 @@ public class AutoOneBinandTwoTote extends CommandGroup {
     	addSequential(new Delay(0.3));
     	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
-    	addSequential(new DriveTurnLeft90());
-    	addSequential(new DriveTurnLeft90());
+    	addSequential(new DriveTurnLeft90NavX());
+    	addSequential(new DriveTurnLeft90NavX());
     	addSequential(new Delay(0.3));
     	addSequential(new DriveStraight(1.4));
     	addSequential(new LiftGrabberOpen());
@@ -35,9 +35,9 @@ public class AutoOneBinandTwoTote extends CommandGroup {
     	addSequential(new LiftGrabberClose());
     	addSequential(new Delay(0.3));
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
-    	addSequential(new DriveTurnRight90());
+    	addSequential(new DriveTurnRight90NavX());
     	addSequential(new DriveStraight(3.4));
-    	addSequential(new DriveTurnRight90());
+    	addSequential(new DriveTurnRight90NavX());
     	addParallel(new LiftDown());
     }
 }

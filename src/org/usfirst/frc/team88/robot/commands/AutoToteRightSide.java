@@ -16,11 +16,11 @@ public class AutoToteRightSide extends CommandGroup {
     	addSequential(new Delay(0.2));
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
-    	addSequential(new DriveTurnRight90());
+    	addSequential(new DriveTurnRight90NavX());
     	
     	addSequential(new DriveStraight(3.4));
     	
-    	addSequential(new DriveTurnLeft90());
+    	addSequential(new DriveTurnLeft90NavX());
     	
     	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     }

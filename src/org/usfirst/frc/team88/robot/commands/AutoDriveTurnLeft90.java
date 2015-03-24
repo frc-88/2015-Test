@@ -11,7 +11,7 @@ public class AutoDriveTurnLeft90 extends CommandGroup {
 
 		addSequential(new DriveStraight(3.4));
 		addSequential(new Delay(1));
-		addSequential(new DriveTurnLeft90());
+		addSequential(new DriveTurnLeft90NavX());
 	}
 }
 

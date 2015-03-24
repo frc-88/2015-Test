@@ -26,7 +26,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new Delay(0.3));
     	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
-    	addSequential(new DriveTurnLeft90());
+    	addSequential(new DriveTurnLeft90NavX());
     	
     	addSequential(new DriveStraight(3.4));
     }
