@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftStop extends Command {
 
-	private final static double speedDown = -1;
-	
     public LiftStop() {
     	requires(Robot.lift);
     }

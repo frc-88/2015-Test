@@ -20,7 +20,6 @@ public class DriveStraight extends Command {
 	private static final double ANGLE_MULTIPLIER = 0.2;
 
 	private double speed;
-	private double initialYaw;
 	private double firstTarget;
 	private double finalTarget;
 	private boolean inSpeedMode;
@@ -42,7 +41,7 @@ public class DriveStraight extends Command {
 		inSpeedMode = true;
 		Robot.drive.setClosedLoopSpeed();
 		Robot.drive.resetEncoders();
-		initialYaw = Robot.drive.getYaw();
+		Robot.drive.zeroYaw();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -50,7 +49,7 @@ public class DriveStraight extends Command {
 		double left, right, scale;
 		double leftPosition = Robot.drive.getLeftPosition();
 		double rightPosition = Robot.drive.getRightPosition();
-		double angle = ANGLE_MULTIPLIER * (Robot.drive.getYaw() - initialYaw);
+		double angle = ANGLE_MULTIPLIER * Robot.drive.getYaw();
 
 		if (inSpeedMode) {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
@@ -110,10 +109,12 @@ public class DriveStraight extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.drive.setClosedLoopSpeed();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.drive.setClosedLoopSpeed();
 	}
 }

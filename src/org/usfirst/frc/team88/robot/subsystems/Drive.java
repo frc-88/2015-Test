@@ -39,6 +39,7 @@ public class Drive extends Subsystem {
 	private final static double SLOW_SPEED = 150.0;
 
 	private final static int SUSPENSION_TIMEOUT = 15;
+	private static final double ANGLE_MULTIPLIER = 0.2;
 
 	// Speed PID constants
 	public final static double SPEED_P = 1.0;
@@ -214,6 +215,66 @@ public class Drive extends Subsystem {
 		mTalon.set(middle);
 
 		if (!isSuspensionDown) {
+			switch (controlMode) {
+			case PercentVbus:
+			case Position:
+				lTalonMaster.set(left);
+				rTalonMaster.set(right);
+				break;
+
+			case Speed:
+				lTalonMaster.set(left * maxSpeed);
+				rTalonMaster.set(right * maxSpeed);
+				break;
+
+			default:
+				break;
+			}
+		}
+
+		updateSmartDashboard();
+	}
+
+	public void driveMoveSteadyStrafeNavX(double left, double right, double middle) {
+		double angle;
+		double scale;
+		
+		if (middle == 0.0) {
+			if (isSuspensionDown) {
+				if (middleStillCount++ > SUSPENSION_TIMEOUT) {
+					suspension.set(Value.kReverse);
+					isSuspensionDown = false;
+				}
+			}
+		} else {
+			if(!isSuspensionDown) {
+				suspension.set(Value.kForward);
+				zeroYaw();
+				isSuspensionDown = true;
+			} 
+			middleStillCount = 0;
+		}
+		mTalon.set(middle);
+
+		if (isSuspensionDown) {
+			angle = ANGLE_MULTIPLIER * getYaw();
+			left = - angle;
+			right = angle;
+			
+	        // scale values of left and right so they are between -1.0 and 1.0
+	        if ((Math.abs(left) > 1.0) || (Math.abs(right) > 1.0)) {
+	            if (Math.abs(left) > Math.abs(right)) {
+	                scale = 1.0 / Math.abs(left);
+	            } else {
+	                scale = 1.0 / Math.abs(right);
+	            }
+	            left *= scale;
+	            right *= scale;
+	        }
+	        
+			lTalonMaster.set(left * maxSpeed);
+			rTalonMaster.set(right * maxSpeed);
+		} else {
 			switch (controlMode) {
 			case PercentVbus:
 			case Position:

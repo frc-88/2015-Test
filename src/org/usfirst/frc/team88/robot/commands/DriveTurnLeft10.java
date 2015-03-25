@@ -4,7 +4,6 @@ import org.usfirst.frc.team88.robot.Robot;
 import org.usfirst.frc.team88.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -64,7 +63,7 @@ public class DriveTurnLeft10 extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.drive.setP(Robot.drive.POSITION_P);
+		Robot.drive.setP(Drive.POSITION_P);
 	}
 
 	// Called when another command which requires one or more of the same
