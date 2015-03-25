@@ -1,7 +1,6 @@
 package org.usfirst.frc.team88.robot.commands;
 
 import org.usfirst.frc.team88.robot.Robot;
-import org.usfirst.frc.team88.robot.subsystems.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,14 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTurnLeft90NavX extends Command {
-	private static final double TIMEOUT = 5;
-	private static final double SPEED = 0.5;
-
-	private double prevLeftPosition = 0.0;
-	private double prevRightPosition = 0.0;
-	private int leftStillCount = 0;
-	private int rightStillCount = 0;
-
+	private static final double MAXSPEED = 0.7;
+	private boolean done;
+	
 	public DriveTurnLeft90NavX() {
 		requires(Robot.drive);
 	}
@@ -25,51 +19,41 @@ public class DriveTurnLeft90NavX extends Command {
 	protected void initialize() {
 		Robot.drive.setClosedLoopSpeed();
 		Robot.drive.zeroYaw();
-		// 90 degree spin to the left
-		Robot.drive.driveMove(-SPEED, SPEED, 0.0);
+		done = false;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.drive.getYaw() < -90) {
-			Robot.drive.resetEncoders();
-			Robot.drive.setClosedLoopPosition();
-			Robot.drive.driveMove(0.0, 0.0, 0.0);
+		double speed;
+		double currentYaw = Robot.drive.getYaw();
+		
+		if (currentYaw > -70) {
+			speed = MAXSPEED;
+		} else if (currentYaw > -90 ) {
+			// the equation for a line is
+			// y = m * x + b
+			//  m = slope, b = y-intercept
+			// we want a straight line from x=-70 degrees and y = 100% MAXSPEED
+			// to x = -90 degrees and y = 0% MAXSPEED
+			speed = (0.05 * currentYaw + 4.5) * MAXSPEED;
+			
+			// or, maybe we need to keep power to make sure we get past 90
+			// this line gives us 20% MAXSPEED at -90 degrees
+			//speed = (0.04 * currentYaw + 3.8) * MAXSPEED;
+		} else {
+			speed = 0;
+			done = true;
 		}
+		Robot.drive.driveMove(-speed, speed, 0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		double leftPosition = Robot.drive.getLeftPosition();
-		double rightPosition = Robot.drive.getRightPosition();
-		boolean done = false;
-
-		// start counting cycles as long as the encoder position doesn't change.
-		// If we aren't moving for long enough, we are done.
-		if (leftPosition == prevLeftPosition) {
-			leftStillCount++;
-		} else {
-			leftStillCount = 0;
-			prevLeftPosition = leftPosition;
-		}
-		if (rightPosition == prevRightPosition) {
-			rightStillCount++;
-		} else {
-			rightStillCount = 0;
-			prevRightPosition = rightPosition;
-		}
-
-		if ((leftStillCount > TIMEOUT) && (rightStillCount > TIMEOUT)) {
-			done = true;
-		}
-
 		return done;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.drive.setClosedLoopSpeed();
-		//Robot.drive.driveMove(0.0, 0.0, 0.0);
 	}
 
 	// Called when another command which requires one or more of the same

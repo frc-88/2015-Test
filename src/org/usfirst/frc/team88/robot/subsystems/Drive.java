@@ -295,6 +295,10 @@ public class Drive extends Subsystem {
 		return imu.getYaw();
 	}
 	
+	public boolean isNavXOn() {
+		return imu.isConnected() && !imu.isCalibrating();
+	}
+	
 	public void initDefaultCommand() {
 		switch (DRIVE_MODE) {
 		case 0:

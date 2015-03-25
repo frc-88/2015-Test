@@ -75,16 +75,21 @@ public class Robot extends IterativeRobot {
 		autoSelector = new SendableChooser();
 		autoSelector.addDefault("Tote Left Side", new AutoToteLeftSide());
 		autoSelector.addObject("Tote Right Side", new AutoToteRightSide());
+		autoSelector.addObject("Bin", new AutoBin());
+		autoSelector.addObject("Drive 3.4", new DriveStraight(3.4));
+		autoSelector.addObject("Drive 2.0", new DriveStraight(2.0));
 		autoSelector.addObject("Do Nothing", new AutoNothing());
-		autoSelector.addObject("Drive Only", new AutoDrive());
+		
+		/*
 		autoSelector.addObject("Drive straight Turn left 90", new AutoDriveTurnLeft90());
 		autoSelector.addObject("Drive straight Turn right 90", new AutoDriveTurnRight90());
-		autoSelector.addObject("Bin Only", new AutoBin());
 		autoSelector.addObject("Bin Forward", new AutoBinForward());
 		autoSelector.addObject("Bin Backup", new AutoBinBackup());
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		autoSelector.addObject("Bin and Two Totes Maybe", new AutoOneBinandTwoTote());
 		autoSelector.addObject("Three Tote", new AutoThreeToteOhYeah());
+		*/
+		
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 
 		SmartDashboard.putData(lights);
@@ -111,7 +116,6 @@ public class Robot extends IterativeRobot {
 
     	// Testing auto command groups
     	SmartDashboard.putData("Auto Test", new AutoTest());
-    	SmartDashboard.putData("Auto Drive", new AutoDrive());
     	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
     	SmartDashboard.putData("Auto Bin Only", new AutoBin());
     	SmartDashboard.putData("Auto Tote Left Side", new AutoToteLeftSide());
@@ -128,12 +132,12 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command
     	autoCommand = (Command) autoSelector.getSelected();
-        if (autoCommand != null) {
-        	autoCommand.start();
-        } else {
-        	autoCommand = new AutoToteLeftSide();
-        	autoCommand.start();
+
+    	if ((!drive.isNavXOn()) || (autoCommand == null)) {
+    		autoCommand = new AutoNothing();
         }
+    	
+    	autoCommand.start();
     }
 
     /**
