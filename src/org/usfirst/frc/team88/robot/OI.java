@@ -55,8 +55,8 @@ public class OI {
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());
-        operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
-        operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
+        operatorButtonLeftBumper.whenPressed(new SchtickIn());
+        operatorButtonRightBumper.whenPressed(new SchtickOut());
         operatorButtonY.whenPressed(new AutoPickup());
         operatorButtonX.whenPressed(new LiftStop());
         
