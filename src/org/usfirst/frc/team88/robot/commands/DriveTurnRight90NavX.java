@@ -12,7 +12,6 @@ public class DriveTurnRight90NavX extends Command {
 	private static final double TIMEOUT = 5;
 	private static final double SPEED = 0.5;
 
-	private double initialYaw;
 	private double prevLeftPosition = 0.0;
 	private double prevRightPosition = 0.0;
 	private int leftStillCount = 0;
@@ -25,14 +24,14 @@ public class DriveTurnRight90NavX extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.drive.setClosedLoopSpeed();
-		initialYaw = Robot.drive.getYaw();
+		Robot.drive.zeroYaw();
 		// 90 degree spin to the left
 		Robot.drive.driveMove(SPEED, -SPEED, 0.0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.drive.getYaw() - initialYaw < 90) {
+		if (Robot.drive.getYaw() > 90) {
 			Robot.drive.resetEncoders();
 			Robot.drive.setClosedLoopPosition();
 			Robot.drive.driveMove(0.0, 0.0, 0.0);

@@ -4,6 +4,7 @@ import org.usfirst.frc.team88.robot.commands.AutoPickup;
 import org.usfirst.frc.team88.robot.commands.DecreaseMode;
 import org.usfirst.frc.team88.robot.commands.IncreaseMode;
 import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
+import org.usfirst.frc.team88.robot.commands.LiftStop;
 import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
 import org.usfirst.frc.team88.robot.commands.SchtickIn;
 import org.usfirst.frc.team88.robot.commands.SchtickOut;
@@ -57,6 +58,7 @@ public class OI {
         operatorButtonLeftBumper.whenPressed(new LiftUpOnePosition());
         operatorButtonRightBumper.whenPressed(new LiftDownOnePosition());
         operatorButtonY.whenPressed(new AutoPickup());
+        operatorButtonX.whenPressed(new LiftStop());
         
     }
     public boolean getOperatorXButton(){

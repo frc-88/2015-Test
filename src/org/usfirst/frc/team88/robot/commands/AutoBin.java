@@ -17,7 +17,7 @@ public class AutoBin extends CommandGroup {
     	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	
-    	addSequential(new DriveTurnLeft90());
+    	addSequential(new DriveTurnLeft90NavX());
     	addSequential(new DriveStraight(3.4));
     }
 }

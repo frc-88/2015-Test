@@ -22,16 +22,16 @@ public class Lift extends Subsystem {
 	public static final double POS_FOURTOTES = Wiring.practiceRobot ? 160000 : 39000;
 	public static final double POS_THREETOTES = Wiring.practiceRobot ? 115000 : 31000;
 	public static final double POS_TWOTOTES = Wiring.practiceRobot ? 80000 : 22000;
-	public static final double POS_ONETOTE = Wiring.practiceRobot ? 44000 : 12000;
+	public static final double POS_ONETOTE = Wiring.practiceRobot ? 44000 : 21000;  // 3.24.15
 	public static final double POS_TRAVEL = Wiring.practiceRobot ? 10000 : 3000;
 	public static final double POS_BOTTOM = 0;
 	
 	public static final double POS_BINONTOTE = 35000;
 	public static final double POS_PICKUPBIN = 21000;
 	public static final double POS_HOOKBIN = 75000;
-	public static final double POS_TOTEONTOTE = Wiring.practiceRobot ? 29000 : 6000;
+	public static final double POS_TOTEONTOTE = Wiring.practiceRobot ? 29000 : 14000;  // 3.24.15
 	public static final double POS_TOTEONTWOTOTES = Wiring.practiceRobot ? 70000 : 19000;
-	public static final double POS_ABOVETHECHUTE = Wiring.practiceRobot ? 120000 : 32000;
+	public static final double POS_ABOVETHECHUTE = Wiring.practiceRobot ? 120000 : 50000;  // 3.24.15
 
 	
     private final CANTalon liftTalon;

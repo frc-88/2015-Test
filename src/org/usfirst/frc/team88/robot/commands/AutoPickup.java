@@ -9,15 +9,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  */
 public class AutoPickup extends CommandGroup {
-    
-    public  AutoPickup() {
-       requires(Robot.lift);
-       
-       addSequential(new LiftToPosition(Lift.POS_TOTEONTWOTOTES));
-       addSequential(new LiftGrabberOpen());
-       addSequential(new LiftToPosition(Lift.POS_TOTEONTOTE));
-       addSequential(new LiftGrabberClose());
-       addSequential(new Delay(0.2));
-       addSequential(new LiftToPosition(Lift.POS_ABOVETHECHUTE));
-    }
+
+	public  AutoPickup() {
+		requires(Robot.lift);
+
+		addSequential(new SchtickOut());
+		addSequential(new LiftToPosition(Lift.POS_TOTEONTOTE));
+		addSequential(new LiftGrabberOpen());
+		addSequential(new LiftDown());
+		addSequential(new LiftGrabberClose());
+		addSequential(new Delay(0.2));
+		addSequential(new SchtickIn());
+		addSequential(new LiftToPosition(Lift.POS_ABOVETHECHUTE));
+	}
 }

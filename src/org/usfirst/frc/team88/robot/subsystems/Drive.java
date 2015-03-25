@@ -287,6 +287,10 @@ public class Drive extends Subsystem {
 		return rTalonMaster.getPosition();
 	}
 
+	public void zeroYaw() {
+		imu.zeroYaw();
+	}
+	
 	public double getYaw() {
 		return imu.getYaw();
 	}
