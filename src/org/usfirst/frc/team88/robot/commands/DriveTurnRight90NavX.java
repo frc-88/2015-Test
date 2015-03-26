@@ -33,9 +33,9 @@ public class DriveTurnRight90NavX extends Command {
 			// the equation for a line is
 			// y = m * x + b
 			//  m = slope, b = y-intercept
-			// we want a straight line from x=70 degrees and y = 100% MAXSPEED
+			// we want a straight line from x=45 degrees and y = 100% MAXSPEED
 			// to x = 90 degrees and y = 0% MAXSPEED
-			speed = (-0.05 * currentYaw + 4.5) * MAXSPEED;
+			speed = (-1/45 * currentYaw + 2) * MAXSPEED;
 			
 			// or, maybe we need to keep power to make sure we get past 90
 			// this line gives us 20% MAXSPEED at 90 degrees

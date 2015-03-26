@@ -19,5 +19,7 @@ public class AutoBin extends CommandGroup {
     	
     	addSequential(new DriveTurnLeft90NavX());
     	addSequential(new DriveStraight(3.4));
+    	addSequential(new DriveTurnRight90NavX());
+
     }
 }

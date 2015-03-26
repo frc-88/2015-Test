@@ -35,7 +35,8 @@ public class DriveWithControllerClosed extends Command {
 		middle = Robot.oi.applyDeadZone(middle);
 
 		//Robot.drive.driveMove(left, right, middle);
-		Robot.drive.driveMoveSteadyStrafe(left, right, middle);
+//		Robot.drive.driveMoveSteadyStrafe(left, right, middle);
+		Robot.drive.driveMoveSteadyStrafeNavX(left, right, middle);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -28,23 +28,23 @@ public class DriveTurnLeft90NavX extends Command {
 		double currentYaw = Robot.drive.getYaw();
 		
 		if (currentYaw > -70) {
-			speed = MAXSPEED;
+			Robot.drive.driveMove(-MAXSPEED, MAXSPEED, 0);
 		} else if (currentYaw > -90 ) {
 			// the equation for a line is
 			// y = m * x + b
 			//  m = slope, b = y-intercept
-			// we want a straight line from x=-70 degrees and y = 100% MAXSPEED
-			// to x = -90 degrees and y = 0% MAXSPEED
-			speed = (0.05 * currentYaw + 4.5) * MAXSPEED;
+			// we want a straight line from x=45 degrees and y = 100% MAXSPEED
+			// to x = 90 degrees and y = 0% MAXSPEED
+			speed = (1/45 * currentYaw + 2) * MAXSPEED;
 			
 			// or, maybe we need to keep power to make sure we get past 90
-			// this line gives us 20% MAXSPEED at -90 degrees
-			//speed = (0.04 * currentYaw + 3.8) * MAXSPEED;
+			// this line gives us 20% MAXSPEED at 90 degrees
+			//speed = (-0.04 * currentYaw + 3.8) * MAXSPEED;
+			Robot.drive.driveMove(speed, -speed, 0);
 		} else {
-			speed = 0;
+			Robot.drive.driveMove(0, 0, 0);
 			done = true;
 		}
-		Robot.drive.driveMove(-speed, speed, 0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

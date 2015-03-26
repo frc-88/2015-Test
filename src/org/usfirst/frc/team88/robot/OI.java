@@ -52,6 +52,8 @@ public class OI {
         driverButtonA.whenPressed(new SchtickIn());
         driverButtonB.whenPressed(new SchtickOut());
         driverButtonX.whenPressed(new DriveToggleMaxSpeed());
+        driverButtonLeftBumper.whenPressed(new IncreaseMode());
+        driverButtonRightBumper.whenPressed(new DecreaseMode());
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());

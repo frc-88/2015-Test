@@ -39,7 +39,7 @@ public class Drive extends Subsystem {
 	private final static double SLOW_SPEED = 150.0;
 
 	private final static int SUSPENSION_TIMEOUT = 15;
-	private static final double ANGLE_MULTIPLIER = 0.2;
+	private static final double ANGLE_MULTIPLIER = 0.05;
 
 	// Speed PID constants
 	public final static double SPEED_P = 1.0;
