@@ -339,6 +339,10 @@ public class Drive extends Subsystem {
 		lTalonMaster.setPosition(0);
 		rTalonMaster.setPosition(0);
 	}
+	public void enableBrakeMode(boolean brakeMode){
+		lTalonMaster.enableBrakeMode(brakeMode);
+		rTalonMaster.enableBrakeMode(brakeMode);
+	}
 
 	public double getLeftPosition() {
 		return lTalonMaster.getPosition();

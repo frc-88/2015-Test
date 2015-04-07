@@ -28,6 +28,7 @@ import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90;
 import org.usfirst.frc.team88.robot.commands.DriveTurnLeft90NavX;
 import org.usfirst.frc.team88.robot.commands.DriveTurnRight90;
 import org.usfirst.frc.team88.robot.commands.DriveTurnRight90NavX;
+import org.usfirst.frc.team88.robot.commands.DriveTurnRight90NavX2;
 import org.usfirst.frc.team88.robot.commands.LiftDownOnePosition;
 import org.usfirst.frc.team88.robot.commands.LiftToPosition;
 import org.usfirst.frc.team88.robot.commands.LiftUpOnePosition;
@@ -102,7 +103,7 @@ public class Robot extends IterativeRobot {
     	SmartDashboard.putData("Left 90 (NavX)",new DriveTurnLeft90NavX());
     	SmartDashboard.putData("Left 10",new DriveTurnLeft10());
     	SmartDashboard.putData("Right 90",new DriveTurnRight90());
-    	SmartDashboard.putData("Right 90 (NavX)",new DriveTurnRight90NavX());
+    	SmartDashboard.putData("Right 90 (NavX)",new DriveTurnRight90NavX2());
 
     	// Testing commands for auto lift
     	SmartDashboard.putData("Lift Down One",new LiftDownOnePosition());

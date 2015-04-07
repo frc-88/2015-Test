@@ -4,7 +4,7 @@ public class Wiring {
 	// Practice bot flag for practice bot overrides
 	// true = practice bot
 	// false = competition bot
-	public static boolean practiceRobot = false;
+	public static boolean practiceRobot = true;
 	
 	// Drive
 	public static final int leftMotorController = 7;
