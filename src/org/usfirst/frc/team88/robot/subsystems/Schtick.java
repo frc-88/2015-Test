@@ -26,6 +26,10 @@ public class Schtick extends Subsystem {
     	schtick.set(Value.kForward);
     }
  
+    public boolean isSchtickIn() {
+    	return schtick.get() == Value.kReverse;
+    }
+    
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

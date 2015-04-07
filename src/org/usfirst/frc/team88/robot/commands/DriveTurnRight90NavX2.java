@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class DriveTurnRight90NavX2 extends Command {
-	private static final double MAXSPEED = 0.1;
+	private static final double MAXSPEED = 0.5;
 	private boolean done;
 
 	public DriveTurnRight90NavX2() {
@@ -34,7 +34,7 @@ public class DriveTurnRight90NavX2 extends Command {
 			//  m = slope, b = y-intercept
 			// we want a straight line from x=45 degrees and y = 100% MAXSPEED
 			// to x = 90 degrees and y = 0% MAXSPEED
-			speed = (-1/90 * currentYaw + 1) * MAXSPEED;
+			speed = (-1/85 * currentYaw + 1) * MAXSPEED;
 
 			// or, maybe we need to keep power to make sure we get past 90
 			// this line gives us 20% MAXSPEED at 90 degrees

@@ -32,6 +32,7 @@ public class Lift extends Subsystem {
 	public static final double POS_TOTEONTOTE = Wiring.practiceRobot ? 14000 : 14000;  // 3.24.15
 	public static final double POS_TOTEONTWOTOTES = Wiring.practiceRobot ? 19000 : 19000;
 	public static final double POS_ABOVETHECHUTE = Wiring.practiceRobot ? 35000 : 35000;  // 3.24.15
+	public static final double POS_BEWAREOFSCHTICK = Wiring.practiceRobot ? 9000 : 9000;  // guess
 
 	
     private final CANTalon liftTalon;
@@ -85,6 +86,10 @@ public class Lift extends Subsystem {
     
     public void liftRelease() {
     	liftSolenoid.set(Value.kReverse);
+    }
+    
+    public boolean isLiftArmsClosed() {
+    	return liftSolenoid.get() == Value.kReverse;
     }
     
     public void initDefaultCommand() {
