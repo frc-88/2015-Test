@@ -11,6 +11,8 @@ import org.usfirst.frc.team88.robot.commands.SchtickOut;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberClose;
 import org.usfirst.frc.team88.robot.commands.LiftGrabberOpen;
 import org.usfirst.frc.team88.robot.commands.DriveToggleMaxSpeed;
+import org.usfirst.frc.team88.robot.commands.SuperSchticksDown;
+import org.usfirst.frc.team88.robot.commands.SuperSchticksUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -57,8 +59,8 @@ public class OI {
         
         operatorButtonA.whenPressed(new LiftGrabberOpen());
         operatorButtonB.whenPressed(new LiftGrabberClose());
-        operatorButtonLeftBumper.whenPressed(new SchtickIn());
-        operatorButtonRightBumper.whenPressed(new SchtickOut());
+        operatorButtonLeftBumper.whenPressed(new SuperSchticksUp());
+        operatorButtonRightBumper.whenPressed(new SuperSchticksDown());
         operatorButtonY.whenPressed(new AutoPickup());
         operatorButtonX.whenPressed(new LiftStop());
         
