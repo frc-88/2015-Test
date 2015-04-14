@@ -16,6 +16,7 @@ import org.usfirst.frc.team88.robot.commands.AutoDrive;
 import org.usfirst.frc.team88.robot.commands.AutoDriveTurnLeft90;
 import org.usfirst.frc.team88.robot.commands.AutoDriveTurnRight90;
 import org.usfirst.frc.team88.robot.commands.AutoGrabFromLandfill;
+import org.usfirst.frc.team88.robot.commands.AutoBinFromLandfill;
 import org.usfirst.frc.team88.robot.commands.AutoNothing;
 import org.usfirst.frc.team88.robot.commands.AutoOneBinandTwoTote;
 import org.usfirst.frc.team88.robot.commands.AutoTest;
@@ -57,30 +58,33 @@ public class Robot extends IterativeRobot {
 	private static SendableChooser autoSelector;
 	private static Command autoCommand;
 
-    /**
-     * This function is run when the robot is first started up and should be
-     * used for any initialization code.
-     */
-    public void robotInit() {
+	/**
+	 * This function is run when the robot is first started up and should be
+	 * used for any initialization code.
+	 */
+	public void robotInit() {
 		drive = new Drive();
 		lift = new Lift();
 		arminator = new Arminator();
 		schtick = new Schtick();
 		lights = new Lights();
-		
-        // do this last so OI can reference Robot subsystems
+
+		// do this last so OI can reference Robot subsystems
 		oi = new OI();
 
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("Tote Left Side", new AutoToteLeftSide());
+		autoSelector.addDefault("Bin from Landfill", new AutoBinFromLandfill());
+		autoSelector.addObject("Tote Left Side", new AutoToteLeftSide());
 		autoSelector.addObject("Tote Right Side", new AutoToteRightSide());
 		autoSelector.addObject("Bin", new AutoBin());
 		autoSelector.addObject("Drive 3.4", new DriveStraight(3.4));
 		autoSelector.addObject("Drive 2.0", new DriveStraight(2.0));
 		autoSelector.addObject("Do Nothing", new AutoNothing());
-		
+		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
+
+
 		/*
 		autoSelector.addObject("Drive straight Turn left 90", new AutoDriveTurnLeft90());
 		autoSelector.addObject("Drive straight Turn right 90", new AutoDriveTurnRight90());
@@ -89,92 +93,92 @@ public class Robot extends IterativeRobot {
 		autoSelector.addObject("Bin and Tote", new AutoBinAndTote());
 		autoSelector.addObject("Bin and Two Totes Maybe", new AutoOneBinandTwoTote());
 		autoSelector.addObject("Three Tote", new AutoThreeToteOhYeah());
-		*/
-		
+		 */
+
 		SmartDashboard.putData("Autonomous Mode",autoSelector);
 
 		SmartDashboard.putData(lights);
 		//SmartDashboard.
-    	// Testing commands for auto drive
+		// Testing commands for auto drive
 		SmartDashboard.putData("Forward 1m", new DriveStraight(1.0));
-    	SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
-    	SmartDashboard.putData("Forward 3m",new DriveStraight(3.0));
-    	SmartDashboard.putData("Left 90",new DriveTurnLeft90());
-    	SmartDashboard.putData("Left 90 (NavX)",new DriveTurnLeft90NavX());
-    	SmartDashboard.putData("Left 10",new DriveTurnLeft10());
-    	SmartDashboard.putData("Right 90",new DriveTurnRight90());
-    	SmartDashboard.putData("Right 90 (NavX)",new DriveTurnRight90NavX2());
+		SmartDashboard.putData("Forward 2m",new DriveStraight(2.0));
+		SmartDashboard.putData("Forward 3m",new DriveStraight(3.0));
+		SmartDashboard.putData("Left 90",new DriveTurnLeft90());
+		SmartDashboard.putData("Left 90 (NavX)",new DriveTurnLeft90NavX());
+		SmartDashboard.putData("Left 10",new DriveTurnLeft10());
+		SmartDashboard.putData("Right 90",new DriveTurnRight90());
+		SmartDashboard.putData("Right 90 (NavX)",new DriveTurnRight90NavX2());
 
-    	// Testing commands for auto lift
-    	SmartDashboard.putData("Lift Down One",new LiftDownOnePosition());
-    	SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
-    	SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
-    	SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
-    	SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
-    	SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
-    	SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
-    	SmartDashboard.putData("Lift Up One",new LiftUpOnePosition());
+		// Testing commands for auto lift
+		SmartDashboard.putData("Lift Down One",new LiftDownOnePosition());
+		SmartDashboard.putData("Lift Bottom",new LiftToPosition(Lift.POS_BOTTOM));
+		SmartDashboard.putData("Lift Travel",new LiftToPosition(Lift.POS_TRAVEL));
+		SmartDashboard.putData("Lift One",new LiftToPosition(Lift.POS_ONETOTE));
+		SmartDashboard.putData("Lift Two",new LiftToPosition(Lift.POS_TWOTOTES));
+		SmartDashboard.putData("Lift Three",new LiftToPosition(Lift.POS_THREETOTES));
+		SmartDashboard.putData("Lift Top",new LiftToPosition(Lift.POS_TOP));
+		SmartDashboard.putData("Lift Up One",new LiftUpOnePosition());
 
-    	// Testing auto command groups
-    	SmartDashboard.putData("Auto Test", new AutoTest());
-    	SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
-    	SmartDashboard.putData("Auto Bin Only", new AutoBin());
-    	SmartDashboard.putData("Auto Tote Left Side", new AutoToteLeftSide());
-    	SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
-    	SmartDashboard.putData("Auto Straight turn 90 left",new AutoDriveTurnLeft90());
-    	SmartDashboard.putData("Auto Straight turn 90 right",new AutoDriveTurnRight90());
-    	SmartDashboard.putData("Bin and Two Totes Maybe",new AutoOneBinandTwoTote());
-    }
-	
+		// Testing auto command groups
+		SmartDashboard.putData("Auto Test", new AutoTest());
+		SmartDashboard.putData("Auto Bin and Tote", new AutoBinAndTote());
+		SmartDashboard.putData("Auto Bin Only", new AutoBin());
+		SmartDashboard.putData("Auto Tote Left Side", new AutoToteLeftSide());
+		SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
+		SmartDashboard.putData("Auto Straight turn 90 left",new AutoDriveTurnLeft90());
+		SmartDashboard.putData("Auto Straight turn 90 right",new AutoDriveTurnRight90());
+		SmartDashboard.putData("Auto Bin From landfill",new AutoBinFromLandfill());
+	}
+
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-    public void autonomousInit() {
-        // schedule the autonomous command
-    	autoCommand = (Command) autoSelector.getSelected();
+	public void autonomousInit() {
+		// schedule the autonomous command
+		autoCommand = (Command) autoSelector.getSelected();
 
-    	if ((!drive.isNavXOn()) || (autoCommand == null)) {
-    		autoCommand = new AutoNothing();
-        }
-    	
-    	autoCommand.start();
-    }
+		if ((!drive.isNavXOn()) || (autoCommand == null)) {
+			autoCommand = new AutoNothing();
+		}
 
-    /**
-     * This function is called periodically during autonomous
-     */
-    public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
-    }
+		autoCommand.start();
+	}
 
-    public void teleopInit() {
+	/**
+	 * This function is called periodically during autonomous
+	 */
+	public void autonomousPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
-        // continue until interrupted by another command, remove
-        // this line or comment it out.
-        if (autoCommand != null) autoCommand.cancel();
-    }
+		// teleop starts running. If you want the autonomous to 
+		// continue until interrupted by another command, remove
+		// this line or comment it out.
+		if (autoCommand != null) autoCommand.cancel();
+	}
 
-    /**
-     * This function is called when the disabled button is hit.
-     * You can use it to reset subsystems before shutting down.
-     */
-    public void disabledInit(){
+	/**
+	 * This function is called when the disabled button is hit.
+	 * You can use it to reset subsystems before shutting down.
+	 */
+	public void disabledInit(){
 
-    }
+	}
 
-    /**
-     * This function is called periodically during operator control
-     */
-    public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-    }
-    
-    /**
-     * This function is called periodically during test mode
-     */
-    public void testPeriodic() {
-        LiveWindow.run();
-    }
+	/**
+	 * This function is called periodically during operator control
+	 */
+	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This function is called periodically during test mode
+	 */
+	public void testPeriodic() {
+		LiveWindow.run();
+	}
 }

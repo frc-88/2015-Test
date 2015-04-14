@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * encode values don't change. If we don't move for long enough, we're done.
  * 
  */
-public class DriveStraight extends Command {
+public class DriveStraightMaxSpeed extends Command {
 
-	private static final double SPEED = 0.7;
+	private static final double SPEED = 1.0;
 	private static final double RANGE = 1000;
 	private static final double TIMEOUT = 3;
 	private static final double ANGLE_MULTIPLIER = 0.05;
@@ -28,7 +28,7 @@ public class DriveStraight extends Command {
 	private int leftStillCount = 0;
 	private int rightStillCount = 0;
 
-	public DriveStraight(double distance) {
+	public DriveStraightMaxSpeed(double distance) {
 		requires(Robot.drive);
 
 		speed = (distance > 0.0) ? SPEED : -SPEED;

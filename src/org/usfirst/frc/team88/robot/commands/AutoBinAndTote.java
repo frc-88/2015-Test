@@ -13,7 +13,7 @@ public class AutoBinAndTote extends CommandGroup {
     	addSequential(new LiftGrabberOpen());
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
-    	addSequential(new Delay(0.3));
+    	addSequential(new Delay(0.4));
     	
     	addSequential(new LiftToPosition(Lift.POS_ONETOTE));
     	
@@ -23,7 +23,7 @@ public class AutoBinAndTote extends CommandGroup {
     	
     	addSequential(new LiftDown());
     	addSequential(new LiftGrabberClose());
-    	addSequential(new Delay(0.3));
+    	addSequential(new Delay(0.4));
     	
     	addSequential(new LiftToPosition(Lift.POS_TRAVEL));
     	addSequential(new DriveTurnLeft90NavX());

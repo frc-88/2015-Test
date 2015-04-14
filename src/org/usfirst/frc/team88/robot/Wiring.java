@@ -1,4 +1,4 @@
-package org.usfirst.frc.team88.robot;
+ package org.usfirst.frc.team88.robot;
 
 public class Wiring {
 	// Practice bot flag for practice bot overrides
@@ -12,8 +12,10 @@ public class Wiring {
     public static final int rightMotorController = 3;
     public static final int rightMotorController2 = 4;
     public static final int middleMotorController = 5;
+    //Middle Wheel Suspension
     public static final int suspensionSolenoidDown = 0;
     public static final int suspensionSolenoidUp = 1;
+    //Ultrasonics
     public static final int leftUltrasonicPing = 7;
     public static final int leftUltrasonicEcho = 6;
     public static final int rightUltrasonicPing = 9;
@@ -21,6 +23,7 @@ public class Wiring {
     
     // Lift
     public static final int liftMotorController = 8;
+    //Lift pheumatics
     public static final int liftSolenoidIn = 2;
     public static final int liftSolenoidOut = 3;
     public static final int liftLowerLimit = 4;
@@ -29,7 +32,7 @@ public class Wiring {
     // Arminator
     public static final int arminatorMotor = 0;
 
-    // Bin Arms
+    // Double Schtick
 	public static final int schtickSolenoidIn = 4;
 	public static final int schtickSolenoidOut = 5;
 	// Light
