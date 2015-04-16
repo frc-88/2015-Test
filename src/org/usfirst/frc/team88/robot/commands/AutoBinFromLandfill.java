@@ -8,11 +8,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoBinFromLandfill extends CommandGroup {
 
-	public  AutoBinFromLandfill() {
+	public  AutoBinFromLandfill(double distanceForward) {
 		addParallel(new DriveStraightMaxSpeed(-1.1));
 		addSequential(new Delay(0.3));
 		addSequential(new SuperSchticksUp());
 		addSequential(new Delay(0.8));
-		addSequential(new DriveStraightMaxSpeed(1.3));
+		addSequential(new DriveStraightMaxSpeed(distanceForward));
 	}
 }

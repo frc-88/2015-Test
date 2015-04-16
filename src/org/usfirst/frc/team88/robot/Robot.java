@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.I2C;
 
 import org.usfirst.frc.team88.robot.commands.AutoBin;
 import org.usfirst.frc.team88.robot.commands.AutoBinAndTote;
@@ -54,6 +55,8 @@ public class Robot extends IterativeRobot {
 	public static Schtick schtick;
 	public static OI oi;
 	public static Lights lights;
+	public static Lidar lidar1;
+	public static Lidar lidar2;
 
 	private static SendableChooser autoSelector;
 	private static Command autoCommand;
@@ -68,14 +71,20 @@ public class Robot extends IterativeRobot {
 		arminator = new Arminator();
 		schtick = new Schtick();
 		lights = new Lights();
+		lidar1 = new Lidar(I2C.Port.kMXP);
+		lidar2 = new Lidar(I2C.Port.kOnboard);
 
 		// do this last so OI can reference Robot subsystems
 		oi = new OI();
+		
+		lidar1.start();
+		lidar2.start();
 
 		// set up the SmartDashboard
 		// set up SendableChooser to select autonomous mode
 		autoSelector = new SendableChooser();
-		autoSelector.addDefault("Bin from Landfill", new AutoBinFromLandfill());
+		autoSelector.addDefault("Bin from Landfill 1.3", new AutoBinFromLandfill(1.3));
+		autoSelector.addObject("Bin from Landfill 3.1", new AutoBinFromLandfill(3.1));
 		autoSelector.addObject("Tote Left Side", new AutoToteLeftSide());
 		autoSelector.addObject("Tote Right Side", new AutoToteRightSide());
 		autoSelector.addObject("Bin", new AutoBin());
@@ -127,7 +136,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto Three Tote", new AutoThreeToteOhYeah());
 		SmartDashboard.putData("Auto Straight turn 90 left",new AutoDriveTurnLeft90());
 		SmartDashboard.putData("Auto Straight turn 90 right",new AutoDriveTurnRight90());
-		SmartDashboard.putData("Auto Bin From landfill",new AutoBinFromLandfill());
+		SmartDashboard.putData("Auto Bin From landfill (1.3)",new AutoBinFromLandfill(1.3));
+		SmartDashboard.putData("Auto Bin From landfill (3.1)",new AutoBinFromLandfill(3.1));
 	}
 
 	public void disabledPeriodic() {

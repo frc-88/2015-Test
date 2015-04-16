@@ -55,6 +55,7 @@ public class DriveStraightMaxSpeed extends Command {
 			if ( (Math.abs(leftPosition) > firstTarget) || (Math.abs(rightPosition) > firstTarget) ) {
 				inSpeedMode = false;
 				Robot.drive.setClosedLoopPosition();
+				Robot.drive.setP(1.0);
 				Robot.drive.driveMove(finalTarget, finalTarget, 0.0);
 			} else {
 				left = speed - angle;
@@ -109,12 +110,14 @@ public class DriveStraightMaxSpeed extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
+		Robot.drive.setP(Drive.POSITION_P);
 		Robot.drive.setClosedLoopSpeed();
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.drive.setP(Drive.POSITION_P);
 		Robot.drive.setClosedLoopSpeed();
 	}
 }

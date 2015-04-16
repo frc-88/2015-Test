@@ -1,5 +1,6 @@
 package org.usfirst.frc.team88.robot.subsystems;
 
+import org.usfirst.frc.team88.robot.Robot;
 import org.usfirst.frc.team88.robot.Wiring;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerSSS;
 import org.usfirst.frc.team88.robot.commands.DriveWithControllerClosed;
@@ -403,6 +404,8 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber(   "Velocity_Y",       	imu.getVelocityY() );
         SmartDashboard.putNumber(   "Displacement_X",       imu.getDisplacementX() );
         SmartDashboard.putNumber(   "Displacement_Y",       imu.getDisplacementY() );
+        SmartDashboard.putNumber(   "Distance from Lidar 1",       Robot.lidar1.getDistance() );
+        SmartDashboard.putNumber(   "Distance from Lidar 2",       Robot.lidar2.getDistance() );
 	}
 	
 }
